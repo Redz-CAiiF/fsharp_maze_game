@@ -1,0 +1,10 @@
+﻿module maze_resolutor_algorithm
+
+
+exception ERROR_NEGATIVE_COLUMNS_NUMBER
+exception ERROR_NEGATIVE_ROWS_NUMBER
+exception ERROR_NEGATIVE_INDEX_NUMBER
+
+
+
+

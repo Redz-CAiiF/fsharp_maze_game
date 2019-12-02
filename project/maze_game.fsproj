@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="globals.fs" />
+    <Compile Include="general.fs" />
+    <Compile Include="printing.fs" />
+    <Compile Include="game_map.fs" />
+    <Compile Include="maze_generator_algorithm.fs" />
+    <Compile Include="maze_resolutor_algorithm.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+</Project>
