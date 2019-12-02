@@ -12,6 +12,13 @@ let PLAYER = 2
 let WALL = 1
 let PATH = 0
 
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                                 OTHER 
+// │    NAME:          FIXED PRINTING_MODULE VALUES
+// │    DESCRIPTION:   tutti i valori fissati nel modulo printing
+// │    CREATOR:       ML
+// │
+// └─────────────────────────────────────────────────────────────────────────┘
 //colours
 let COLOUR_WALL = ConsoleColor.White
 let COLOUR_BACKGROUND = ConsoleColor.Black
@@ -67,3 +74,7 @@ let PORTAL_1 = '¤'
 let PORTAL_3 = '»'
 
 //other
+
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                               END OTHER 
+// └─────────────────────────────────────────────────────────────────────────┘

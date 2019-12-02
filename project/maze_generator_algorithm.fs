@@ -6,16 +6,28 @@ open globals
 open general
 open game_map
 
-open printing
 
-// return true if the map is completely explored
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                                FUNCTION 
+// │    NAME:          is_explored
+// │    DESCRIPTION:   data una mappa, ritorna true se la mappa è completamante esplorata
+// │    CREATOR:       ML
+// │    OLD NAME:      .
+// │
+// └─────────────────────────────────────────────────────────────────────────┘
 let rec is_explored (map:cell list) =
     match map with
     | [] -> true
     | (x:int,y:int,walls:walls,visited:bool)::tail -> if visited then is_explored(tail) else false
 
-
-//find and return all not visited neighbours of the current cell
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                                FUNCTION 
+// │    NAME:          get_unvisited_neighbours
+// │    DESCRIPTION:   dati la cella corrente e la mappa, trova e ritorna tutti i vicini non visitati della cella corrente
+// │    CREATOR:       ML
+// │    OLD NAME:      .
+// │
+// └─────────────────────────────────────────────────────────────────────────┘
 let get_unvisited_neighbours (cell:cell) (map:cell list) =
     let map_h = (get_maze_height map)
     let map_w = (get_maze_width map)
@@ -25,7 +37,7 @@ let get_unvisited_neighbours (cell:cell) (map:cell list) =
 
     let get_cell = fun (index:int) -> try map.[index] with _ -> ERROR_CELL
     //neighbours cells
-    let top    = get_cell (ind (x-1) y)/////////////////////////////////////////////////////////
+    let top    = get_cell (ind (x-1) y)
     let right  = get_cell (ind x (y+1))
     let bottom = get_cell (ind (x+1) y)
     let left   = get_cell (ind x (y-1))
@@ -36,17 +48,38 @@ let get_unvisited_neighbours (cell:cell) (map:cell list) =
     let neighbours = (add_neighbour top)@(add_neighbour right)@(add_neighbour bottom)@(add_neighbour left)
     neighbours
 
-// return the number of the not visited neighbours
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                                FUNCTION 
+// │    NAME:          unvisited_neighbours_number
+// │    DESCRIPTION:   dati la cella corrente e la mappa, ritorna il numero dei vicini non visitati
+// │    CREATOR:       ML
+// │    OLD NAME:      .
+// │
+// └─────────────────────────────────────────────────────────────────────────┘
 let unvisited_neighbours_number (cell:cell) (map:cell list) =
     let neighbours = get_unvisited_neighbours cell map
     neighbours.Length
 
-// return true if the current cell has a not visited neighbour
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                                FUNCTION 
+// │    NAME:          has_unvisited_neighbours
+// │    DESCRIPTION:   dati la cella corrente e la mappa, ritorna true se la cella corrente ha dei vicini non visitati altrimenti false
+// │    CREATOR:       ML
+// │    OLD NAME:      .
+// │
+// └─────────────────────────────────────────────────────────────────────────┘
 let has_unvisited_neighbours (cell:cell) (map:cell list) =
     let neighbours = get_unvisited_neighbours cell map
     if neighbours.Length <> 0 then true else false
 
-// return a random neighbour from all possible neighbours
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                                FUNCTION 
+// │    NAME:          get_random_unvisited_neighbour
+// │    DESCRIPTION:   dati la cella corrente e la mappa, ritorna un vicino casuale tra quelli non visitati
+// │    CREATOR:       ML
+// │    OLD NAME:      .
+// │
+// └─────────────────────────────────────────────────────────────────────────┘
 let get_random_unvisited_neighbour (cell:cell) (map:cell list) =
     let neighbours = get_unvisited_neighbours cell map
     let random_index = System.Random().Next(0, neighbours.Length)
@@ -55,6 +88,14 @@ let get_random_unvisited_neighbour (cell:cell) (map:cell list) =
 
 
 //remove the connected wall
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                                FUNCTION 
+// │    NAME:          remove_common_wall
+// │    DESCRIPTION:   data la cella corrente e quella successiva, rimuove il muro adiacente alle due celle
+// │    CREATOR:       ML
+// │    OLD NAME:      .
+// │
+// └─────────────────────────────────────────────────────────────────────────┘
 let remove_common_wall (current:cell) (next:cell) =
     let c_x,c_y,(c_wall1,c_wall2,c_wall3,c_wall4),c_visited = current
     let n_x,n_y,(n_wall1,n_wall2,n_wall3,n_wall4),n_visited = next
@@ -74,44 +115,75 @@ let remove_common_wall (current:cell) (next:cell) =
         (current,next)
 
 
-//maze generator
-//exception ERROR_INCORRECT_PROGRAM_LOGIC
-let rec recursive_backtracker (stack:cell list) (map:cell list) (current:cell) =
-    let map = replace_cell (find_cell current map) (update_visited current) map
-    let current = (update_visited current)
-    //printfn "evaluating: %A" current
-    if not (is_explored map) then
-        let unvisited_neighbours = unvisited_neighbours_number current map
-        if (unvisited_neighbours) > 0 then
-            let next = get_random_unvisited_neighbour current map
-            
-            let new_current,new_next = remove_common_wall current next
-            let new_stack = if unvisited_neighbours > 1 then new_current::stack else stack
-            let new_map = replace_cell (find_cell next map) new_next (replace_cell (find_cell current map) new_current map)
 
-            //printfn "current iteration: %A" new_current
-            //printfn "current iteration: %A %A %A map:\n %A" next new_stack (new_current,new_next) new_map
-            
-            recursive_backtracker new_stack new_map new_next
 
-        elif (stack.Length <> 0) then
-            //printfn "current iteration on stack: %A" current
-            let next::new_stack = stack
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                                ALGORITHM
+// │    NAME:          recursive_backtracker
+// │    DESCRIPTION:   .
+// │    SOURCE:        https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker
+// │
+// └─────────────────────────────────────────────────────────────────────────┘
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                                FUNCTION 
+// │    NAME:          recursive_backtracker
+// │    DESCRIPTION:   genera un labirinto usando l'algoritmo recursive backtracker
+// │    CREATOR:       ML
+// │    OLD NAME:      .
+// │
+// └─────────────────────────────────────────────────────────────────────────┘
+let recursive_backtracker (map:cell list) (current:cell) = 
+    let rec aux (stack:cell list) (map:cell list) (current:cell) =
+        let map = replace_cell (find_cell current map) (set_visited current) map
+        let current = (set_visited current)
+        //printfn "evaluating: %A" current
+        if not (is_explored map) then
+            let unvisited_neighbours = unvisited_neighbours_number current map
+            if (unvisited_neighbours) > 0 then
+                let next = get_random_unvisited_neighbour current map
             
-            recursive_backtracker new_stack map (update_visited next)
+                let new_current,new_next = remove_common_wall current next
+                let new_stack = if unvisited_neighbours > 1 then new_current::stack else stack
+                let new_map = replace_cell (find_cell next map) new_next (replace_cell (find_cell current map) new_current map)
+
+                //printfn "current iteration: %A" new_current
+                //printfn "current iteration: %A %A %A map:\n %A" next new_stack (new_current,new_next) new_map
             
+                aux new_stack new_map new_next
+
+            elif (stack.Length <> 0) then
+                //printfn "current iteration on stack: %A" current
+                let next::new_stack = stack
+            
+                aux new_stack map (set_visited next)
+            
+            else
+                aux stack map current
         else
-            recursive_backtracker stack map current
-    else
-        map
+            map
+    aux [] map current
 
-
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                                FUNCTION 
+// │    NAME:          generate_maze
+// │    DESCRIPTION:   chiama recursive_backtracker con la mappa di cell passata come parametro e con la cella (0,0,..) come prima cella
+// │    CREATOR:       ML
+// │    OLD NAME:      .
+// │
+// └─────────────────────────────────────────────────────────────────────────┘
 let generate_maze (map:cell list) =
-    recursive_backtracker [] map map.[0]
+    recursive_backtracker map map.[0]
 
 
 
-// CONNECT 2 MAZES TOGHETER
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                                FUNCTION 
+// │    NAME:          connect_default
+// │    DESCRIPTION:   connette due mappe di cell assieme
+// │    CREATOR:       ML
+// │    OLD NAME:      .
+// │
+// └─────────────────────────────────────────────────────────────────────────┘
 let connect_default (maze1:cell list) (maze2:cell list) =
 
     let rec aux height (maze1:cell list) (maze2:cell list) =
@@ -138,6 +210,14 @@ let connect_default (maze1:cell list) (maze2:cell list) =
     let p_map = open_path map_h map_w unp_map
     p_map
 
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                                FUNCTION 
+// │    NAME:          connect_extended
+// │    DESCRIPTION:   connette due mappe di cell_reduced assieme
+// │    CREATOR:       ML
+// │    OLD NAME:      .
+// │
+// └─────────────────────────────────────────────────────────────────────────┘
 let connect_extended (maze1:cell_reduced list) (maze2:cell_reduced list) =
 
     let rec aux height (maze1:cell_reduced list) (maze2:cell_reduced list) =

@@ -1,6 +1,6 @@
 ﻿open System
 
-//cell (x:int, y:int, (wall1:bool,wall2:bool,wall3:bool,wall4:bool), visited:bool)
+
 
 open globals
 open general
@@ -35,8 +35,8 @@ let main argv =
     
     let maze_tot_exp = expand maze_tot
 
-    print_map SET_THIN (get_map_height maze_tot_exp) (get_map_width maze_tot_exp) maze_tot_exp
-    print_map SET_THICK (get_map_height maze_tot_exp) expanded_COLUMNS maze_tot_exp
+    print_map SET_THIN  maze_tot_exp
+    print_map SET_THICK maze_tot_exp
     print_map_generic (get_map_height maze_tot_exp) expanded_COLUMNS maze_tot_exp
 
     System.Console.ReadKey() |> ignore
