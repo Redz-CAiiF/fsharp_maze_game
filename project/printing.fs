@@ -3,7 +3,7 @@
 open System
 open globals
 open general
-open game_map
+open map
 
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
@@ -91,17 +91,17 @@ let get_neighbours_state (x:int) (y:int) (index_f:(int->int->int)) (map:cell_red
     let b_s_left   = if s_left   = WALL then true else false
     (b_s_top,b_s_right,b_s_bottom,b_s_left)
 
-// ┌─────────────────────────────────────────────────────────────────────────┐
-// │                                FUNCTION 
-// │    NAME:          print_map
-// │    DESCRIPTION:   data una mappa stampa la mappa passata nel terminale
-// │    CREATOR:       ML
-// │    OLD NAME:      .
-// │
-// └─────────────────────────────────────────────────────────────────────────┘
+//  ┌─────────────────────────────────────────────────────────────────────────┐
+//  │                                FUNCTION 
+//  │    NAME:          print_map
+/// │    DESCRIPTION:   data una mappa stampa la mappa passata nel terminale, wall_type può essere: SET_THIN or SET_THICK
+//  │    CREATOR:       ML
+//  │    OLD NAME:      .
+//  │
+//  └─────────────────────────────────────────────────────────────────────────┘
 let print_map wall_type (map:cell_reduced list) =
-    let rows = get_map_height map
-    let cols = get_map_width map
+    let rows = ((map_expanded_sizes map) |> get_map_height)
+    let cols = ((map_expanded_sizes map) |> get_map_width)
     set_colour COLOUR_WALL COLOUR_BACKGROUND
     let index_f = index_general rows cols
     for x in 0..(rows-1) do

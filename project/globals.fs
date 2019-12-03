@@ -32,7 +32,7 @@ let COLOUR_PORTAL = ConsoleColor.Yellow
 let GENERIC_PATH = ' '
 
 //wall
-let GENERIC_WALL = '▓'
+let GENERIC_WALL = '█'
 
 let SET_THIN = '0'
 //THIN
