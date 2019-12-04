@@ -10,13 +10,13 @@ open maze_resolutor
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
 // │                                FUNCTION 
-// │    NAME:          connect_default
+// │    NAME:          connect
 // │    DESCRIPTION:   connette due mappe di cell assieme
 // │    CREATOR:       ML
-// │    OLD NAME:      .
+// │    OLD NAME:      connect_default
 // │
 // └─────────────────────────────────────────────────────────────────────────┘
-let connect_default (maze1:cell list) (maze2:cell list) =
+let connect (maze1:cell list) (maze2:cell list) =
 
     let rec aux height (maze1:cell list) (maze2:cell list) =
         match maze2 with
@@ -44,13 +44,13 @@ let connect_default (maze1:cell list) (maze2:cell list) =
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
 // │                                FUNCTION 
-// │    NAME:          connect_extended
+// │    NAME:          .
 // │    DESCRIPTION:   connette due mappe di cell_reduced assieme
 // │    CREATOR:       ML
-// │    OLD NAME:      .
+// │    OLD NAME:      connect_extended
 // │
 // └─────────────────────────────────────────────────────────────────────────┘
-let connect_extended (maze1:cell_reduced list) (maze2:cell_reduced list) =
+(*let connect_extended (maze1:cell_reduced list) (maze2:cell_reduced list) =
 
     let rec aux height (maze1:cell_reduced list) (maze2:cell_reduced list) =
         match maze2 with
@@ -69,7 +69,7 @@ let connect_extended (maze1:cell_reduced list) (maze2:cell_reduced list) =
     let unp_map = aux map_h maze1 maze2
     //create a path between the two mazes
     let p_map = open_path map_h map_w unp_map
-    p_map
+    p_map*)
 
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
@@ -84,7 +84,36 @@ let generate_maze (map:cell list) =
     recursive_backtracker map map.[0]
 
 
-///disconnect heigth map
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                                FUNCTION 
+// │    NAME:          disconnect
+// │    DESCRIPTION:   elimina la prime height righe alla mappa fornita, chiudendo il muro sovrastante
+// │    CREATOR:       ML
+// │    OLD NAME:      disconnect_default
+// │
+// └─────────────────────────────────────────────────────────────────────────┘
+let disconnect (height:int) (maze:cell list) = //height <=maze height
+    let rec remove_cells (cells_number:int) (maze:cell list) = //cells_number <=maze cells
+        match cells_number with
+        | 0 -> maze
+        | _ -> let _::maze_tail = maze in remove_cells (cells_number-1) maze_tail
+    
+    //maze_updated should start from [] when the function is called for the first time
+    let rec reduce_indexes (n:int) (maze_updated:cell list) (maze_old:cell list) = 
+        match maze_old with
+        | [] -> maze_updated
+        | (x,y,w,v)::maze_old_tail -> reduce_indexes n (maze_updated@[((x-n),y,w,v)]) maze_old_tail
+
+    let maze_w = ((get_sizes maze MAP_TYPE) |> get_map_width)
+    let cells_number = height*maze_w
+
+    let rec close_top_wall (cells_number:int) (maze:cell list) = //cells_number <=maze cells
+        match cells_number with
+        | 0 -> maze
+        | _ -> let (x,y,(tw,rw,bw,lw),visited)::maze_tail = maze in (x,y,(true,rw,bw,lw),visited)::(close_top_wall (cells_number-1) maze_tail)
+
+    close_top_wall maze_w (reduce_indexes height [] (remove_cells cells_number maze))
+
 //test connect disconnect connect to see how indexes work when they dont start from 0
 
 
@@ -92,4 +121,4 @@ let generate_maze (map:cell list) =
 let rec generate rows cols chunk =
     match chunk with
     | 1 -> (generate_maze (generate_map rows cols))
-    | _ -> (connect_default (generate rows cols (chunk-1)) (generate_maze (generate_map rows cols)))
+    | _ -> (connect (generate rows cols (chunk-1)) (generate_maze (generate_map rows cols)))

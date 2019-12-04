@@ -26,9 +26,13 @@ let main argv =
     
     let maze_tot_exp = expand maze_tot
 
-    print_map SET_THIN  maze_tot_exp
-    print_map SET_THICK maze_tot_exp
-    print_map_generic (((get_sizes maze_tot_exp MAP_EXPANDED_TYPE) |> get_map_height)) (((get_sizes maze_tot_exp MAP_EXPANDED_TYPE) |> get_map_width)) maze_tot_exp
+    print_map SET_THIN maze_tot_exp
+    //print_map SET_THICK maze_tot_exp
+    //print_map_generic (((get_sizes maze_tot_exp MAP_EXPANDED_TYPE) |> get_map_height)) (((get_sizes maze_tot_exp MAP_EXPANDED_TYPE) |> get_map_width)) maze_tot_exp
+
+    let maze_tot_exp_deloaded = expand (disconnect ROWS maze_tot)
+
+    print_map SET_THIN maze_tot_exp_deloaded
 
     System.Console.ReadKey() |> ignore
     0 // return exit code
