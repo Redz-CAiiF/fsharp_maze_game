@@ -100,8 +100,8 @@ let get_neighbours_state (x:int) (y:int) (index_f:(int->int->int)) (map:cell_red
 //  │
 //  └─────────────────────────────────────────────────────────────────────────┘
 let print_map wall_type (map:cell_reduced list) =
-    let rows = ((map_expanded_sizes map) |> get_map_height)
-    let cols = ((map_expanded_sizes map) |> get_map_width)
+    let rows = ((get_sizes map MAP_EXPANDED_TYPE) |> get_map_height)
+    let cols = ((get_sizes map MAP_EXPANDED_TYPE) |> get_map_width)
     set_colour COLOUR_WALL COLOUR_BACKGROUND
     let index_f = index_general rows cols
     for x in 0..(rows-1) do

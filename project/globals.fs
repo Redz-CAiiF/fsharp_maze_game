@@ -5,8 +5,8 @@ open System
 //map
 let ROWS = 3
 let COLUMNS =7
-let expanded_ROWS = ROWS*2+1
-let expanded_COLUMNS = COLUMNS*2+1
+let EXPANDED_ROWS = ROWS*2+1
+let EXPANDED_COLUMNS = COLUMNS*2+1
 let PORTAL = 3
 let PLAYER = 2
 let WALL = 1

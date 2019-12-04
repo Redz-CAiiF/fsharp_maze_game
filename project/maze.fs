@@ -34,8 +34,8 @@ let connect_default (maze1:cell list) (maze2:cell list) =
         let maze = replace_cell (index_general (height*2) width height random_column) nc2 maze
         maze
 
-    let map_h = ((map_sizes maze1) |> get_map_height)
-    let map_w = ((map_sizes maze1) |> get_map_width)
+    let map_h = ((get_sizes maze1 MAP_TYPE) |> get_map_height)
+    let map_w = ((get_sizes maze1 MAP_TYPE) |> get_map_width)
     //conect the two mazes
     let unp_map = aux map_h maze1 maze2
     //create a path between the two mazes
@@ -63,8 +63,8 @@ let connect_extended (maze1:cell_reduced list) (maze2:cell_reduced list) =
         let (x,y,state) = ((height-1),random_column,PATH)
         replace_cell (index_general height width x y) (x,y,state) maze
 
-    let map_h = ((map_expanded_sizes maze1) |> get_map_height)
-    let map_w = ((map_expanded_sizes maze1) |> get_map_width)
+    let map_h = ((get_sizes maze1 MAP_EXPANDED_TYPE) |> get_map_height)
+    let map_w = ((get_sizes maze1 MAP_EXPANDED_TYPE) |> get_map_width)
     //conect the two mazes
     let unp_map = aux map_h maze1 maze2
     //create a path between the two mazes

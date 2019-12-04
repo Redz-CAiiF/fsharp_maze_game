@@ -29,8 +29,8 @@ let rec is_explored (map:cell list) =
 // │
 // └─────────────────────────────────────────────────────────────────────────┘
 let get_unvisited_neighbours (cell:cell) (map:cell list) =
-    let map_h = ((map_sizes map) |> get_map_height)
-    let map_w = ((map_sizes map) |> get_map_width)
+    let map_h = ((get_sizes map MAP_TYPE) |> get_map_height)
+    let map_w = ((get_sizes map MAP_TYPE) |> get_map_width)
     let ind = index_general map_h map_w
     //current cell separated variables
     let x,y,_,visited = cell

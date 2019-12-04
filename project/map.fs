@@ -11,12 +11,15 @@ open general
 // │    CREATOR:       ML
 // │
 // └─────────────────────────────────────────────────────────────────────────┘
+let MAP_TYPE = (fun ((f_x,f_y,_,_):cell) ((l_x,l_y,_,_):cell) -> (l_x,f_x,l_y,f_y))
+let MAP_EXPANDED_TYPE = (fun ((f_x,f_y,_):cell_reduced) ((l_x,l_y,_):cell_reduced) -> (l_x,f_x,l_y,f_y))
+
 let get_sizes (map:'A list) predicate = 
-    let (h,w) = predicate map
-    (h+1,w+1)
-    
-let map_sizes map = get_sizes map (fun (map:cell list) -> let (l_x,l_y,_,_)::_ = List.rev map in (l_x,l_y))
-let map_expanded_sizes map = get_sizes map (fun (map:cell_reduced list) -> let (l_x,l_y,_)::_ = List.rev map in (l_x,l_y))
+    let get_first_last (map:'A list) = (map.[0])::(map.[(map.Length-1)])::[]
+    let f::l::[] = get_first_last map
+    let (l_x,f_x,l_y,f_y) = predicate f l
+    let (h,w) = ((l_x-f_x+1),(l_y-f_y+1))
+    (h,w)
 
 let get_map_height (h:int,w:int) = 
     h
@@ -161,8 +164,8 @@ let expand (map:cell list) =
     let isEven x = (x % 2) = 0
     let isOdd x = isEven x = false
 
-    let n_cols = ((map_sizes map) |> get_map_width)*2+1
-    let n_rows = ((map_sizes map) |> get_map_height)*2+1
+    let n_cols = ((get_sizes map MAP_TYPE) |> get_map_width)*2+1
+    let n_rows = ((get_sizes map MAP_TYPE) |> get_map_height)*2+1
     let ext_map = generate_expanded_map n_rows n_cols
     let rec set_unconditional_cells = fun map -> 
         match map with
