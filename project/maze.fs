@@ -44,36 +44,6 @@ let connect (maze1:cell list) (maze2:cell list) =
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
 // │                                FUNCTION 
-// │    NAME:          .
-// │    DESCRIPTION:   connette due mappe di cell_reduced assieme
-// │    CREATOR:       ML
-// │    OLD NAME:      connect_extended
-// │
-// └─────────────────────────────────────────────────────────────────────────┘
-(*let connect_extended (maze1:cell_reduced list) (maze2:cell_reduced list) =
-
-    let rec aux height (maze1:cell_reduced list) (maze2:cell_reduced list) =
-        match maze2 with
-        | [] -> maze1
-        | (x,y,state)::maze2_tail -> if x<>0 then aux height (maze1@[(x+height-1,y,state)]) maze2_tail else aux height maze1 maze2_tail
-    
-    let open_path (height:int) (width:int) (maze:cell_reduced list) = 
-        //posizione della cella da modificare
-        let random_column = (((new System.Random()).Next(0, (width-1)/2))*2+1)
-        let (x,y,state) = ((height-1),random_column,PATH)
-        replace_cell (index_general height width x y) (x,y,state) maze
-
-    let map_h = ((get_sizes maze1 MAP_EXPANDED_TYPE) |> get_map_height)
-    let map_w = ((get_sizes maze1 MAP_EXPANDED_TYPE) |> get_map_width)
-    //conect the two mazes
-    let unp_map = aux map_h maze1 maze2
-    //create a path between the two mazes
-    let p_map = open_path map_h map_w unp_map
-    p_map*)
-
-
-// ┌─────────────────────────────────────────────────────────────────────────┐
-// │                                FUNCTION 
 // │    NAME:          generate_maze
 // │    DESCRIPTION:   chiama recursive_backtracker con la mappa di cell passata come parametro e con la cella (0,0,..) come prima cella
 // │    CREATOR:       ML
@@ -87,7 +57,8 @@ let generate_maze (map:cell list) =
 // ┌─────────────────────────────────────────────────────────────────────────┐
 // │                                FUNCTION 
 // │    NAME:          disconnect
-// │    DESCRIPTION:   elimina la prime height righe alla mappa fornita, chiudendo il muro sovrastante
+// │    DESCRIPTION:   elimina la prime height righe alla mappa fornita, chiudendo il muro sovrastante, 
+// │                    rimuovere delle righe può portare il labitinto a non avere souzioni
 // │    CREATOR:       ML
 // │    OLD NAME:      disconnect_default
 // │

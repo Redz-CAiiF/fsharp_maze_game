@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\00mat\\Desktop\\F#\\__Fsharp_project\\__maze_game\\maze_game.fsproj": {}
+    "C:\\Users\\00mat\\Desktop\\F#\\__Fsharp_project\\maze_game_gh\\fsharp_maze_game\\project\\maze_game.fsproj": {}
   },
   "projects": {
-    "C:\\Users\\00mat\\Desktop\\F#\\__Fsharp_project\\__maze_game\\maze_game.fsproj": {
+    "C:\\Users\\00mat\\Desktop\\F#\\__Fsharp_project\\maze_game_gh\\fsharp_maze_game\\project\\maze_game.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\00mat\\Desktop\\F#\\__Fsharp_project\\__maze_game\\maze_game.fsproj",
+        "projectUniqueName": "C:\\Users\\00mat\\Desktop\\F#\\__Fsharp_project\\maze_game_gh\\fsharp_maze_game\\project\\maze_game.fsproj",
         "projectName": "maze_game",
-        "projectPath": "C:\\Users\\00mat\\Desktop\\F#\\__Fsharp_project\\__maze_game\\maze_game.fsproj",
+        "projectPath": "C:\\Users\\00mat\\Desktop\\F#\\__Fsharp_project\\maze_game_gh\\fsharp_maze_game\\project\\maze_game.fsproj",
         "packagesPath": "C:\\Users\\00mat\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\00mat\\Desktop\\F#\\__Fsharp_project\\__maze_game\\obj\\",
+        "outputPath": "C:\\Users\\00mat\\Desktop\\F#\\__Fsharp_project\\maze_game_gh\\fsharp_maze_game\\project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\00mat\\AppData\\Roaming\\NuGet\\NuGet.Config",
