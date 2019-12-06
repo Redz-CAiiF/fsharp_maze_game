@@ -3,9 +3,7 @@
 
 
 open globals
-open general
 open printing
-open map
 open maze
 
 

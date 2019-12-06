@@ -1,10 +1,8 @@
 ﻿module maze
 
-open globals
 open general
 open map
 open maze_generator
-open maze_resolutor
 
 
 

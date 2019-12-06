@@ -1,6 +1,5 @@
 ﻿module map
 
-open globals
 open general
 
 

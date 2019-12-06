@@ -1,8 +1,6 @@
 ﻿//maze generation algorithm module
 module maze_generator
 
-open System
-open globals
 open general
 open map
 
