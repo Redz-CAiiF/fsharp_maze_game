@@ -12,7 +12,6 @@ open general
 // │
 // └─────────────────────────────────────────────────────────────────────────┘
 let MAP_TYPE = (fun ((f_x,f_y,_,_):cell) ((l_x,l_y,_,_):cell) -> (l_x,f_x,l_y,f_y))
-let MAP_EXPANDED_TYPE = (fun ((f_x,f_y,_):cell_reduced) ((l_x,l_y,_):cell_reduced) -> (l_x,f_x,l_y,f_y))
 
 let get_sizes (map:'A list) predicate = 
     let get_first_last (map:'A list) = (map.[0])::(map.[(map.Length-1)])::[]
@@ -73,18 +72,6 @@ let generate_matrix (rows:int) (cols:int) (predicate:(int -> int -> 'A)) =
 // └─────────────────────────────────────────────────────────────────────────┘
 let generate_map (rows:int) (cols:int) =
     let res:cell list = generate_matrix rows cols (fun row col -> (row, col, (true,true,true,true), false))
-    res
-
-// ┌─────────────────────────────────────────────────────────────────────────┐
-// │                                FUNCTION 
-// │    NAME:          generate_expanded_map
-// │    DESCRIPTION:   chiama generate_row con il predicato per creare una cell_reduced
-// │    CREATOR:       ML
-// │    OLD NAME:      .
-// │
-// └─────────────────────────────────────────────────────────────────────────┘
-let generate_expanded_map (rows:int) (cols:int) =
-    let res:cell_reduced list = generate_matrix rows cols (fun row col -> (row, col, WALL))
     res
 
 
@@ -149,47 +136,4 @@ let update_visited (cell:cell) (visited:bool) =
 // └─────────────────────────────────────────────────────────────────────────┘
 let set_visited (cell:cell) = 
     update_visited cell true
-
-
-
-// ┌─────────────────────────────────────────────────────────────────────────┐
-// │                                FUNCTION 
-// │    NAME:          expand
-// │    DESCRIPTION:   data una mappa di cell, ritorna la mappa estesa della mappa passata
-// │    CREATOR:       ML
-// │    OLD NAME:      .
-// │
-// └─────────────────────────────────────────────────────────────────────────┘
-let expand (map:cell list) =
-
-    let n_cols = ((get_sizes map MAP_TYPE) |> get_map_width)*2+1
-    let n_rows = ((get_sizes map MAP_TYPE) |> get_map_height)*2+1
-    let ext_map = generate_expanded_map n_rows n_cols
-    let rec set_unconditional_cells = fun map -> 
-        match map with
-        | [] -> []
-        | (x,y,value)::tail ->  (if (x |> isOdd) && (y |> isOdd) then (x,y,PATH) else (x,y,value))::(set_unconditional_cells tail)
-    let rec set_walls = fun (map:cell list) (ext_map:cell_reduced list) ->
-        //tolgo una cella dalla mappa è modifico ext_map
-        match map with
-        | [] -> ext_map
-        | cell::tail -> (
-                        //do the logic here, what to return, how to set the walls on the extended map
-                        // use replace_cell on ext_map
-                        let x,y,walls,_ = cell
-                        let wall_top,wall_right,wall_bottom,wall_left = walls
-                        let n_x = 2 * x + 1
-                        let n_y = 2 * y + 1
-                        //per ogni muro controllo se non c'è, se non c'è modifico la mappa estesa
-                        let wall_check = fun wall x y map -> if not wall then replace_cell (index_general n_rows n_cols x y) (x,y,PATH) map else map
-
-                        let ext_map = wall_check wall_top    (n_x-1) (n_y)   ext_map
-                        let ext_map = wall_check wall_right  (n_x)   (n_y+1) ext_map
-                        let ext_map = wall_check wall_bottom (n_x+1) (n_y)   ext_map
-                        let ext_map = wall_check wall_left   (n_x)   (n_y-1) ext_map
-
-                        set_walls tail ext_map
-                        )
-    
-    set_walls map (set_unconditional_cells ext_map)
 

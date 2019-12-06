@@ -3,9 +3,9 @@
 open System
 
 //map general dimensions
-let ROWS = 2 //height of a chunk
-let COLUMNS = 2 //width of a chunk
-let CHUNKS = 1 //number of chunks generated
+let ROWS = 3 //height of a chunk
+let COLUMNS = 10 //width of a chunk
+let CHUNKS = 2 //number of chunks generated
 
 //map printing constants
 let EXPANDED_ROWS = ROWS*2+1

@@ -40,7 +40,6 @@ let connect (maze1:cell list) (maze2:cell list) =
     let unp_map = aux map_h maze1 maze2
     //create a path between the two mazes
     let p_map = open_path map_h map_w unp_map
-    //game_map_row_fix map_w p_map 0
     p_map
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
@@ -55,7 +54,6 @@ let stopWatch = System.Diagnostics.Stopwatch.StartNew()
 let generate_maze (map:cell list) =
     stopWatch.Restart()
     let res = recursive_backtracker map map.[0]
-    //let res = sidewinder_algorithm map
     stopWatch.Stop()
     printfn "GENERATION time: %A" stopWatch.Elapsed.TotalMilliseconds
     res
