@@ -18,22 +18,19 @@ open maze
 let main argv =
 
     set_colour COLOUR_PLAYER COLOUR_BACKGROUND
-    let maze_tot = generate ROWS COLUMNS 3
+    let maze_tot = generate ROWS COLUMNS CHUNKS
     reset_colour
 
-    //let custom_index = (index_general (get_maze_height maze_tot) (get_maze_width maze_tot))
-    //print_debug (get_maze_height maze_tot) (get_maze_width maze_tot) custom_index maze_tot
+    //let custom_index = (index_general (((get_sizes maze_tot MAP_TYPE) |> get_map_height)) (((get_sizes maze_tot MAP_TYPE) |> get_map_width)))
+    //print_debug (((get_sizes maze_tot MAP_TYPE) |> get_map_height)) (((get_sizes maze_tot MAP_TYPE) |> get_map_width)) custom_index maze_tot
     
-    let maze_tot_exp = expand maze_tot
+    
+    let chars_map = map_to_chars maze_tot
 
-    print_map SET_THIN maze_tot_exp
-    //print_map SET_THICK maze_tot_exp
-    //print_map_generic (((get_sizes maze_tot_exp MAP_EXPANDED_TYPE) |> get_map_height)) (((get_sizes maze_tot_exp MAP_EXPANDED_TYPE) |> get_map_width)) maze_tot_exp
-
-    let maze_tot_exp_deloaded = expand (disconnect ROWS maze_tot)
-
-    print_map SET_THIN maze_tot_exp_deloaded
+    print_map (improve_output_map chars_map)
 
     System.Console.ReadKey() |> ignore
     0 // return exit code
-    
+
+
+

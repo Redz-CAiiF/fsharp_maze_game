@@ -8,6 +8,16 @@ open map
 
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
+// │                                CONSTANT 
+// │    NAME:          SEED
+// │    DESCRIPTION:   avvia un generatore random
+// │    CREATOR:       ML
+// │    OLD NAME:      .
+// │
+// └─────────────────────────────────────────────────────────────────────────┘
+let SEED = System.Random()
+
+// ┌─────────────────────────────────────────────────────────────────────────┐
 // │                                FUNCTION 
 // │    NAME:          is_explored
 // │    DESCRIPTION:   data una mappa, ritorna true se la mappa è completamante esplorata
@@ -82,7 +92,7 @@ let has_unvisited_neighbours (cell:cell) (map:cell list) =
 // └─────────────────────────────────────────────────────────────────────────┘
 let get_random_unvisited_neighbour (cell:cell) (map:cell list) =
     let neighbours = get_unvisited_neighbours cell map
-    let random_index = System.Random().Next(0, neighbours.Length)
+    let random_index = SEED.Next(0, neighbours.Length)
     let random_neighbour = neighbours.[random_index]
     random_neighbour
 
@@ -136,30 +146,27 @@ let recursive_backtracker (map:cell list) (current:cell) =
     let rec aux (stack:cell list) (map:cell list) (current:cell) =
         let map = replace_cell (find_cell current map) (set_visited current) map
         let current = (set_visited current)
-        //printfn "evaluating: %A" current
+
         if not (is_explored map) then
-            let unvisited_neighbours = unvisited_neighbours_number current map
+            let all_unvisited_neighbours = get_unvisited_neighbours current map
+            let unvisited_neighbours = all_unvisited_neighbours.Length
             if (unvisited_neighbours) > 0 then
-                let next = get_random_unvisited_neighbour current map
-            
+                let next = all_unvisited_neighbours.[SEED.Next(0,unvisited_neighbours)]
+                
                 let new_current,new_next = remove_common_wall current next
                 let new_stack = if unvisited_neighbours > 1 then new_current::stack else stack
-                let new_map = replace_cell (find_cell next map) new_next (replace_cell (find_cell current map) new_current map)
+                let new_map = (replace_cell (find_cell current map) new_current map)
+                let new_map = replace_cell (find_cell next map) new_next new_map
 
-                //printfn "current iteration: %A" new_current
-                //printfn "current iteration: %A %A %A map:\n %A" next new_stack (new_current,new_next) new_map
-            
                 aux new_stack new_map new_next
 
-            elif (stack.Length <> 0) then
-                //printfn "current iteration on stack: %A" current
+            else // ci arriverà solo se lo stack è vuoto
                 let next::new_stack = stack
-            
                 aux new_stack map (set_visited next)
             
-            else
-                aux stack map current
         else
             map
+
     aux [] map current
+
 

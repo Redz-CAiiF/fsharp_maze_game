@@ -29,19 +29,9 @@ type walls = bool*bool*bool*bool
 type cell = (int*int*walls*bool)
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
-// │                               DEFINITION
-// │    NAME:          cell_reduced
-// │    DEFINITION:    (x:int, y:int, status:int) -> status: PATH / WALL / PLAYER / PORTAL
-// │    CREATOR:       ML
-// │
-// └─────────────────────────────────────────────────────────────────────────┘
-type cell_reduced = (int*int*int)
-
-// ┌─────────────────────────────────────────────────────────────────────────┐
 // │                          DEFAULT ERROR CELLS
 // └─────────────────────────────────────────────────────────────────────────┘
-let ERROR_CELL = (-1,-1,(false,false,false,false),false)
-let ERROR_CELL_REDUCED = (-1,-1,PATH)
+let ERROR_CELL = (-1,-1,(CLOSED,CLOSED,CLOSED,CLOSED),false)
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
 // │                               END OTHER 
@@ -77,4 +67,16 @@ let index_general = fun (rows:int) (cols:int) (x:int) (y:int) -> if (x < 0 || y 
 // └─────────────────────────────────────────────────────────────────────────┘
 let extend_size (size:int) = size*2+1
 
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                                 OTHER 
+// │    NAME:          DEFINITION OF EVEN AND ODD
+// │    DESCRIPTION:   the various definition of the function to see if a number is odd or even
+// │    CREATOR:       ML
+// │
+// └─────────────────────────────────────────────────────────────────────────┘
+let isEven x = (x % 2) = 0
+let isOdd x = isEven x = false
 
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                               END OTHER 
+// └─────────────────────────────────────────────────────────────────────────┘
