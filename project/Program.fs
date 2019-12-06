@@ -38,7 +38,7 @@ let main argv =
 
     //print_map SET_THIN maze_tot_exp_deloaded
 
-    printfn "%A" (generate_chars_map 5 5)
+    printfn "%A" (map_to_chars EXPANDED_ROWS EXPANDED_COLUMNS maze_tot)
 
     System.Console.ReadKey() |> ignore
     0 // return exit code

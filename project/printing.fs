@@ -158,7 +158,7 @@ let print_map_generic (map:cell_reduced list) =
         printf "\n"
 
 
-let generate_chars_map (rows:int) (cols:int) = 
+let map_to_chars (rows:int) (cols:int) (map:cell list) = 
     let generate_walls_map (rows:int) (cols:int) = 
         let mutable res = []
         for x in 0..(rows-1) do
@@ -170,25 +170,28 @@ let generate_chars_map (rows:int) (cols:int) =
             res <- row::res
         res
 
+    let replace_char (x:int) (y:int) wall (res:string list) =
+        let line = res.[x]
+        let new_line = ((line.[..(y-1)]) + (string (if not wall then GENERIC_PATH else GENERIC_WALL)) + (line.[(y+1)..]))
+        let n_res = ((res.[..(x-1)])@[new_line]@(res.[(x+1)..]))
+        n_res
 
-    generate_walls_map rows cols
-            
+    let set_maze (rows:int) (cols:int) (c_map:string list) (map:cell list) = 
+        let mutable res = c_map
+        let mutable map = map
+        for iter in 0..(map.Length-1) do
+            //per ogni cella in map prendo gli stati dei muri destra e basso e gli cambio nella mappa dei chars
+            let (x,y,(_,w2,w3,_),_)::map_tail = map
+            map <- map_tail
+            let x = extend_size x
+            let y = extend_size y
+            res <- replace_char x (y+1) w2 res
+            res <- replace_char (x+1) y w3 res
 
-let map_chars (map:cell list) =
-    let rows,cols = (get_sizes map MAP_TYPE)
-    //generate the default character matrix, then i have to replace only the chars that are needed to be replaced by the various walls
-    //creo delle funzioni che data la posizione e la matrice stringhe sostituisce il carattere passato, tenendo in considerazione il carattere precedente
-    let mutable res = []
+        res
 
-    let index_f = index_general rows cols
-    for x in 0..(rows-1) do
-        for y in 0..(cols-1) do
-            let x,y,(w1,w2,w3,w4),_ = map.[(index_f x y)]
-            
-            0
-            //let character = if block = PATH then GENERIC_PATH else GENERIC_WALL
-            //printf "%c" character
-        printf "\n"
+    set_maze rows cols (generate_walls_map rows cols) map
+
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
 // │                               END OTHER 
