@@ -40,6 +40,7 @@ let connect (maze1:cell list) (maze2:cell list) =
     let unp_map = aux map_h maze1 maze2
     //create a path between the two mazes
     let p_map = open_path map_h map_w unp_map
+    //game_map_row_fix map_w p_map 0
     p_map
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
@@ -50,8 +51,15 @@ let connect (maze1:cell list) (maze2:cell list) =
 // │    OLD NAME:      .
 // │
 // └─────────────────────────────────────────────────────────────────────────┘
+let stopWatch = System.Diagnostics.Stopwatch.StartNew()
 let generate_maze (map:cell list) =
-    recursive_backtracker map map.[0]
+    stopWatch.Restart()
+    let res = recursive_backtracker map map.[0]
+    //let res = sidewinder_algorithm map
+    stopWatch.Stop()
+    printfn "GENERATION time: %A" stopWatch.Elapsed.TotalMilliseconds
+    res
+    
 
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
@@ -85,7 +93,6 @@ let disconnect (height:int) (maze:cell list) = //height <=maze height
 
     close_top_wall maze_w (reduce_indexes height [] (remove_cells cells_number maze))
 
-//test connect disconnect connect to see how indexes work when they dont start from 0
 
 
 ///automatize the generate, it should only take rows and cols and it should choose by itself the chunks

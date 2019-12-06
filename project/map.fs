@@ -161,8 +161,6 @@ let set_visited (cell:cell) =
 // │
 // └─────────────────────────────────────────────────────────────────────────┘
 let expand (map:cell list) =
-    let isEven x = (x % 2) = 0
-    let isOdd x = isEven x = false
 
     let n_cols = ((get_sizes map MAP_TYPE) |> get_map_width)*2+1
     let n_rows = ((get_sizes map MAP_TYPE) |> get_map_height)*2+1

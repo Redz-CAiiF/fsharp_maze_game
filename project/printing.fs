@@ -113,6 +113,23 @@ let print_map wall_type (map:cell_reduced list) =
         printf "\n"
     reset_colour
 
+(*let map_chars wall_type (map:cell list) =
+    let rows,cols = (get_sizes map MAP_TYPE)
+    //generate the default character matrix, then i have to replace only the chars that are needed to be replaced by the various walls
+    //creo delle funzioni che data la posizione e la matrice stringhe sostituisce il carattere passato, tenendo in considerazione il carattere precedente
+    let mutable res = []
+    
+    let index_f = index_general rows cols
+    for x in 0..(rows-1) do
+        for y in 0..(cols-1) do
+            let x,y,(w1,w2,w3,w4),_ = map.[(index_f x y)]
+            //in base ai vari muri scrivo sulla cella
+            let character = if block = PATH then GENERIC_PATH else (get_proper_wall wall_type (get_neighbours_state x y index_f map))
+            let spacing = get_proper_spacing wall_type character
+            printf "%c%c" spacing character
+        printf "\n"*)
+    
+
 
 
 
@@ -130,13 +147,47 @@ let print_debug (rows:int) (cols:int) (index_f:(int->int->int)) (map:'A list)=
             printf "\t  %A" (map.[(index_f x y)])
         printf "\n"
 
-let print_map_generic (rows:int) (cols:int) (map:cell_reduced list) =
+let print_map_generic (map:cell_reduced list) =
+    let rows,cols = (get_sizes map MAP_EXPANDED_TYPE)
     let index_f = index_general rows cols
     for x in 0..(rows-1) do
         for y in 0..(cols-1) do
             let x,y,block = map.[(index_f x y)]
             let character = if block = PATH then GENERIC_PATH else GENERIC_WALL
             printf "%c" character
+        printf "\n"
+
+
+let generate_chars_map (rows:int) (cols:int) = 
+    let generate_walls_map (rows:int) (cols:int) = 
+        let mutable res = []
+        for x in 0..(rows-1) do
+            let mutable row = ""
+            for y in 0..(cols-1) do
+                //se sia x che y sono dispari
+                row <- row + (if (x |> isOdd) && (y |> isOdd) then string GENERIC_PATH else string GENERIC_WALL)
+
+            res <- row::res
+        res
+
+
+    generate_walls_map rows cols
+            
+
+let map_chars (map:cell list) =
+    let rows,cols = (get_sizes map MAP_TYPE)
+    //generate the default character matrix, then i have to replace only the chars that are needed to be replaced by the various walls
+    //creo delle funzioni che data la posizione e la matrice stringhe sostituisce il carattere passato, tenendo in considerazione il carattere precedente
+    let mutable res = []
+
+    let index_f = index_general rows cols
+    for x in 0..(rows-1) do
+        for y in 0..(cols-1) do
+            let x,y,(w1,w2,w3,w4),_ = map.[(index_f x y)]
+            
+            0
+            //let character = if block = PATH then GENERIC_PATH else GENERIC_WALL
+            //printf "%c" character
         printf "\n"
 
 // ┌─────────────────────────────────────────────────────────────────────────┐

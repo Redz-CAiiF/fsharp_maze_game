@@ -2,15 +2,24 @@
 
 open System
 
-//map
-let ROWS = 3
-let COLUMNS =7
+//map general dimensions
+let ROWS = 6 //height of a chunk
+let COLUMNS = 50 //width of a chunk
+let CHUNKS = 2 //number of chunks generated
+
+//map printing constants
 let EXPANDED_ROWS = ROWS*2+1
 let EXPANDED_COLUMNS = COLUMNS*2+1
+
+//map cell states
 let PORTAL = 3
 let PLAYER = 2
 let WALL = 1
 let PATH = 0
+
+//wall status
+let CLOSED = true
+let OPEN = false
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
 // │                                 OTHER 
