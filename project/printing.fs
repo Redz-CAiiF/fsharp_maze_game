@@ -68,7 +68,7 @@ let map_to_chars (map:cell list) =
         res
 
     let rows, cols = (get_sizes map MAP_TYPE)
-    set_maze (generate_walls_map rows cols) map
+    set_maze (generate_walls_map (extend_size rows) (extend_size cols)) map
     
 
 
