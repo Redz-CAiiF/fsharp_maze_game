@@ -2,6 +2,7 @@
 F# project for december 2019, currently maintained by:
 * @Redz-CAiiF
 * @EPMatt
+* @whitedemond
 
 ## License
 GNU General Public License v3.0, please refer to [LICENSE](https://github.com/Redz-CAiiF/fsharp_maze_game/blob/master/LICENSE) or to the last LICENSE file inside the last commit of [this repository](https://github.com/Redz-CAiiF/fsharp_maze_game), if the repository is unavailable please refer to the last electronic of phisical copy you currently have access to, if you dont have access to any copy of the license ask the person, team or company that provided you with this program, if no copy of the license can be obtained please refer to the GNU GENERAL PUBLIC LICENSE v3.0 that can be found online.
@@ -103,7 +104,7 @@ this is part is an example of some possible elements in a menu
 > │ ELEMENT NAME | │ START |
 > └──────────────┘ └───────┘
 > ```
-> some element with a field to increase od decrease some value, for example a field to increase or reduce the game map size
+> some element with a field to increase or decrease some value, for example a field to increase or reduce the game map size
 > ```F#
 > ┌──────────────┐ ┌─────┐┌────────┐┌─────┐
 > │ ELEMENT NAME | │  <  |│ NUMBER |│  >  |
