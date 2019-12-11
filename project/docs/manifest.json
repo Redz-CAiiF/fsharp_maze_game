@@ -1,0 +1,272 @@
+{
+  "homepages": [],
+  "source_base_path": "D:/temo/fsharp_maze_game/project",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.Cell.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.Cell.html",
+          "hash": "uJ3y4jRzH/kLnvJOvVinAg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.CellType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.CellType.html",
+          "hash": "ddGfC5l9DH93vfizVKCZDQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.Maze.Generator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.Maze.Generator.html",
+          "hash": "HXjH+6YtgD61EDKqaKeM5A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.Maze.MazeMap.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.Maze.MazeMap.html",
+          "hash": "DSRa2cGlm012SyXa3w4hAg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.Maze.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.Maze.html",
+          "hash": "uTwKfLr7a1n+g2iXzv4YYA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.MazeType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.MazeType.html",
+          "hash": "bFPIJJB7kl2yICBUlBcQTQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.Utils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.Utils.html",
+          "hash": "GpEcfM7rcFB/3Qf30UwXnQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.Walls.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.Walls.html",
+          "hash": "9VmInHg1B9KkkHdceBeFPQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.WallsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.WallsType.html",
+          "hash": "RexOyMUq+gOLILTi5EneUA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.html",
+          "hash": "2ijjBxl8M/LxEzzuKFnF5g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Program.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Program.html",
+          "hash": "oW8ob24IY/tGUxSmWlZIDA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.html",
+          "hash": "1s8Q0PDq19UN6ke/be43lg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "ts3StIfSeTX+tuCMcUBF+g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "u3XkGNPPlWpkaeLvowDQ9A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "9hh1iAQgvpBuNF3ap5IoAA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "gB8AESyvNru97tzIZofEEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "QXNW4PSf/J1gm9ZzyitLQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "+rHUkRZHZRi5gd1aTU6lJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Disable incremental build by force rebuild option.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "ForceRebuild"
+      },
+      "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 3,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 12,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: it's disabled.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

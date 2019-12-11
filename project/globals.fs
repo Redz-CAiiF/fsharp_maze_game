@@ -17,6 +17,8 @@ let PLAYER = 2
 let WALL = 1
 let PATH = 0
 
+
+//DONE
 //wall status
 let CLOSED = true
 let OPEN = false

@@ -1,9 +1,30 @@
 ﻿module printing
-
 open System
+open FMaze.Core
 open globals
-open general
-open map
+
+type cell=int*int*(bool*bool*bool*bool)*bool
+
+
+//temporary function for converting the new data structure in the old one just for being used in printing functions
+let convert_celltype_to_cell_list (map:CellType list) (cols:int):cell list = 
+
+    let rec aux (index:int) (map:CellType list) = 
+        match map with
+        [] ->[]
+        |x::xs -> ((index/cols),(index%cols),(x.walls.top,x.walls.right,x.walls.bottom,x.walls.left),x.visited)::(aux (index+1) xs)
+    aux 0 map
+    
+/// ┌─────────────────────────────────────────────────────────────────────────┐
+/// │                                FUNCTION 
+/// │    NAME:          extend_size
+/// │    DESCRIPTION:   data una dimensione ritorna la dimensione estesa f(x):x*2+1
+/// │    CREATOR:       ML
+/// │    OLD NAME:      .
+/// │
+/// └─────────────────────────────────────────────────────────────────────────┘
+let extend_size (size:int) = size*2+1
+
 
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
@@ -12,7 +33,7 @@ open map
 // │    DESCRIPTION:   contiene le funzioni per la gestione del colore sul terminale
 // │    CREATOR:       ML      
 // │
-// └─────────────────────────────────────────────────────────────────────────┘
+// └─────────────────────────────────────────────────────────────────────────┘ 
 let set_terminal_color fore back = 
     Console.ForegroundColor <- fore
     Console.BackgroundColor <- back
@@ -35,14 +56,14 @@ let reset_colour =
 //  │    OLD NAME:      .
 //  │
 //  └─────────────────────────────────────────────────────────────────────────┘
-let map_to_chars (map:cell list) = 
+let map_to_chars (map:cell list) (maze:MazeType)= 
     let generate_walls_map (rows:int) (cols:int) = 
         let mutable res = []
         for x in 0..(rows-1) do
             let mutable row = ""
             for y in 0..(cols-1) do
                 //se sia x che y sono dispari
-                row <- row + (if (x |> isOdd) && (y |> isOdd) then string GENERIC_PATH else string GENERIC_WALL)
+                row <- row + (if (x |> Utils.isOdd) && (y |> Utils.isOdd) then string GENERIC_PATH else string GENERIC_WALL)
 
             res <- row::res
         res
@@ -67,7 +88,7 @@ let map_to_chars (map:cell list) =
 
         res
 
-    let rows, cols = (get_sizes map MAP_TYPE)
+    let rows, cols = maze.rows,maze.cols
     set_maze (generate_walls_map (extend_size rows) (extend_size cols)) map
     
 
@@ -112,19 +133,19 @@ let rec print_map (chars_map:string list) =
 
 
 
-// ┌─────────────────────────────────────────────────────────────────────────┐
-// │                                 OTHER 
-// │    NAME:          FUNZIONI OBSOLETE O DI DEBUG
-// │    DESCRIPTION:   funzioni obsolete per fare l'output
-// │    CREATOR:       ML
-// │
-// └─────────────────────────────────────────────────────────────────────────┘
-let print_debug (rows:int) (cols:int) (index_f:(int->int->int)) (map:'A list)= 
-    for x in 0..(rows-1) do
-        for y in 0..(cols-1) do
-            printf "\t  %A" (map.[(index_f x y)])
-        printf "\n"
+//// ┌─────────────────────────────────────────────────────────────────────────┐
+//// │                                 OTHER 
+//// │    NAME:          FUNZIONI OBSOLETE O DI DEBUG
+//// │    DESCRIPTION:   funzioni obsolete per fare l'output
+//// │    CREATOR:       ML
+//// │
+//// └─────────────────────────────────────────────────────────────────────────┘
+//let print_debug (rows:int) (cols:int) (index_f:(int->int->int)) (map:'A list)= 
+//    for x in 0..(rows-1) do
+//        for y in 0..(cols-1) do
+//            printf "\t  %A" (map.[(index_f x y)])
+//        printf "\n"
 
-// ┌─────────────────────────────────────────────────────────────────────────┐
-// │                               END OTHER 
-// └─────────────────────────────────────────────────────────────────────────┘
+//// ┌─────────────────────────────────────────────────────────────────────────┐
+//// │                               END OTHER 
+//// └─────────────────────────────────────────────────────────────────────────┘

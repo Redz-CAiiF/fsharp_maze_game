@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+<assembly><name>maze_game</name></assembly>
+<members>
+<member name="M:printing.print_map(Microsoft.FSharp.Collections.FSharpList{System.String})">
+<summary>
+ │    DESCRIPTION:   .
+</summary>
+</member>
+<member name="M:printing.map_to_chars(Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.Int32,System.Int32,System.Tuple{System.Boolean,System.Boolean,System.Boolean,System.Boolean},System.Boolean}},FMaze.Core.MazeType)">
+<summary>
+ │    DESCRIPTION:   data una mappa ritorna una lista di stringhe, che compongono la mappa graficamente
+</summary>
+</member>
+<member name="M:printing.extend_size(System.Int32)">
+<summary>
+ ┌─────────────────────────────────────────────────────────────────────────┐
+ │                                FUNCTION 
+ │    NAME:          extend_size
+ │    DESCRIPTION:   data una dimensione ritorna la dimensione estesa f(x):x*2+1
+ │    CREATOR:       ML
+ │    OLD NAME:      .
+ │
+ └─────────────────────────────────────────────────────────────────────────┘
+</summary>
+</member>
+<member name="P:FMaze.Core.WallsType.left">
+<summary>
+Open/Closed status for the cell&apos;s left wall
+</summary>
+</member>
+<member name="P:FMaze.Core.WallsType.bottom">
+<summary>
+Open/Closed status for the cell&apos;s bottom wall
+</summary>
+</member>
+<member name="P:FMaze.Core.WallsType.right">
+<summary>
+Open/Closed status for the cell&apos;s right wall
+</summary>
+</member>
+<member name="P:FMaze.Core.WallsType.top">
+<summary>
+Open/Closed status for the cell&apos;s top wall
+</summary>
+</member>
+<member name="T:FMaze.Core.WallsType">
+<summary>Defines walls for a cell. Values: OPEN/CLOSED</summary>
+</member>
+<member name="P:FMaze.Core.CellType.visited">
+<summary>
+whether the cell was visited by generator algorhythm or not
+</summary>
+</member>
+<member name="P:FMaze.Core.CellType.walls">
+<summary>
+walls for the cell
+</summary>
+</member>
+<member name="T:FMaze.Core.CellType">
+<summary>
+The cell data structure.
+</summary>
+</member>
+<member name="P:FMaze.Core.MazeType.cols">
+<summary>
+number of columns the maze is made up of
+</summary>
+</member>
+<member name="P:FMaze.Core.MazeType.rows">
+<summary>
+number of rows the maze is made up of
+</summary>
+</member>
+<member name="P:FMaze.Core.MazeType.map">
+<summary>
+map of cells representing the structure of the maze
+</summary>
+</member>
+<member name="T:FMaze.Core.MazeType">
+<summary>
+The data structure representing a maze instance.
+</summary>
+</member>
+<member name="M:FMaze.Core.Utils.isOdd(System.Int32)">
+<summary>Check if the given number is odd.</summary>
+<param name="x">The value to check</param>
+<returns><c>true</c> if the number is odd, <c>false</c> if not.</returns>
+</member>
+<member name="M:FMaze.Core.Utils.isEven(System.Int32)">
+<summary>Check if the given number is even.</summary>
+<param name="x">The value to check</param>
+<returns><c>true</c> if the number is even, <c>false</c> if not.</returns>
+</member>
+<member name="M:FMaze.Core.Utils.from_monodim_to_bidim(System.Int32,System.Int32)">
+<summary>Convert a monodimensional index into bidimensional coordinates.</summary>
+<param name="index">The monodimensional index to convert to</param>
+<param name="cols">Numbers of columns in the matrix</param>
+<returns>A tuple <c>(row , col )</c> containing the coordinates corresponding the given momodimensional index.</returns>
+</member>
+<member name="M:FMaze.Core.Utils.from_bidim_to_monodim(System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>Convert bidimensional coordinates in a 1-dimensional index for matrix operations.</summary>
+<param name="rows">Number of rows of the matrix</param>
+<param name="cols">Numbers of columns of the matrix</param>
+<param name="row">Row index</param>
+<param name="col">Column index</param>
+<returns>The respective 1-dimensional index if coordinates are valid, false if not</returns>
+</member>
+<member name="M:FMaze.Core.Utils.are_coordinates_valid(System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>Check if the given coordinates are valid in the given matrix dimensions.</summary>
+<param name="rows">Number of rows of the matrix</param>
+<param name="cols">Numbers of columns of the matrix</param>
+<param name="row">Row index to check</param>
+<param name="col">Column index to check</param>
+<returns><c>true</c> if the coordinates are vaild in the given matrix dimensions, <c>false</c> if not.</returns>
+</member>
+<member name="T:FMaze.Core.Utils">
+<summary>The Utils module contains utility functions and definitions used across the whole application</summary>
+</member>
+<member name="P:FMaze.Core.Walls.OPEN">
+<summary>Const value which represent an open wall.</summary>
+</member>
+<member name="P:FMaze.Core.Walls.CLOSED">
+<summary>Const value which represent a closed wall.</summary>
+</member>
+<member name="T:FMaze.Core.Walls">
+<summary>The Walls module define consts for the <c>WallType</c> type.</summary>
+</member>
+<member name="M:FMaze.Core.Cell.create(FMaze.Core.WallsType,System.Boolean)">
+<summary>Create a new <c>CellType</c> instance with the given parameters.</summary>
+</member>
+<member name="M:FMaze.Core.Cell.set_visited(FMaze.Core.CellType,System.Boolean)">
+<summary>Sets the given value of visited for the given cell.</summary>
+<param name="cell">The cell which the setter operates on</param>
+<param name="visited">The new value of visited</param>
+<returns>The given cell with the updated value of visited</returns>
+</member>
+<member name="P:FMaze.Core.Cell.ERROR_CELL">
+<summary>A cell representing an error in the application</summary>
+</member>
+<member name="T:FMaze.Core.Cell">
+<summary>The Cell module defines common operations on cells.</summary>
+<remarks>
+A cell is the basic component of the maze. It contains info on the walls and a boolean used for various purposes throughout the application.
+Cells, organized in a list constitute a map
+</remarks>
+</member>
+<member name="M:FMaze.Core.Maze.create(System.Int32,System.Int32)">
+<summary>Creates a new Maze from the given parameters.</summary>
+<returns>The maze with the given parameters</returns>
+</member>
+<member name="M:FMaze.Core.Maze.connect(FMaze.Core.MazeType,FMaze.Core.MazeType)">
+<summary>Connects two mazes together. It takes the second maze and connects it to the end of the first one.</summary>
+<param name="maze1">The first maze to operate on</param>
+<param name="maze2">The second maze to operate on</param>
+<returns>A new maze made of the concatenation of the 2 mazes.</returns>
+</member>
+<member name="M:FMaze.Core.Maze.get_bi_cell(System.Int32,System.Int32,FMaze.Core.MazeType)">
+<summary>Gets the cell at the specified index in the given Maze. Index is specified as 1-dimensional.</summary>
+<param name="position">The index of the desired element in the maze</param>
+<param name="map">The maze to select the element from</param>
+<returns>The cell at the specified index</returns>
+</member>
+<member name="M:FMaze.Core.Maze.get_cell(System.Int32,FMaze.Core.MazeType)">
+<summary>Gets the cell at the specified index in the given Maze. Index is specified as 1-dimensional.</summary>
+<param name="position">The index of the desired element in the maze</param>
+<param name="map">The maze to select the element from</param>
+<returns>The cell at the specified index</returns>
+</member>
+<member name="M:FMaze.Core.Maze.Generator.generate(FMaze.Core.MazeType)">
+<summary>Generate a maze from a default initialized <c>Maze</c> instance.</summary>
+<param name="maze">A default initialized maze.</param>
+<returns>A new maze made of the concatenation of the 2 mazes.</returns>
+</member>
+<member name="M:FMaze.Core.Maze.Generator.recursive_backtracker(FMaze.Core.MazeType,System.Int32)">
+<summary>The recursive backtracker algorhythm used for generating the maze. See <a href="https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker">Maze generation on Wikipedia</a> for details about how the algorhythm.</summary>
+<param name="maze">An maze initialized with default cells</param>
+<param name="start">The index of the cell representing the entry point of the recursive backtracker algorhythm </param>
+<returns>The maze with randomly generated paths.</returns>
+</member>
+<member name="M:FMaze.Core.Maze.Generator.has_unvisited_neighbours(System.Int32,FMaze.Core.MazeType)">
+<summary>Given a maze and a cell index check if the given cell has unvisited neighbours.</summary>
+<param name="index">Index of the base cell</param>
+<param name="maze">The maze where the cell is located in</param>
+<returns><c>true</c> if the given cell has unvisited neighbours, <c>false</c> if not.</returns>
+</member>
+<member name="M:FMaze.Core.Maze.Generator.unvisited_neighbours_number(System.Int32,FMaze.Core.MazeType)">
+<summary>Given a maze and a cell index return the number of unvisited neightbours for the given cell.</summary>
+<param name="index">Index of the base cell</param>
+<param name="maze">The maze where the cell is located in</param>
+<returns>The number of unvisited neighbours of the cell at the given index.</returns>
+</member>
+<member name="M:FMaze.Core.Maze.Generator.get_unvisited_neighbours(System.Int32,FMaze.Core.MazeType)">
+<summary>Given a maze and a cell index return a list of indexes of the cell neighbours.</summary>
+<param name="index">Index of the base cell</param>
+<param name="maze">The maze where the cell is located in</param>
+<returns>A list of monodimensional indexes each one representing an unvisited neighbour of the cell at the given index.</returns>
+</member>
+<member name="M:FMaze.Core.Maze.Generator.is_explored(Microsoft.FSharp.Collections.FSharpList{FMaze.Core.CellType})">
+<summary>Given a cell map, check if the map has been entirely explored, i.e. all the cells have been visited by the generator algorhythm.</summary>
+<param name="map">The cell map which the check is performed on</param>
+<returns><c>true</c> if the map has been entirely explored, <c>false</c> if not.</returns>
+</member>
+<member name="P:FMaze.Core.Maze.Generator.SEED">
+<summary>The seed used for generating random numbers for implementing randomness in the maze generator algorhythm</summary>
+</member>
+<member name="T:FMaze.Core.Maze.Generator">
+<summary>Routines used in the maze generation process.</summary>
+</member>
+<member name="M:FMaze.Core.Maze.MazeMap.remove_common_wall(Microsoft.FSharp.Collections.FSharpList{FMaze.Core.CellType},System.Int32,System.Int32,System.Int32)">
+<summary>Remove the wall of adjacent cells.</summary>
+<param name="current">The current cell</param>
+<param name="next">The adjacent cell</param>
+<returns>A new map with the modified cells</returns>
+</member>
+<member name="M:FMaze.Core.Maze.MazeMap.find_cell(FMaze.Core.CellType,Microsoft.FSharp.Collections.FSharpList{FMaze.Core.CellType})">
+<summary>Given a cell find the index of that cell in the given map.</summary>
+<param name="cell">The new cell to look for in the map</param>
+<param name="map">The cell map to search on for the cell</param>
+<returns>The index of the cell in the map, or <c>-1</c> if the cell is not present in the map.</returns>
+</member>
+<member name="M:FMaze.Core.Maze.MazeMap.replace_cell(System.Int32,FMaze.Core.CellType,Microsoft.FSharp.Collections.FSharpList{FMaze.Core.CellType})">
+<summary>Replace the cell at the given index in the cell list with the new given cell instance.</summary>
+<param name="position">Index of the cell to replace</param>
+<param name="cell">The new cell to replace in the map</param>
+<param name="map">The cell map to operate on</param>
+<returns>The map with the new replaced cell.</returns>
+</member>
+<member name="M:FMaze.Core.Maze.MazeMap.generate_map(System.Int32,System.Int32)">
+<summary>Generate a map and initialize cells to their default value.</summary>
+<param name="rows">Number of rows of the map</param>
+<param name="cols">Number of columns of the map</param>
+<returns>A new map of <code>rows</code> rows and <code>cols</code> columns whose elements are <code>CellType</code> instances initialized to default value.</returns>
+</member>
+<member name="T:FMaze.Core.Maze.MazeMap">
+<summary>Defines operations on cell lists.</summary>
+</member>
+<member name="T:FMaze.Core.Maze">
+<summary>The <c>Maze</c> module contains functions to operate on <code>MazeType</code> instances.</summary>
+</member>
+</members>
+</doc>

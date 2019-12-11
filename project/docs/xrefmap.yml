@@ -1,0 +1,451 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: FMaze
+  name: FMaze
+  href: api/FMaze.html
+  commentId: N:FMaze
+  fullName: FMaze
+  nameWithType: FMaze
+- uid: FMaze.Core
+  name: FMaze.Core
+  href: api/FMaze.Core.html
+  commentId: N:FMaze.Core
+  fullName: FMaze.Core
+  nameWithType: FMaze.Core
+- uid: FMaze.Core.Cell
+  name: Cell (mod)
+  href: api/FMaze.Core.Cell.html
+  commentId: T:FMaze.Core.Cell
+  fullName: FMaze.Core.Cell
+  nameWithType: FMaze.Core.Cell
+- uid: FMaze.Core.Cell.create(FMaze.Core.WallsType * bool)
+  name: 'val create: WallsType * bool -> CellType'
+  href: api/FMaze.Core.Cell.html#FMaze_Core_Cell_create_FMaze_Core_WallsType___bool_
+  commentId: M:FMaze.Core.create(FMaze.Core.WallsType,System.Boolean)
+  fullName: 'val FMaze.Core.Cell.create: FMaze.Core.WallsType * bool -> FMaze.Core.CellType'
+  nameWithType: 'val Cell.create: WallsType * bool -> CellType'
+- uid: FMaze.Core.Cell.create*
+  name: create
+  href: api/FMaze.Core.Cell.html#FMaze_Core_Cell_create_
+  commentId: Overload:FMaze.Core.Cell.create*
+  isSpec: "True"
+  fullName: FMaze.Core.Cell.create
+  nameWithType: Cell.create
+- uid: FMaze.Core.Cell.ERROR_CELL()
+  name: val ERROR_CELL
+  href: api/FMaze.Core.Cell.html#FMaze_Core_Cell_ERROR_CELL__
+  commentId: P:FMaze.Core.ERROR_CELL
+  fullName: 'val FMaze.Core.Cell.ERROR_CELL: FMaze.Core.CellType'
+  nameWithType: 'val Cell.ERROR_CELL: CellType'
+- uid: FMaze.Core.Cell.set_visited(FMaze.Core.CellType -> bool)
+  name: 'val set_visited: CellType -> bool -> CellType'
+  href: api/FMaze.Core.Cell.html#FMaze_Core_Cell_set_visited_FMaze_Core_CellType____bool_
+  commentId: M:FMaze.Core.set_visited(FMaze.Core.CellType,System.Boolean)
+  fullName: 'val FMaze.Core.Cell.set_visited: FMaze.Core.CellType -> bool -> FMaze.Core.CellType'
+  nameWithType: 'val Cell.set_visited: CellType -> bool -> CellType'
+- uid: FMaze.Core.Cell.set_visited*
+  name: set_visited
+  href: api/FMaze.Core.Cell.html#FMaze_Core_Cell_set_visited_
+  commentId: Overload:FMaze.Core.Cell.set_visited*
+  isSpec: "True"
+  fullName: FMaze.Core.Cell.set_visited
+  nameWithType: Cell.set_visited
+- uid: FMaze.Core.CellType
+  name: CellType (rec)
+  href: api/FMaze.Core.CellType.html
+  commentId: T:FMaze.Core.CellType
+  fullName: FMaze.Core.CellType
+  nameWithType: FMaze.Core.CellType
+- uid: FMaze.Core.CellType.visited
+  name: 'val visited: bool'
+  href: api/FMaze.Core.CellType.html#FMaze_Core_CellType_visited
+  commentId: P:FMaze.Core.CellType.visited
+  fullName: 'val FMaze.Core.CellType.visited: bool'
+  nameWithType: 'val CellType.visited: bool'
+- uid: FMaze.Core.CellType.walls
+  name: 'val walls: WallsType'
+  href: api/FMaze.Core.CellType.html#FMaze_Core_CellType_walls
+  commentId: P:FMaze.Core.CellType.walls
+  fullName: 'val FMaze.Core.CellType.walls: FMaze.Core.WallsType'
+  nameWithType: 'val CellType.walls: WallsType'
+- uid: FMaze.Core.Maze
+  name: Maze (mod)
+  href: api/FMaze.Core.Maze.html
+  commentId: T:FMaze.Core.Maze
+  fullName: FMaze.Core.Maze
+  nameWithType: FMaze.Core.Maze
+- uid: FMaze.Core.Maze.connect(FMaze.Core.MazeType -> FMaze.Core.MazeType)
+  name: 'val connect: MazeType -> MazeType -> MazeType'
+  href: api/FMaze.Core.Maze.html#FMaze_Core_Maze_connect_FMaze_Core_MazeType____FMaze_Core_MazeType_
+  commentId: M:FMaze.Core.connect(FMaze.Core.MazeType,FMaze.Core.MazeType)
+  fullName: 'val FMaze.Core.Maze.connect: FMaze.Core.MazeType -> FMaze.Core.MazeType -> FMaze.Core.MazeType'
+  nameWithType: 'val Maze.connect: MazeType -> MazeType -> MazeType'
+- uid: FMaze.Core.Maze.connect*
+  name: connect
+  href: api/FMaze.Core.Maze.html#FMaze_Core_Maze_connect_
+  commentId: Overload:FMaze.Core.Maze.connect*
+  isSpec: "True"
+  fullName: FMaze.Core.Maze.connect
+  nameWithType: Maze.connect
+- uid: FMaze.Core.Maze.create(int -> int)
+  name: 'val create: int -> int -> MazeType'
+  href: api/FMaze.Core.Maze.html#FMaze_Core_Maze_create_int____int_
+  commentId: M:FMaze.Core.create(System.Int32,System.Int32)
+  fullName: 'val FMaze.Core.Maze.create: int -> int -> FMaze.Core.MazeType'
+  nameWithType: 'val Maze.create: int -> int -> MazeType'
+- uid: FMaze.Core.Maze.create*
+  name: create
+  href: api/FMaze.Core.Maze.html#FMaze_Core_Maze_create_
+  commentId: Overload:FMaze.Core.Maze.create*
+  isSpec: "True"
+  fullName: FMaze.Core.Maze.create
+  nameWithType: Maze.create
+- uid: FMaze.Core.Maze.Generator
+  name: Maze.Generator (mod)
+  href: api/FMaze.Core.Maze.Generator.html
+  commentId: T:FMaze.Core.Maze.Generator
+  fullName: FMaze.Core.Maze.Generator
+  nameWithType: FMaze.Core.Maze.Generator
+- uid: FMaze.Core.Maze.Generator.generate(FMaze.Core.MazeType)
+  name: 'val generate: MazeType -> MazeType'
+  href: api/FMaze.Core.Maze.Generator.html#FMaze_Core_Maze_Generator_generate_FMaze_Core_MazeType_
+  commentId: M:FMaze.Core.Maze.generate(FMaze.Core.MazeType)
+  fullName: 'val FMaze.Core.Maze.Generator.generate: FMaze.Core.MazeType -> FMaze.Core.MazeType'
+  nameWithType: 'val Generator.generate: MazeType -> MazeType'
+- uid: FMaze.Core.Maze.Generator.generate*
+  name: generate
+  href: api/FMaze.Core.Maze.Generator.html#FMaze_Core_Maze_Generator_generate_
+  commentId: Overload:FMaze.Core.Maze.Generator.generate*
+  isSpec: "True"
+  fullName: FMaze.Core.Maze.Generator.generate
+  nameWithType: Generator.generate
+- uid: FMaze.Core.Maze.Generator.get_unvisited_neighbours(int -> FMaze.Core.MazeType)
+  name: 'val get_unvisited_neighbours: int -> MazeType -> int list'
+  href: api/FMaze.Core.Maze.Generator.html#FMaze_Core_Maze_Generator_get_unvisited_neighbours_int____FMaze_Core_MazeType_
+  commentId: M:FMaze.Core.Maze.get_unvisited_neighbours(System.Int32,FMaze.Core.MazeType)
+  fullName: 'val FMaze.Core.Maze.Generator.get_unvisited_neighbours: int -> FMaze.Core.MazeType -> int list'
+  nameWithType: 'val Generator.get_unvisited_neighbours: int -> MazeType -> int list'
+- uid: FMaze.Core.Maze.Generator.get_unvisited_neighbours*
+  name: get_unvisited_neighbours
+  href: api/FMaze.Core.Maze.Generator.html#FMaze_Core_Maze_Generator_get_unvisited_neighbours_
+  commentId: Overload:FMaze.Core.Maze.Generator.get_unvisited_neighbours*
+  isSpec: "True"
+  fullName: FMaze.Core.Maze.Generator.get_unvisited_neighbours
+  nameWithType: Generator.get_unvisited_neighbours
+- uid: FMaze.Core.Maze.Generator.has_unvisited_neighbours(int -> FMaze.Core.MazeType)
+  name: 'val has_unvisited_neighbours: int -> MazeType -> bool'
+  href: api/FMaze.Core.Maze.Generator.html#FMaze_Core_Maze_Generator_has_unvisited_neighbours_int____FMaze_Core_MazeType_
+  commentId: M:FMaze.Core.Maze.has_unvisited_neighbours(System.Int32,FMaze.Core.MazeType)
+  fullName: 'val FMaze.Core.Maze.Generator.has_unvisited_neighbours: int -> FMaze.Core.MazeType -> bool'
+  nameWithType: 'val Generator.has_unvisited_neighbours: int -> MazeType -> bool'
+- uid: FMaze.Core.Maze.Generator.has_unvisited_neighbours*
+  name: has_unvisited_neighbours
+  href: api/FMaze.Core.Maze.Generator.html#FMaze_Core_Maze_Generator_has_unvisited_neighbours_
+  commentId: Overload:FMaze.Core.Maze.Generator.has_unvisited_neighbours*
+  isSpec: "True"
+  fullName: FMaze.Core.Maze.Generator.has_unvisited_neighbours
+  nameWithType: Generator.has_unvisited_neighbours
+- uid: FMaze.Core.Maze.Generator.is_explored(FMaze.Core.CellType list)
+  name: 'val is_explored: CellType list -> bool'
+  href: api/FMaze.Core.Maze.Generator.html#FMaze_Core_Maze_Generator_is_explored_FMaze_Core_CellType_list_
+  commentId: M:FMaze.Core.Maze.is_explored(Microsoft.FSharp.Collections.FSharpList{FMaze.Core.CellType})
+  fullName: 'val FMaze.Core.Maze.Generator.is_explored: FMaze.Core.CellType list -> bool'
+  nameWithType: 'val Generator.is_explored: CellType list -> bool'
+- uid: FMaze.Core.Maze.Generator.is_explored*
+  name: is_explored
+  href: api/FMaze.Core.Maze.Generator.html#FMaze_Core_Maze_Generator_is_explored_
+  commentId: Overload:FMaze.Core.Maze.Generator.is_explored*
+  isSpec: "True"
+  fullName: FMaze.Core.Maze.Generator.is_explored
+  nameWithType: Generator.is_explored
+- uid: FMaze.Core.Maze.Generator.recursive_backtracker(FMaze.Core.MazeType -> int)
+  name: 'val recursive_backtracker: MazeType -> int -> MazeType'
+  href: api/FMaze.Core.Maze.Generator.html#FMaze_Core_Maze_Generator_recursive_backtracker_FMaze_Core_MazeType____int_
+  commentId: M:FMaze.Core.Maze.recursive_backtracker(FMaze.Core.MazeType,System.Int32)
+  fullName: 'val FMaze.Core.Maze.Generator.recursive_backtracker: FMaze.Core.MazeType -> int -> FMaze.Core.MazeType'
+  nameWithType: 'val Generator.recursive_backtracker: MazeType -> int -> MazeType'
+- uid: FMaze.Core.Maze.Generator.recursive_backtracker*
+  name: recursive_backtracker
+  href: api/FMaze.Core.Maze.Generator.html#FMaze_Core_Maze_Generator_recursive_backtracker_
+  commentId: Overload:FMaze.Core.Maze.Generator.recursive_backtracker*
+  isSpec: "True"
+  fullName: FMaze.Core.Maze.Generator.recursive_backtracker
+  nameWithType: Generator.recursive_backtracker
+- uid: FMaze.Core.Maze.Generator.SEED()
+  name: val SEED
+  href: api/FMaze.Core.Maze.Generator.html#FMaze_Core_Maze_Generator_SEED__
+  commentId: P:FMaze.Core.Maze.SEED
+  fullName: 'val FMaze.Core.Maze.Generator.SEED: System.Random'
+  nameWithType: 'val Generator.SEED: Random'
+- uid: FMaze.Core.Maze.Generator.unvisited_neighbours_number(int -> FMaze.Core.MazeType)
+  name: 'val unvisited_neighbours_number: int -> MazeType -> int'
+  href: api/FMaze.Core.Maze.Generator.html#FMaze_Core_Maze_Generator_unvisited_neighbours_number_int____FMaze_Core_MazeType_
+  commentId: M:FMaze.Core.Maze.unvisited_neighbours_number(System.Int32,FMaze.Core.MazeType)
+  fullName: 'val FMaze.Core.Maze.Generator.unvisited_neighbours_number: int -> FMaze.Core.MazeType -> int'
+  nameWithType: 'val Generator.unvisited_neighbours_number: int -> MazeType -> int'
+- uid: FMaze.Core.Maze.Generator.unvisited_neighbours_number*
+  name: unvisited_neighbours_number
+  href: api/FMaze.Core.Maze.Generator.html#FMaze_Core_Maze_Generator_unvisited_neighbours_number_
+  commentId: Overload:FMaze.Core.Maze.Generator.unvisited_neighbours_number*
+  isSpec: "True"
+  fullName: FMaze.Core.Maze.Generator.unvisited_neighbours_number
+  nameWithType: Generator.unvisited_neighbours_number
+- uid: FMaze.Core.Maze.get_bi_cell(int -> int -> FMaze.Core.MazeType)
+  name: 'val get_bi_cell: int -> int -> MazeType -> CellType'
+  href: api/FMaze.Core.Maze.html#FMaze_Core_Maze_get_bi_cell_int____int____FMaze_Core_MazeType_
+  commentId: M:FMaze.Core.get_bi_cell(System.Int32,System.Int32,FMaze.Core.MazeType)
+  fullName: 'val FMaze.Core.Maze.get_bi_cell: int -> int -> FMaze.Core.MazeType -> FMaze.Core.CellType'
+  nameWithType: 'val Maze.get_bi_cell: int -> int -> MazeType -> CellType'
+- uid: FMaze.Core.Maze.get_bi_cell*
+  name: get_bi_cell
+  href: api/FMaze.Core.Maze.html#FMaze_Core_Maze_get_bi_cell_
+  commentId: Overload:FMaze.Core.Maze.get_bi_cell*
+  isSpec: "True"
+  fullName: FMaze.Core.Maze.get_bi_cell
+  nameWithType: Maze.get_bi_cell
+- uid: FMaze.Core.Maze.get_cell(int -> FMaze.Core.MazeType)
+  name: 'val get_cell: int -> MazeType -> CellType'
+  href: api/FMaze.Core.Maze.html#FMaze_Core_Maze_get_cell_int____FMaze_Core_MazeType_
+  commentId: M:FMaze.Core.get_cell(System.Int32,FMaze.Core.MazeType)
+  fullName: 'val FMaze.Core.Maze.get_cell: int -> FMaze.Core.MazeType -> FMaze.Core.CellType'
+  nameWithType: 'val Maze.get_cell: int -> MazeType -> CellType'
+- uid: FMaze.Core.Maze.get_cell*
+  name: get_cell
+  href: api/FMaze.Core.Maze.html#FMaze_Core_Maze_get_cell_
+  commentId: Overload:FMaze.Core.Maze.get_cell*
+  isSpec: "True"
+  fullName: FMaze.Core.Maze.get_cell
+  nameWithType: Maze.get_cell
+- uid: FMaze.Core.Maze.MazeMap
+  name: Maze.MazeMap (mod)
+  href: api/FMaze.Core.Maze.MazeMap.html
+  commentId: T:FMaze.Core.Maze.MazeMap
+  fullName: FMaze.Core.Maze.MazeMap
+  nameWithType: FMaze.Core.Maze.MazeMap
+- uid: FMaze.Core.Maze.MazeMap.find_cell(FMaze.Core.CellType -> FMaze.Core.CellType list)
+  name: 'val find_cell: CellType -> CellType list -> int'
+  href: api/FMaze.Core.Maze.MazeMap.html#FMaze_Core_Maze_MazeMap_find_cell_FMaze_Core_CellType____FMaze_Core_CellType_list_
+  commentId: M:FMaze.Core.Maze.find_cell(FMaze.Core.CellType,Microsoft.FSharp.Collections.FSharpList{FMaze.Core.CellType})
+  fullName: 'val FMaze.Core.Maze.MazeMap.find_cell: FMaze.Core.CellType -> FMaze.Core.CellType list -> int'
+  nameWithType: 'val MazeMap.find_cell: CellType -> CellType list -> int'
+- uid: FMaze.Core.Maze.MazeMap.find_cell*
+  name: find_cell
+  href: api/FMaze.Core.Maze.MazeMap.html#FMaze_Core_Maze_MazeMap_find_cell_
+  commentId: Overload:FMaze.Core.Maze.MazeMap.find_cell*
+  isSpec: "True"
+  fullName: FMaze.Core.Maze.MazeMap.find_cell
+  nameWithType: MazeMap.find_cell
+- uid: FMaze.Core.Maze.MazeMap.generate_map(int -> int)
+  name: 'val generate_map: int -> int -> CellType list'
+  href: api/FMaze.Core.Maze.MazeMap.html#FMaze_Core_Maze_MazeMap_generate_map_int____int_
+  commentId: M:FMaze.Core.Maze.generate_map(System.Int32,System.Int32)
+  fullName: 'val FMaze.Core.Maze.MazeMap.generate_map: int -> int -> FMaze.Core.CellType list'
+  nameWithType: 'val MazeMap.generate_map: int -> int -> CellType list'
+- uid: FMaze.Core.Maze.MazeMap.generate_map*
+  name: generate_map
+  href: api/FMaze.Core.Maze.MazeMap.html#FMaze_Core_Maze_MazeMap_generate_map_
+  commentId: Overload:FMaze.Core.Maze.MazeMap.generate_map*
+  isSpec: "True"
+  fullName: FMaze.Core.Maze.MazeMap.generate_map
+  nameWithType: MazeMap.generate_map
+- uid: FMaze.Core.Maze.MazeMap.remove_common_wall(FMaze.Core.CellType list -> int -> int -> int)
+  name: 'val remove_common_wall: CellType list -> int -> int -> int -> CellType list'
+  href: api/FMaze.Core.Maze.MazeMap.html#FMaze_Core_Maze_MazeMap_remove_common_wall_FMaze_Core_CellType_list____int____int____int_
+  commentId: M:FMaze.Core.Maze.remove_common_wall(Microsoft.FSharp.Collections.FSharpList{FMaze.Core.CellType},System.Int32,System.Int32,System.Int32)
+  fullName: 'val FMaze.Core.Maze.MazeMap.remove_common_wall: FMaze.Core.CellType list -> int -> int -> int -> FMaze.Core.CellType list'
+  nameWithType: 'val MazeMap.remove_common_wall: CellType list -> int -> int -> int -> CellType list'
+- uid: FMaze.Core.Maze.MazeMap.remove_common_wall*
+  name: remove_common_wall
+  href: api/FMaze.Core.Maze.MazeMap.html#FMaze_Core_Maze_MazeMap_remove_common_wall_
+  commentId: Overload:FMaze.Core.Maze.MazeMap.remove_common_wall*
+  isSpec: "True"
+  fullName: FMaze.Core.Maze.MazeMap.remove_common_wall
+  nameWithType: MazeMap.remove_common_wall
+- uid: FMaze.Core.Maze.MazeMap.replace_cell(int -> FMaze.Core.CellType -> FMaze.Core.CellType list)
+  name: 'val replace_cell: int -> CellType -> CellType list -> CellType list'
+  href: api/FMaze.Core.Maze.MazeMap.html#FMaze_Core_Maze_MazeMap_replace_cell_int____FMaze_Core_CellType____FMaze_Core_CellType_list_
+  commentId: M:FMaze.Core.Maze.replace_cell(System.Int32,FMaze.Core.CellType,Microsoft.FSharp.Collections.FSharpList{FMaze.Core.CellType})
+  fullName: 'val FMaze.Core.Maze.MazeMap.replace_cell: int -> FMaze.Core.CellType -> FMaze.Core.CellType list -> FMaze.Core.CellType list'
+  nameWithType: 'val MazeMap.replace_cell: int -> CellType -> CellType list -> CellType list'
+- uid: FMaze.Core.Maze.MazeMap.replace_cell*
+  name: replace_cell
+  href: api/FMaze.Core.Maze.MazeMap.html#FMaze_Core_Maze_MazeMap_replace_cell_
+  commentId: Overload:FMaze.Core.Maze.MazeMap.replace_cell*
+  isSpec: "True"
+  fullName: FMaze.Core.Maze.MazeMap.replace_cell
+  nameWithType: MazeMap.replace_cell
+- uid: FMaze.Core.MazeType
+  name: MazeType (rec)
+  href: api/FMaze.Core.MazeType.html
+  commentId: T:FMaze.Core.MazeType
+  fullName: FMaze.Core.MazeType
+  nameWithType: FMaze.Core.MazeType
+- uid: FMaze.Core.MazeType.cols
+  name: 'val cols: int'
+  href: api/FMaze.Core.MazeType.html#FMaze_Core_MazeType_cols
+  commentId: P:FMaze.Core.MazeType.cols
+  fullName: 'val FMaze.Core.MazeType.cols: int'
+  nameWithType: 'val MazeType.cols: int'
+- uid: FMaze.Core.MazeType.map
+  name: 'val map: CellType list'
+  href: api/FMaze.Core.MazeType.html#FMaze_Core_MazeType_map
+  commentId: P:FMaze.Core.MazeType.map
+  fullName: 'val FMaze.Core.MazeType.map: FMaze.Core.CellType list'
+  nameWithType: 'val MazeType.map: CellType list'
+- uid: FMaze.Core.MazeType.rows
+  name: 'val rows: int'
+  href: api/FMaze.Core.MazeType.html#FMaze_Core_MazeType_rows
+  commentId: P:FMaze.Core.MazeType.rows
+  fullName: 'val FMaze.Core.MazeType.rows: int'
+  nameWithType: 'val MazeType.rows: int'
+- uid: FMaze.Core.Utils
+  name: Utils (mod)
+  href: api/FMaze.Core.Utils.html
+  commentId: T:FMaze.Core.Utils
+  fullName: FMaze.Core.Utils
+  nameWithType: FMaze.Core.Utils
+- uid: FMaze.Core.Utils.are_coordinates_valid(int -> int -> int -> int)
+  name: 'val are_coordinates_valid: int -> int -> int -> int -> bool'
+  href: api/FMaze.Core.Utils.html#FMaze_Core_Utils_are_coordinates_valid_int____int____int____int_
+  commentId: M:FMaze.Core.are_coordinates_valid(System.Int32,System.Int32,System.Int32,System.Int32)
+  fullName: 'val FMaze.Core.Utils.are_coordinates_valid: int -> int -> int -> int -> bool'
+  nameWithType: 'val Utils.are_coordinates_valid: int -> int -> int -> int -> bool'
+- uid: FMaze.Core.Utils.are_coordinates_valid*
+  name: are_coordinates_valid
+  href: api/FMaze.Core.Utils.html#FMaze_Core_Utils_are_coordinates_valid_
+  commentId: Overload:FMaze.Core.Utils.are_coordinates_valid*
+  isSpec: "True"
+  fullName: FMaze.Core.Utils.are_coordinates_valid
+  nameWithType: Utils.are_coordinates_valid
+- uid: FMaze.Core.Utils.from_bidim_to_monodim(int -> int -> int -> int)
+  name: 'val from_bidim_to_monodim: int -> int -> int -> int -> int'
+  href: api/FMaze.Core.Utils.html#FMaze_Core_Utils_from_bidim_to_monodim_int____int____int____int_
+  commentId: M:FMaze.Core.from_bidim_to_monodim(System.Int32,System.Int32,System.Int32,System.Int32)
+  fullName: 'val FMaze.Core.Utils.from_bidim_to_monodim: int -> int -> int -> int -> int'
+  nameWithType: 'val Utils.from_bidim_to_monodim: int -> int -> int -> int -> int'
+- uid: FMaze.Core.Utils.from_bidim_to_monodim*
+  name: from_bidim_to_monodim
+  href: api/FMaze.Core.Utils.html#FMaze_Core_Utils_from_bidim_to_monodim_
+  commentId: Overload:FMaze.Core.Utils.from_bidim_to_monodim*
+  isSpec: "True"
+  fullName: FMaze.Core.Utils.from_bidim_to_monodim
+  nameWithType: Utils.from_bidim_to_monodim
+- uid: FMaze.Core.Utils.from_monodim_to_bidim(int -> int)
+  name: 'val from_monodim_to_bidim: int -> int -> int * int'
+  href: api/FMaze.Core.Utils.html#FMaze_Core_Utils_from_monodim_to_bidim_int____int_
+  commentId: M:FMaze.Core.from_monodim_to_bidim(System.Int32,System.Int32)
+  fullName: 'val FMaze.Core.Utils.from_monodim_to_bidim: int -> int -> int * int'
+  nameWithType: 'val Utils.from_monodim_to_bidim: int -> int -> int * int'
+- uid: FMaze.Core.Utils.from_monodim_to_bidim*
+  name: from_monodim_to_bidim
+  href: api/FMaze.Core.Utils.html#FMaze_Core_Utils_from_monodim_to_bidim_
+  commentId: Overload:FMaze.Core.Utils.from_monodim_to_bidim*
+  isSpec: "True"
+  fullName: FMaze.Core.Utils.from_monodim_to_bidim
+  nameWithType: Utils.from_monodim_to_bidim
+- uid: FMaze.Core.Utils.isEven(int)
+  name: 'val isEven: int -> bool'
+  href: api/FMaze.Core.Utils.html#FMaze_Core_Utils_isEven_int_
+  commentId: M:FMaze.Core.isEven(System.Int32)
+  fullName: 'val FMaze.Core.Utils.isEven: int -> bool'
+  nameWithType: 'val Utils.isEven: int -> bool'
+- uid: FMaze.Core.Utils.isEven*
+  name: isEven
+  href: api/FMaze.Core.Utils.html#FMaze_Core_Utils_isEven_
+  commentId: Overload:FMaze.Core.Utils.isEven*
+  isSpec: "True"
+  fullName: FMaze.Core.Utils.isEven
+  nameWithType: Utils.isEven
+- uid: FMaze.Core.Utils.isOdd(int)
+  name: 'val isOdd: int -> bool'
+  href: api/FMaze.Core.Utils.html#FMaze_Core_Utils_isOdd_int_
+  commentId: M:FMaze.Core.isOdd(System.Int32)
+  fullName: 'val FMaze.Core.Utils.isOdd: int -> bool'
+  nameWithType: 'val Utils.isOdd: int -> bool'
+- uid: FMaze.Core.Utils.isOdd*
+  name: isOdd
+  href: api/FMaze.Core.Utils.html#FMaze_Core_Utils_isOdd_
+  commentId: Overload:FMaze.Core.Utils.isOdd*
+  isSpec: "True"
+  fullName: FMaze.Core.Utils.isOdd
+  nameWithType: Utils.isOdd
+- uid: FMaze.Core.Walls
+  name: Walls (mod)
+  href: api/FMaze.Core.Walls.html
+  commentId: T:FMaze.Core.Walls
+  fullName: FMaze.Core.Walls
+  nameWithType: FMaze.Core.Walls
+- uid: FMaze.Core.Walls.CLOSED()
+  name: val CLOSED
+  href: api/FMaze.Core.Walls.html#FMaze_Core_Walls_CLOSED__
+  commentId: P:FMaze.Core.CLOSED
+  fullName: 'val FMaze.Core.Walls.CLOSED: bool'
+  nameWithType: 'val Walls.CLOSED: bool'
+- uid: FMaze.Core.Walls.OPEN()
+  name: val OPEN
+  href: api/FMaze.Core.Walls.html#FMaze_Core_Walls_OPEN__
+  commentId: P:FMaze.Core.OPEN
+  fullName: 'val FMaze.Core.Walls.OPEN: bool'
+  nameWithType: 'val Walls.OPEN: bool'
+- uid: FMaze.Core.WallsType
+  name: WallsType (rec)
+  href: api/FMaze.Core.WallsType.html
+  commentId: T:FMaze.Core.WallsType
+  fullName: FMaze.Core.WallsType
+  nameWithType: FMaze.Core.WallsType
+- uid: FMaze.Core.WallsType.bottom
+  name: 'val bottom: bool'
+  href: api/FMaze.Core.WallsType.html#FMaze_Core_WallsType_bottom
+  commentId: P:FMaze.Core.WallsType.bottom
+  fullName: 'val FMaze.Core.WallsType.bottom: bool'
+  nameWithType: 'val WallsType.bottom: bool'
+- uid: FMaze.Core.WallsType.left
+  name: 'val left: bool'
+  href: api/FMaze.Core.WallsType.html#FMaze_Core_WallsType_left
+  commentId: P:FMaze.Core.WallsType.left
+  fullName: 'val FMaze.Core.WallsType.left: bool'
+  nameWithType: 'val WallsType.left: bool'
+- uid: FMaze.Core.WallsType.right
+  name: 'val right: bool'
+  href: api/FMaze.Core.WallsType.html#FMaze_Core_WallsType_right
+  commentId: P:FMaze.Core.WallsType.right
+  fullName: 'val FMaze.Core.WallsType.right: bool'
+  nameWithType: 'val WallsType.right: bool'
+- uid: FMaze.Core.WallsType.top
+  name: 'val top: bool'
+  href: api/FMaze.Core.WallsType.html#FMaze_Core_WallsType_top
+  commentId: P:FMaze.Core.WallsType.top
+  fullName: 'val FMaze.Core.WallsType.top: bool'
+  nameWithType: 'val WallsType.top: bool'
+- uid: FMaze.Program
+  name: Program (mod)
+  href: api/FMaze.Program.html
+  commentId: T:FMaze.Program
+  fullName: FMaze.Program
+  nameWithType: FMaze.Program
+- uid: FMaze.Program.COLS()
+  name: val COLS
+  href: api/FMaze.Program.html#FMaze_Program_COLS__
+  commentId: P:FMaze.COLS
+  fullName: 'val FMaze.Program.COLS: int'
+  nameWithType: 'val Program.COLS: int'
+- uid: FMaze.Program.main(string [])
+  name: 'val main: string [] -> int'
+  href: api/FMaze.Program.html#FMaze_Program_main_string____
+  commentId: M:FMaze.main(System.String[])
+  fullName: 'val FMaze.Program.main: string [] -> int'
+  nameWithType: 'val Program.main: string [] -> int'
+- uid: FMaze.Program.main*
+  name: main
+  href: api/FMaze.Program.html#FMaze_Program_main_
+  commentId: Overload:FMaze.Program.main*
+  isSpec: "True"
+  fullName: FMaze.Program.main
+  nameWithType: Program.main
+- uid: FMaze.Program.ROWS()
+  name: val ROWS
+  href: api/FMaze.Program.html#FMaze_Program_ROWS__
+  commentId: P:FMaze.ROWS
+  fullName: 'val FMaze.Program.ROWS: int'
+  nameWithType: 'val Program.ROWS: int'
