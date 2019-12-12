@@ -1,18 +1,174 @@
 {
   "homepages": [],
-  "source_base_path": "C:/Users/00mat/Desktop/F#/__Fsharp_project/maze_game_gh/fsharp_maze_game/project",
+  "source_base_path": "D:/temo/fsharp_maze_game/project",
   "xrefmap": "xrefmap.yml",
   "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.Cell.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.Cell.html",
+          "hash": "uJ3y4jRzH/kLnvJOvVinAg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.CellType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.CellType.html",
+          "hash": "ddGfC5l9DH93vfizVKCZDQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.Maze.Generator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.Maze.Generator.html",
+          "hash": "HXjH+6YtgD61EDKqaKeM5A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.Maze.MazeMap.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.Maze.MazeMap.html",
+          "hash": "DSRa2cGlm012SyXa3w4hAg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.Maze.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.Maze.html",
+          "hash": "uTwKfLr7a1n+g2iXzv4YYA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.MazeType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.MazeType.html",
+          "hash": "bFPIJJB7kl2yICBUlBcQTQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.Utils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.Utils.html",
+          "hash": "GpEcfM7rcFB/3Qf30UwXnQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.Walls.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.Walls.html",
+          "hash": "9VmInHg1B9KkkHdceBeFPQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.WallsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.WallsType.html",
+          "hash": "RexOyMUq+gOLILTi5EneUA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Core.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Core.html",
+          "hash": "2ijjBxl8M/LxEzzuKFnF5g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.Program.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.Program.html",
+          "hash": "oW8ob24IY/tGUxSmWlZIDA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FMaze.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FMaze.html",
+          "hash": "1s8Q0PDq19UN6ke/be43lg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
     {
       "type": "Conceptual",
       "source_relative_path": "api/index.md",
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "bMdPXzaGzVO2mqfL3Yhlng=="
+          "hash": "ts3StIfSeTX+tuCMcUBF+g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "u3XkGNPPlWpkaeLvowDQ9A=="
+        }
+      },
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -21,10 +177,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "yF9+l4bDR0QNtk5js7s3Yw=="
+          "hash": "9hh1iAQgvpBuNF3ap5IoAA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -45,10 +201,10 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "hRoBw8bjx24+u7V+qmzpoQ=="
+          "hash": "QXNW4PSf/J1gm9ZzyitLQA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -57,7 +213,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "IGK1ZSYI4NbShXZSeUUd6Q=="
+          "hash": "+rHUkRZHZRi5gd1aTU6lJA=="
         }
       },
       "is_incremental": false,
@@ -67,10 +223,12 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": true,
+        "can_incremental": false,
+        "details": "Disable incremental build by force rebuild option.",
         "incrementalPhase": "build",
         "total_file_count": 0,
-        "skipped_file_count": 0
+        "skipped_file_count": 0,
+        "full_build_reason_code": "ForceRebuild"
       },
       "processors": {
         "TocDocumentProcessor": {
@@ -81,17 +239,23 @@
           "skipped_file_count": 0
         },
         "ConceptualDocumentProcessor": {
-          "can_incremental": true,
+          "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 3,
-          "skipped_file_count": 3
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 12,
+          "skipped_file_count": 0
         }
       }
     },
     {
       "status": {
-        "can_incremental": true,
-        "details": "Can support incremental post processing.",
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: it's disabled.",
         "incrementalPhase": "postProcessing",
         "total_file_count": 0,
         "skipped_file_count": 0
