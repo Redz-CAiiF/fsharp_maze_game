@@ -17,53 +17,53 @@ module Maze=
 
     ///<summary>Defines operations on cell lists.</summary>
     module MazeMap =
-               ///<summary>Generate a map and initialize cells to their default value.</summary>
-               ///<param name="rows">Number of rows of the map</param>
-               ///<param name="cols">Number of columns of the map</param>
-               ///<returns>A new map of <code>rows</code> rows and <code>cols</code> columns whose elements are <code>CellType</code> instances initialized to default value.</returns>
-               let generate_map (rows:int) (cols:int) =
-                   List.init (rows*cols) (fun i -> Cell.ERROR_CELL)
+        ///<summary>Generate a map and initialize cells to their default value.</summary>
+        ///<param name="rows">Number of rows of the map</param>
+        ///<param name="cols">Number of columns of the map</param>
+        ///<returns>A new map of <code>rows</code> rows and <code>cols</code> columns whose elements are <code>CellType</code> instances initialized to default value.</returns>
+        let generate_map (rows:int) (cols:int) =
+            List.init (rows*cols) (fun i -> Cell.ERROR_CELL)
 
-               ///<summary>Replace the cell at the given index in the cell list with the new given cell instance.</summary>
-               ///<param name="position">Index of the cell to replace</param>
-               ///<param name="cell">The new cell to replace in the map</param>
-               ///<param name="map">The cell map to operate on</param>
-               ///<returns>The map with the new replaced cell.</returns>
-               let replace_cell (position:int) (cell:CellType) (map: CellType list): CellType list = 
-                   map.[..(position-1)]@[cell]@map.[(position+1)..]
+        ///<summary>Replace the cell at the given index in the cell list with the new given cell instance.</summary>
+        ///<param name="position">Index of the cell to replace</param>
+        ///<param name="cell">The new cell to replace in the map</param>
+        ///<param name="map">The cell map to operate on</param>
+        ///<returns>The map with the new replaced cell.</returns>
+        let replace_cell (position:int) (cell:CellType) (map: CellType list): CellType list = 
+            map.[..(position-1)]@[cell]@map.[(position+1)..]
                
-               ///<summary>Given a cell find the index of that cell in the given map.</summary>
-               ///<param name="cell">The new cell to look for in the map</param>
-               ///<param name="map">The cell map to search on for the cell</param>
-               ///<returns>The index of the cell in the map, or <c>-1</c> if the cell is not present in the map.</returns>
-               let find_cell (cell: CellType) (map:CellType list) :int  = 
-                   let rec find (cell:'A) (position:int) (map:'A list) = 
-                       match map with
-                       | [] -> -1
-                       | x::xs -> (if x <> cell then find cell (position+1) xs else position)
-                   find cell 0 map
+        ///<summary>Given a cell find the index of that cell in the given map.</summary>
+        ///<param name="cell">The new cell to look for in the map</param>
+        ///<param name="map">The cell map to search on for the cell</param>
+        ///<returns>The index of the cell in the map, or <c>-1</c> if the cell is not present in the map.</returns>
+        let find_cell (cell: CellType) (map:CellType list) :int  = 
+            let rec find (cell:'A) (position:int) (map:'A list) = 
+                match map with
+                | [] -> -1
+                | x::xs -> (if x <> cell then find cell (position+1) xs else position)
+            find cell 0 map
 
-               ///<summary>Remove the wall of adjacent cells.</summary>
-               ///<param name="current">The current cell</param>
-               ///<param name="next">The adjacent cell</param>
-               ///<returns>A new map with the modified cells</returns>
-               let remove_common_wall (map: CellType list) (current:int) (next:int) (cols:int) =
-                   let c_x,c_y = from_monodim_to_bidim current cols
-                   let n_x,n_y = from_monodim_to_bidim next cols
-                   let on_same_row = c_x = n_x
-                   let on_same_column = c_y = n_y
-                   let current_cell = map.[current]
-                   let next_cell = map.[next]
-                   if on_same_row && (c_y = (n_y-1)) then
-                       replace_cell current {current_cell with walls= {current_cell.walls with right=Walls.OPEN}} (replace_cell next {next_cell with walls= {next_cell.walls with left=Walls.OPEN}} map)
-                   elif on_same_row && (c_y = (n_y+1)) then
-                      replace_cell current {current_cell with walls= {current_cell.walls with left=Walls.OPEN}} (replace_cell next {next_cell with walls= {next_cell.walls with right=Walls.OPEN}} map)
-                   elif on_same_column && (c_x = (n_x-1)) then
-                      replace_cell current {current_cell with walls= {current_cell.walls with bottom=Walls.OPEN}} (replace_cell next {next_cell with walls= {next_cell.walls with top=Walls.OPEN}} map)
-                   elif on_same_column && (c_x = (n_x+1)) then
-                       replace_cell current {current_cell with walls= {current_cell.walls with top=Walls.OPEN}} (replace_cell next {next_cell with walls= {next_cell.walls with bottom=Walls.OPEN}} map)
-                   else
-                       map
+        ///<summary>Remove the wall of adjacent cells.</summary>
+        ///<param name="current">The current cell</param>
+        ///<param name="next">The adjacent cell</param>
+        ///<returns>A new map with the modified cells</returns>
+        let remove_common_wall (map: CellType list) (current:int) (next:int) (cols:int) =
+            let c_x,c_y = from_monodim_to_bidim current cols
+            let n_x,n_y = from_monodim_to_bidim next cols
+            let on_same_row = c_x = n_x
+            let on_same_column = c_y = n_y
+            let current_cell = map.[current]
+            let next_cell = map.[next]
+            if on_same_row && (c_y = (n_y-1)) then
+                replace_cell current {current_cell with walls= {current_cell.walls with right=Walls.OPEN}} (replace_cell next {next_cell with walls= {next_cell.walls with left=Walls.OPEN}} map)
+            elif on_same_row && (c_y = (n_y+1)) then
+                replace_cell current {current_cell with walls= {current_cell.walls with left=Walls.OPEN}} (replace_cell next {next_cell with walls= {next_cell.walls with right=Walls.OPEN}} map)
+            elif on_same_column && (c_x = (n_x-1)) then
+                replace_cell current {current_cell with walls= {current_cell.walls with bottom=Walls.OPEN}} (replace_cell next {next_cell with walls= {next_cell.walls with top=Walls.OPEN}} map)
+            elif on_same_column && (c_x = (n_x+1)) then
+                replace_cell current {current_cell with walls= {current_cell.walls with top=Walls.OPEN}} (replace_cell next {next_cell with walls= {next_cell.walls with bottom=Walls.OPEN}} map)
+            else
+                map
 
      
      ///<summary>Gets the cell at the specified index in the given Maze. Index is specified as 1-dimensional.</summary>
@@ -71,22 +71,24 @@ module Maze=
      ///<param name="map">The maze to select the element from</param>
      ///<returns>The cell at the specified index</returns>
      let get_cell (position:int) (maze:MazeType):CellType =
-            maze.map.[position]
+        maze.map.[position]
 
      ///<summary>Gets the cell at the specified index in the given Maze. Index is specified as 1-dimensional.</summary>
      ///<param name="position">The index of the desired element in the maze</param>
      ///<param name="map">The maze to select the element from</param>
      ///<returns>The cell at the specified index</returns>
      let get_bi_cell (x:int) (y:int) (maze:MazeType):CellType = 
-            let i= (from_bidim_to_monodim maze.rows maze.cols x y)
-            in
-            if i < 0 || i >= maze.cols*maze.rows then Cell.ERROR_CELL
-            else maze.map.[i]
-        
-     ///<summary>Routines used in the maze generation process.</summary>
-     module Generator=
-        open MazeMap
+        let i= (from_bidim_to_monodim maze.rows maze.cols x y) in
+        if i < 0 || i >= maze.cols*maze.rows then Cell.ERROR_CELL
+        else maze.map.[i]
+      
 
+
+
+     ///<summary>Routines used in the maze generation process.</summary>
+    module Generator=
+        open MazeMap
+        
         ///<summary>The seed used for generating random numbers for implementing randomness in the maze generator algorhythm</summary>
         let SEED = System.Random()
       
@@ -102,14 +104,11 @@ module Maze=
         ///<returns>A list of monodimensional indexes each one representing an unvisited neighbour of the cell at the given index.</returns>
         let get_unvisited_neighbours (index: int) (maze:MazeType) : int list=
             let r,c = from_monodim_to_bidim index maze.cols
-            //System.Diagnostics.Debug.WriteLine("from_monodim_to_bidim index maze.cols = {0} {1}",r,c)
             //neighbours cells
-            let top    = from_bidim_to_monodim maze.rows maze.cols (r-1) c 
+            let top    = from_bidim_to_monodim maze.rows maze.cols (r-1) c
             let right  = from_bidim_to_monodim maze.rows maze.cols r (c+1)
-            let bottom = from_bidim_to_monodim maze.rows maze.cols (r+1) c 
-            let left   = from_bidim_to_monodim maze.rows maze.cols r (c-1) 
-            //System.Diagnostics.Debug.WriteLine("finding unvisited neighbours of {0}",index)
-            //System.Diagnostics.Debug.WriteLine( "{0} {1} {2} {3}",top,right,bottom,left)
+            let bottom = from_bidim_to_monodim maze.rows maze.cols (r+1) c
+            let left   = from_bidim_to_monodim maze.rows maze.cols r (c-1)
             //the neighbours    
             List.filter (fun (el:int) -> el <> -1 && not maze.map.[el].visited ) [top;right;bottom;left]
         
@@ -157,25 +156,59 @@ module Maze=
         ///<returns>A new maze made of the concatenation of the 2 mazes.</returns>
         let generate (maze:MazeType): MazeType =
             recursive_backtracker maze 0
-         
-     ///<summary>Connects two mazes together. It takes the second maze and connects it to the end of the first one.</summary>
-     ///<param name="maze1">The first maze to operate on</param>
-     ///<param name="maze2">The second maze to operate on</param>
-     ///<returns>A new maze made of the concatenation of the 2 mazes.</returns>
-     let connect (maze1:MazeType) (maze2:MazeType): MazeType =
-         let open_path (maze:MazeType) = 
-             //posizione della cella da modificare
-             let random_column = (new System.Random()).Next(0,(maze.cols))
-             //i need to change 2 cells
-             let c1 =  from_bidim_to_monodim maze.rows maze.cols (maze1.rows-1) random_column
-             let c2 = from_bidim_to_monodim maze.rows maze.cols (maze1.rows) random_column
-             {maze with map=MazeMap.remove_common_wall maze.map c1 c2 maze.cols} //opened_maze
-            //connect the two mazes: assume that mazes have the same size
-         let unp_map = {maze1 with map= (List.append maze1.map maze2.map); rows=maze1.rows+maze2.rows} 
-         //create a path between the two mazes and return
-         open_path unp_map
      
-     ///<summary>Creates a new Maze from the given parameters.</summary>
-     ///<returns>The maze with the given parameters</returns>
-     let create (rows:int) (cols:int) : MazeType =
-            Generator.generate {map = (MazeMap.generate_map rows cols) ; rows = rows; cols = cols} 
+
+    ///<summary>Connects two mazes together. It takes the second maze and connects it to the end of the first one.</summary>
+    ///<param name="maze1">The first maze to operate on</param>
+    ///<param name="maze2">The second maze to operate on</param>
+    ///<returns>A new maze made of the concatenation of the 2 mazes.</returns>
+    let connect (maze1:MazeType) (maze2:MazeType): MazeType =
+        let open_path (maze:MazeType) = 
+            //posizione della cella da modificare
+            let random_column = (new System.Random()).Next(0,(maze.cols))
+            //i need to change 2 cells
+            let c1 =  from_bidim_to_monodim maze.rows maze.cols (maze1.rows-1) random_column
+            let c2 = from_bidim_to_monodim maze.rows maze.cols (maze1.rows) random_column
+            {maze with map=MazeMap.remove_common_wall maze.map c1 c2 maze.cols} //opened_maze
+        //connect the two mazes: assume that mazes have the same size
+        let unp_map = {maze1 with map= (List.append maze1.map maze2.map); rows=maze1.rows+maze2.rows} 
+        //create a path between the two mazes and return
+        open_path unp_map
+
+
+    ///<summary>Remove a specified number of rows from the given maze, removing lines outside a chunk line might cause the maze to become impossible</summary>
+    ///<param name="height">the number of lines that are going to be removed</param>
+    ///<param name="maze">The maze to operate on</param>
+    ///<returns>A new maze made from the given one minus the number of rows given.</returns>
+    let disconnect (height:int) (maze:MazeType) = //height <=maze height
+        let rec remove_cells (cells_number:int) (maze:CellType list) = //cells_number <=maze cells
+            match cells_number with
+            | 0 -> maze
+            | _ -> let _::maze_tail = maze in remove_cells (cells_number-1) maze_tail
+
+        let cells_number = height*maze.cols
+
+        let rec close_top_wall (cells_number:int) (maze:CellType list) = //cells_number <=maze cells
+            match cells_number with
+            | 0 -> maze
+            | _ -> let cell::maze_tail = maze in ( Cell.create(Walls.create(Walls.CLOSED,cell.walls.right,cell.walls.bottom,cell.walls.left),cell.visited))::(close_top_wall (cells_number-1) maze_tail)
+
+
+        let map = close_top_wall maze.cols (remove_cells cells_number maze.map)
+        let res = {map = map; rows = (maze.rows-height); cols = maze.cols}:MazeType
+        res
+
+
+     
+    ///<summary>Creates a new Maze from the given parameters.</summary>
+    ///<returns>The maze with the given parameters</returns>
+    let create (rows:int) (cols:int) : MazeType =
+        Generator.generate {map = (MazeMap.generate_map rows cols) ; rows = rows; cols = cols} 
+
+    ///<summary>Creates a new Maze from the given parameters.</summary>
+    ///<returns>The maze with the given parameters</returns>
+    let rec create_chunked (rows:int) (cols:int) (chunks:int) : MazeType =
+        match chunks with
+        | 1 -> (create rows cols)
+        | _ -> (connect (create_chunked rows cols (chunks-1)) (create rows cols))
+

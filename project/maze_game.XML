@@ -24,6 +24,21 @@
  └─────────────────────────────────────────────────────────────────────────┘
 </summary>
 </member>
+<member name="P:FMaze.Core.CellType.visited">
+<summary>
+whether the cell was visited by generator algorhythm or not
+</summary>
+</member>
+<member name="P:FMaze.Core.CellType.walls">
+<summary>
+walls for the cell
+</summary>
+</member>
+<member name="T:FMaze.Core.CellType">
+<summary>
+The cell data structure.
+</summary>
+</member>
 <member name="P:FMaze.Core.WallsType.left">
 <summary>
 Open/Closed status for the cell&apos;s left wall
@@ -47,21 +62,6 @@ Open/Closed status for the cell&apos;s top wall
 <member name="T:FMaze.Core.WallsType">
 <summary>Defines walls for a cell. Values: OPEN/CLOSED</summary>
 </member>
-<member name="P:FMaze.Core.CellType.visited">
-<summary>
-whether the cell was visited by generator algorhythm or not
-</summary>
-</member>
-<member name="P:FMaze.Core.CellType.walls">
-<summary>
-walls for the cell
-</summary>
-</member>
-<member name="T:FMaze.Core.CellType">
-<summary>
-The cell data structure.
-</summary>
-</member>
 <member name="P:FMaze.Core.MazeType.cols">
 <summary>
 number of columns the maze is made up of
@@ -81,6 +81,34 @@ map of cells representing the structure of the maze
 <summary>
 The data structure representing a maze instance.
 </summary>
+</member>
+<member name="M:FMaze.Core.Cell.create(FMaze.Core.WallsType,System.Boolean)">
+<summary>Create a new <c>CellType</c> instance with the given parameters.</summary>
+</member>
+<member name="M:FMaze.Core.Cell.set_visited(FMaze.Core.CellType,System.Boolean)">
+<summary>Sets the given value of visited for the given cell.</summary>
+<param name="cell">The cell which the setter operates on</param>
+<param name="visited">The new value of visited</param>
+<returns>The given cell with the updated value of visited</returns>
+</member>
+<member name="P:FMaze.Core.Cell.ERROR_CELL">
+<summary>A cell representing an error in the application</summary>
+</member>
+<member name="T:FMaze.Core.Cell">
+<summary>The Cell module defines common operations on cells.</summary>
+<remarks>
+A cell is the basic component of the maze. It contains info on the walls and a boolean used for various purposes throughout the application.
+Cells, organized in a list constitute a map
+</remarks>
+</member>
+<member name="P:FMaze.Core.Walls.OPEN">
+<summary>Const value which represent an open wall.</summary>
+</member>
+<member name="P:FMaze.Core.Walls.CLOSED">
+<summary>Const value which represent a closed wall.</summary>
+</member>
+<member name="T:FMaze.Core.Walls">
+<summary>The Walls module define consts for the <c>WallType</c> type.</summary>
 </member>
 <member name="M:FMaze.Core.Utils.isOdd(System.Int32)">
 <summary>Check if the given number is odd.</summary>
@@ -117,33 +145,9 @@ The data structure representing a maze instance.
 <member name="T:FMaze.Core.Utils">
 <summary>The Utils module contains utility functions and definitions used across the whole application</summary>
 </member>
-<member name="P:FMaze.Core.Walls.OPEN">
-<summary>Const value which represent an open wall.</summary>
-</member>
-<member name="P:FMaze.Core.Walls.CLOSED">
-<summary>Const value which represent a closed wall.</summary>
-</member>
-<member name="T:FMaze.Core.Walls">
-<summary>The Walls module define consts for the <c>WallType</c> type.</summary>
-</member>
-<member name="M:FMaze.Core.Cell.create(FMaze.Core.WallsType,System.Boolean)">
-<summary>Create a new <c>CellType</c> instance with the given parameters.</summary>
-</member>
-<member name="M:FMaze.Core.Cell.set_visited(FMaze.Core.CellType,System.Boolean)">
-<summary>Sets the given value of visited for the given cell.</summary>
-<param name="cell">The cell which the setter operates on</param>
-<param name="visited">The new value of visited</param>
-<returns>The given cell with the updated value of visited</returns>
-</member>
-<member name="P:FMaze.Core.Cell.ERROR_CELL">
-<summary>A cell representing an error in the application</summary>
-</member>
-<member name="T:FMaze.Core.Cell">
-<summary>The Cell module defines common operations on cells.</summary>
-<remarks>
-A cell is the basic component of the maze. It contains info on the walls and a boolean used for various purposes throughout the application.
-Cells, organized in a list constitute a map
-</remarks>
+<member name="M:FMaze.Core.Maze.create_chunked(System.Int32,System.Int32,System.Int32)">
+<summary>Creates a new Maze from the given parameters.</summary>
+<returns>The maze with the given parameters</returns>
 </member>
 <member name="M:FMaze.Core.Maze.create(System.Int32,System.Int32)">
 <summary>Creates a new Maze from the given parameters.</summary>

@@ -3,8 +3,8 @@
 open System
 
 //map general dimensions
-let ROWS = 5 //height of a chunk
-let COLUMNS = 10 //width of a chunk
+let ROWS = 1 //height of a chunk
+let COLUMNS = 5 //width of a chunk
 let CHUNKS = 2 //number of chunks generated, fewer is faster but takes more time for a single maze / must be 1 or higer
 
 //map printing constants

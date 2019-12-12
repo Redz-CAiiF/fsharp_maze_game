@@ -38,3 +38,61 @@ module Utils=
     ///<param name="x">The value to check</param>
     ///<returns><c>true</c> if the number is odd, <c>false</c> if not.</returns>
     let isOdd (x:int):bool = not (isEven x)
+
+
+
+
+///<summary>Defines walls for a cell. Values: OPEN/CLOSED</summary>
+type WallsType = {
+    ///Open/Closed status for the cell's top wall
+    top:bool;
+    ///Open/Closed status for the cell's right wall
+    right:bool;
+    ///Open/Closed status for the cell's bottom wall
+    bottom:bool;
+    ///Open/Closed status for the cell's left wall
+    left:bool
+    }
+
+///<summary>The Walls module define consts for the <c>WallType</c> type.</summary>
+module Walls= 
+    ///<summary>Const value which represent a closed wall.</summary>
+    let CLOSED = true
+    ///<summary>Const value which represent an open wall.</summary>
+    let OPEN = false
+
+    let create (top:bool,right:bool,bottom:bool,left:bool) = {top = top;right = right;bottom = bottom;left = left}
+
+
+
+
+
+///The cell data structure.
+type CellType = {
+    ///walls for the cell
+    walls:WallsType; 
+    ///whether the cell was visited by generator algorhythm or not
+    visited:bool
+    }
+
+
+///<summary>The Cell module defines common operations on cells.</summary>
+///<remarks>
+///A cell is the basic component of the maze. It contains info on the walls and a boolean used for various purposes throughout the application.
+///Cells, organized in a list constitute a map
+///</remarks>
+module Cell=
+    open Walls
+
+    ///<summary>A cell representing an error in the application</summary>
+    let ERROR_CELL = {walls={top=CLOSED;right=CLOSED;bottom=CLOSED;left=CLOSED};visited=false}
+
+    ///<summary>Sets the given value of visited for the given cell.</summary>
+    ///<param name="cell">The cell which the setter operates on</param>
+    ///<param name="visited">The new value of visited</param>
+    ///<returns>The given cell with the updated value of visited</returns>
+    let set_visited (cell:CellType) (visited:bool) : CellType = 
+        {cell with visited=visited}
+    
+    ///<summary>Create a new <c>CellType</c> instance with the given parameters.</summary>
+    let create (walls:WallsType,visited:bool) = {walls = walls;visited = visited}
