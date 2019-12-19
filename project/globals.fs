@@ -2,14 +2,9 @@
 
 open System
 
-//map general dimensions
-let ROWS = 5 //height of a chunk
-let COLUMNS = 10 //width of a chunk
-let CHUNKS = 2 //number of chunks generated, fewer is faster but takes more time for a single maze / must be 1 or higer
-
-//map printing constants
-let EXPANDED_ROWS = ROWS*2+1
-let EXPANDED_COLUMNS = COLUMNS*2+1
+//map default dimensions
+let ROWS = 5 //height of the map
+let COLUMNS = 10 //width of the map
 
 //map cell states
 let PORTAL = 3
@@ -18,16 +13,9 @@ let WALL = 1
 let PATH = 0
 
 
-//DONE
-//wall status
-let CLOSED = true
-let OPEN = false
-
 // ┌─────────────────────────────────────────────────────────────────────────┐
 // │                                 OTHER 
-// │    NAME:          FIXED PRINTING_MODULE VALUES
-// │    DESCRIPTION:   tutti i valori fissati nel modulo printing
-// │    CREATOR:       ML
+// │    NAME:          PRINTING MODULE DEFAULT VALUES
 // │
 // └─────────────────────────────────────────────────────────────────────────┘
 //colours
@@ -39,52 +27,10 @@ let COLOUR_PLAYER = ConsoleColor.Blue
 let COLOUR_PORTAL = ConsoleColor.Yellow
 
 // characters for graphical module
-//path
-let GENERIC_PATH = ' '
-
-//wall
-let GENERIC_WALL = '█'
-
-let SET_THIN = '0'
-//THIN
-let WALL_COLUMN = '-'
-let WALL_VERTICAL = '│'
-let WALL_HORIZONTAL = '─'
-let WALL_ANGLE_TOP_RIGHT = '┐'
-let WALL_ANGLE_TOP_LEFT = '┌'
-let WALL_ANGLE_BOTTOM_RIGHT = '┘'
-let WALL_ANGLE_BOTTOM_LEFT = '└'
-let WALL_CONNECTION_RIGHT = '├'
-let WALL_CONNECTION_LEFT = '┤'
-let WALL_CONNECTION_TOP = '┴'
-let WALL_CONNECTION_BOTTOM = '┬'
-let WALL_INTERSECTION = '┼'
-
-let SET_THICK = '1'
-//THICK
-let THICK_WALL_COLUMN = '='
-let THICK_WALL_VERTICAL = '║'
-let THICK_WALL_HORIZONTAL = '═'
-let THICK_WALL_ANGLE_TOP_RIGHT = '╗'
-let THICK_WALL_ANGLE_TOP_LEFT = '╔'
-let THICK_WALL_ANGLE_BOTTOM_RIGHT = '╝'
-let THICK_WALL_ANGLE_BOTTOM_LEFT = '╚'
-let THICK_WALL_CONNECTION_RIGHT = '╠'
-let THICK_WALL_CONNECTION_LEFT = '╣'
-let THICK_WALL_CONNECTION_TOP = '╩'
-let THICK_WALL_CONNECTION_BOTTOM = '╦'
-let THICK_WALL_INTERSECTION = '╬'
-
-//character
-let CHARACTER_1 = '©'
-let CHARACTER_2 = '®'
-let CHARACTER_3 = '■'
-
-//portal
-let PORTAL_1 = '¤'
-let PORTAL_3 = '»'
-
-//other
+let PATH_CHARACTER      = ' '
+let WALL_CHARACTER      = '█'
+let PLAYER_CHARACTER    = '■'
+let PORTAL_CHARACTER    = '¤'
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
 // │                               END OTHER 

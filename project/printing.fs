@@ -63,14 +63,14 @@ let map_to_chars (map:cell list) (maze:MazeType)=
             let mutable row = ""
             for y in 0..(cols-1) do
                 //se sia x che y sono dispari
-                row <- row + (if (x |> Utils.isOdd) && (y |> Utils.isOdd) then string GENERIC_PATH else string GENERIC_WALL)
+                row <- row + (if (x |> Utils.isOdd) && (y |> Utils.isOdd) then string PATH_CHARACTER else string WALL_CHARACTER)
 
             res <- row::res
         res
 
     let replace_char (x:int) (y:int) wall (res:string list) =
         let line = res.[x]
-        let new_line = ((line.[..(y-1)]) + (string (if not wall then GENERIC_PATH else GENERIC_WALL)) + (line.[(y+1)..]))
+        let new_line = ((line.[..(y-1)]) + (string (if not wall then PATH_CHARACTER else WALL_CHARACTER)) + (line.[(y+1)..]))
         let n_res = ((res.[..(x-1)])@[new_line]@(res.[(x+1)..]))
         n_res
 

@@ -27,14 +27,17 @@ module Utils=
     ///<returns>A tuple <c>(row , col )</c> containing the coordinates corresponding the given momodimensional index.</returns>
     let from_monodim_to_bidim (index:int) (cols:int) :int*int = (index/cols, index%cols)
 
-
     ///<summary>Check if the given number is even.</summary>
     ///<param name="x">The value to check</param>
     ///<returns><c>true</c> if the number is even, <c>false</c> if not.</returns>
     let isEven (x:int):bool = (x % 2) = 0
 
-
     ///<summary>Check if the given number is odd.</summary>
     ///<param name="x">The value to check</param>
     ///<returns><c>true</c> if the number is odd, <c>false</c> if not.</returns>
     let isOdd (x:int):bool = not (isEven x)
+
+    ///<summary>Expand the given coordinate</summary>
+    ///<param name="x">The coordinate to expand</param>
+    ///<returns><c>true</c> the expanded coordinate</returns>
+    let expand__coordinate_value (x:int):int = x*2+1
