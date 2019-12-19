@@ -2,26 +2,9 @@
 <doc>
 <assembly><name>maze_game</name></assembly>
 <members>
-<member name="M:printing.print_map(Microsoft.FSharp.Collections.FSharpList{System.String})">
+<member name="M:printing.print_map(FMaze.Core.ExpandedMazeType)">
 <summary>
  │    DESCRIPTION:   .
-</summary>
-</member>
-<member name="M:printing.map_to_chars(Microsoft.FSharp.Collections.FSharpList{System.Tuple{System.Int32,System.Int32,System.Tuple{System.Boolean,System.Boolean,System.Boolean,System.Boolean},System.Boolean}},FMaze.Core.MazeType)">
-<summary>
- │    DESCRIPTION:   data una mappa ritorna una lista di stringhe, che compongono la mappa graficamente
-</summary>
-</member>
-<member name="M:printing.extend_size(System.Int32)">
-<summary>
- ┌─────────────────────────────────────────────────────────────────────────┐
- │                                FUNCTION 
- │    NAME:          extend_size
- │    DESCRIPTION:   data una dimensione ritorna la dimensione estesa f(x):x*2+1
- │    CREATOR:       ML
- │    OLD NAME:      .
- │
- └─────────────────────────────────────────────────────────────────────────┘
 </summary>
 </member>
 <member name="P:FMaze.Core.WallsType.left">
@@ -62,6 +45,21 @@ walls for the cell
 The cell data structure.
 </summary>
 </member>
+<member name="P:FMaze.Core.ExpandedMazeType.cols">
+<summary>
+number of columns the maze is made up of
+</summary>
+</member>
+<member name="P:FMaze.Core.ExpandedMazeType.rows">
+<summary>
+number of rows the maze is made up of
+</summary>
+</member>
+<member name="P:FMaze.Core.ExpandedMazeType.map">
+<summary>
+map of cells representing the structure of the maze
+</summary>
+</member>
 <member name="P:FMaze.Core.MazeType.cols">
 <summary>
 number of columns the maze is made up of
@@ -81,6 +79,11 @@ map of cells representing the structure of the maze
 <summary>
 The data structure representing a maze instance.
 </summary>
+</member>
+<member name="M:FMaze.Core.Utils.expand__coordinate_value(System.Int32)">
+<summary>Expand the given coordinate</summary>
+<param name="x">The coordinate to expand</param>
+<returns><c>true</c> the expanded coordinate</returns>
 </member>
 <member name="M:FMaze.Core.Utils.isOdd(System.Int32)">
 <summary>Check if the given number is odd.</summary>
@@ -148,12 +151,6 @@ Cells, organized in a list constitute a map
 <member name="M:FMaze.Core.Maze.create(System.Int32,System.Int32)">
 <summary>Creates a new Maze from the given parameters.</summary>
 <returns>The maze with the given parameters</returns>
-</member>
-<member name="M:FMaze.Core.Maze.connect(FMaze.Core.MazeType,FMaze.Core.MazeType)">
-<summary>Connects two mazes together. It takes the second maze and connects it to the end of the first one.</summary>
-<param name="maze1">The first maze to operate on</param>
-<param name="maze2">The second maze to operate on</param>
-<returns>A new maze made of the concatenation of the 2 mazes.</returns>
 </member>
 <member name="M:FMaze.Core.Maze.get_bi_cell(System.Int32,System.Int32,FMaze.Core.MazeType)">
 <summary>Gets the cell at the specified index in the given Maze. Index is specified as 1-dimensional.</summary>

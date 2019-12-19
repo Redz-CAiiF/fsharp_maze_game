@@ -11,6 +11,20 @@ type MazeType = {
     cols: int
     }
 
+type ExpandedMazeType = {
+    ///map of cells representing the structure of the maze
+    map : bool list;
+    ///number of rows the maze is made up of
+    rows: int
+    ///number of columns the maze is made up of
+    cols: int
+
+    start_row: int
+    start_col: int
+    end_row: int
+    end_col: int
+    }
+
 ///<summary>The <c>Maze</c> module contains functions to operate on <code>MazeType</code> instances.</summary>
 module Maze =
     open Utils
@@ -158,7 +172,47 @@ module Maze =
         let generate (maze:MazeType): MazeType =
             recursive_backtracker maze 0
 
-     
+    
+    module Expand = 
+        let convert_maze_to_expandedmaze (maze: MazeType):ExpandedMazeType = 
+
+            let map_to_bool (maze:MazeType) = 
+        
+                let generate_default_map (rows:int) (cols:int):bool list = 
+                    let mutable res = []
+                    for x in 0..(rows-1) do
+                        let mutable row = []:bool list
+                        for y in 0..(cols-1) do
+                            //se sia x che y sono dispari
+                            row <- row@[(if (x |> Utils.isOdd) && (y |> Utils.isOdd) then Walls.OPEN else Walls.CLOSED)]
+    
+                        res <- row@res
+                    res
+    
+                let set_maze (maze:MazeType) = 
+                    let mutable res = generate_default_map (maze.rows |> Utils.expand__coordinate_value) (maze.cols |> Utils.expand__coordinate_value)
+                    for index in 0..(maze.map.Length-1) do
+                        //per ogni cella in map prendo gli stati dei muri destra e basso e gli cambio nella mappa dei chars
+                        let current = maze.map.[index]
+                        let x,y = Utils.from_monodim_to_bidim index maze.cols
+    
+                        let x = Utils.expand__coordinate_value x
+                        let y = Utils.expand__coordinate_value y
+                        //sostituisco i muri right e bottom con quelli salvati nella cella
+                        let exp_index = Utils.from_bidim_to_monodim (maze.rows |> Utils.expand__coordinate_value) (maze.cols |> Utils.expand__coordinate_value)
+                        let replace_cell (position:int) (cell:'A) (map:'A list): 'A list = 
+                            map.[..(position-1)]@[cell]@map.[(position+1)..]
+    
+                        res <- replace_cell (exp_index x (y+1)) current.walls.right res
+                        res <- replace_cell (exp_index (x+1) y) current.walls.bottom res
+                    res
+                set_maze maze
+    
+            let gen_coord (i:int) (f:int):int = Generator.SEED.Next(i,f) |> Utils.expand__coordinate_value
+
+            {map = (map_to_bool maze); rows = (maze.rows |> Utils.expand__coordinate_value); cols = (maze.cols |> Utils.expand__coordinate_value); start_row = (gen_coord 0 maze.rows); start_col = (gen_coord 0 maze.cols); end_row = (gen_coord 0 maze.rows); end_col = (gen_coord 0 maze.cols)}
+    
+
     ///<summary>Creates a new Maze from the given parameters.</summary>
     ///<returns>The maze with the given parameters</returns>
     let create (rows:int) (cols:int) : MazeType =
