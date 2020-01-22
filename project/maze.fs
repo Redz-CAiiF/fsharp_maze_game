@@ -161,7 +161,7 @@ module Maze =
     module Expand = 
            //let convert_maze_to_expandedmaze (maze: MazeType):ExpandedMazeType = 
 
-               let map_to_bool (maze:MazeType) = 
+               let map_to_bool (maze:MazeType) : bool[] = 
 
                    let generate_default_map (rows:int) (cols:int):bool list = 
                        let mutable res = []
