@@ -162,7 +162,7 @@ module Maze =
            //let convert_maze_to_expandedmaze (maze: MazeType):ExpandedMazeType = 
 
                let map_to_bool (maze:MazeType) : bool[] = 
-
+                   let r = Array.create (maze.rows * maze.cols) (false)        
                    let generate_default_map (rows:int) (cols:int):bool list = 
                        let mutable res = []
                        for x in 0..(rows-1) do
@@ -191,8 +191,11 @@ module Maze =
                            res <- replace_cell (exp_index x (y+1)) current.walls.right res
                            res <- replace_cell (exp_index (x+1) y) current.walls.bottom res
                        res
-                   set_maze maze
-
+                   let lst=set_maze maze
+                   for i=0  to (maze.rows * maze.cols) do 
+                        r.[i]<- lst.[i]
+                   r
+ 
                //let gen_coord (i:int) (f:int):int = Generator.SEED.Next(i,f) |> Utils.expand__coordinate_value
 
                //{map = (map_to_bool maze); rows = (maze.rows |> Utils.expand__coordinate_value); cols = (maze.cols |> Utils.expand__coordinate_value); start_row = (gen_coord 0 maze.rows); start_col = (gen_coord 0 maze.cols); end_row = (gen_coord 0 maze.rows); end_col = (gen_coord 0 maze.cols)}
