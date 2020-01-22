@@ -195,6 +195,10 @@ module Maze =
                    for i=0  to (maze.rows * maze.cols) do 
                         r.[i]<- lst.[i]
                    r
+
+        let bool_to_pixel (b: bool[]) =
+            Array.map (fun t -> if t = Walls.CLOSED then ('x',_,_) else (' ', _ ,_ ) ) b  
+
  
                //let gen_coord (i:int) (f:int):int = Generator.SEED.Next(i,f) |> Utils.expand__coordinate_value
 
