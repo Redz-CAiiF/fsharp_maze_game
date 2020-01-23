@@ -9,11 +9,18 @@ type MazeType = {
     rows: int
     ///number of columns the maze is made up of
     cols: int
+    ///start (row, column)
+    start: int*int
+    ///finish (row,column)
+    finish: int*int
     }
 
 ///<summary>The <c>Maze</c> module contains functions to operate on <code>MazeType</code> instances.</summary>
 module Maze =
     open Utils
+
+    ///<summary>The seed used for generating random numbers and implementing randomness in the maze generator algorhythm</summary>
+    let SEED = System.Random()
 
     ///<summary>Defines operations on cell lists.</summary>
     module MazeMap =
@@ -65,17 +72,28 @@ module Maze =
             else
                 map
 
-     
+    ///<summary>Gets coordinates of a random outer cell for the given maze dimensions. An outer cell is defined as a cell which is on the sides of the maze (on the map limit).</summary>
+    ///<param name="rows">Number of rows the maze which the outer random coordinates must be generated is made up of.</param>
+    ///<param name="cols">Number of columns the maze which the outer random coordinates must be generated is made up of.</param>
+    ///<returns>A pair of int representing coordinates of a random outer cell of the given maze dimensions.</returns>
+    let generate_outer_coordinate (rows:int,cols:int) : (int*int) =
+        //which coordinate is fixed? 50%
+        let is_row_fixed = SEED.Next(100) < 50
+        //fixed coordinate: start or end of coordinate? 50%
+        let fixed_coord = if SEED.Next(100) < 50 then 0 else (if is_row_fixed then rows-1 else cols-1)
+        //randomize other coordinate and return
+        if is_row_fixed then (fixed_coord,SEED.Next(cols)) else (SEED.Next(rows),fixed_coord)
+
     ///<summary>Gets the cell at the specified index in the given Maze. Index is specified as 1-dimensional.</summary>
     ///<param name="position">The index of the desired element in the maze</param>
-    ///<param name="map">The maze to select the element from</param>
+    ///<param name="maze">The maze to select the element from</param>
     ///<returns>The cell at the specified index</returns>
     let get_cell (position:int) (maze:MazeType):CellType =
         maze.map.[position]
 
     ///<summary>Gets the cell at the specified index in the given Maze. Index is specified as 1-dimensional.</summary>
     ///<param name="position">The index of the desired element in the maze</param>
-    ///<param name="map">The maze to select the element from</param>
+    ///<param name="maze">The maze to select the element from</param>
     ///<returns>The cell at the specified index</returns>
     let get_bi_cell (x:int) (y:int) (maze:MazeType):CellType = 
         let i= (from_bidim_to_monodim maze.rows maze.cols x y)
@@ -86,9 +104,6 @@ module Maze =
     ///<summary>Routines used in the maze generation process.</summary>
     module Generator =
         open MazeMap
-
-        ///<summary>The seed used for generating random numbers for implementing randomness in the maze generator algorhythm</summary>
-        let SEED = System.Random()
       
         ///<summary>Given a cell map, check if the map has been entirely explored, i.e. all the cells have been visited by the generator algorhythm.</summary>
         ///<param name="map">The cell map which the check is performed on</param>
@@ -158,53 +173,8 @@ module Maze =
         let generate (maze:MazeType): MazeType =
             recursive_backtracker maze 0
 
-    module Expand = 
-           //let convert_maze_to_expandedmaze (maze: MazeType):ExpandedMazeType = 
-
-               let map_to_bool (maze:MazeType) : bool[] = 
-                   let r = Array.create (maze.rows * maze.cols) (false)        
-                   let generate_default_map (rows:int) (cols:int):bool list = 
-                       let mutable res = []
-                       for x in 0..(rows-1) do
-                           let mutable row = []:bool list
-                           for y in 0..(cols-1) do
-                               //se sia x che y sono dispari
-                               row <- row@[(if (x |> Utils.isOdd) && (y |> Utils.isOdd) then Walls.OPEN else Walls.CLOSED)]
-
-                           res <- row@res
-                       res
-
-                   let set_maze (maze:MazeType) = 
-                       let mutable res = generate_default_map (maze.rows |> Utils.expand__coordinate_value) (maze.cols |> Utils.expand__coordinate_value)
-                       for index in 0..(maze.map.Length-1) do
-                           //per ogni cella in map prendo gli stati dei muri destra e basso e gli cambio nella mappa dei chars
-                           let current = maze.map.[index]
-                           let x,y = Utils.from_monodim_to_bidim index maze.cols
-
-                           let x = Utils.expand__coordinate_value x
-                           let y = Utils.expand__coordinate_value y
-                           //sostituisco i muri right e bottom con quelli salvati nella cella
-                           let exp_index = Utils.from_bidim_to_monodim (maze.rows |> Utils.expand__coordinate_value) (maze.cols |> Utils.expand__coordinate_value)
-                           let replace_cell (position:int) (cell:'A) (map:'A list): 'A list = 
-                               map.[..(position-1)]@[cell]@map.[(position+1)..]
-
-                           res <- replace_cell (exp_index x (y+1)) current.walls.right res
-                           res <- replace_cell (exp_index (x+1) y) current.walls.bottom res
-                       res
-                   let lst=set_maze maze
-                   for i=0  to (maze.rows * maze.cols) do 
-                        r.[i]<- lst.[i]
-                   r
-
-        let bool_to_pixel (b: bool[]) =
-            Array.map (fun t -> if t = Walls.CLOSED then ('x',_,_) else (' ', _ ,_ ) ) b  
-
- 
-               //let gen_coord (i:int) (f:int):int = Generator.SEED.Next(i,f) |> Utils.expand__coordinate_value
-
-               //{map = (map_to_bool maze); rows = (maze.rows |> Utils.expand__coordinate_value); cols = (maze.cols |> Utils.expand__coordinate_value); start_row = (gen_coord 0 maze.rows); start_col = (gen_coord 0 maze.cols); end_row = (gen_coord 0 maze.rows); end_col = (gen_coord 0 maze.cols)}
-
     ///<summary>Creates a new Maze from the given parameters.</summary>
     ///<returns>The maze with the given parameters</returns>
     let create (rows:int) (cols:int) : MazeType =
-        Generator.generate {map = (MazeMap.generate_map rows cols) ; rows = rows; cols = cols} 
+        Generator.generate {map = (MazeMap.generate_map rows cols) ; rows = rows; cols = cols; start = generate_outer_coordinate (rows,cols); finish= generate_outer_coordinate (rows,cols)} 
+
