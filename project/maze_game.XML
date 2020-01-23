@@ -2,6 +2,19 @@
 <doc>
 <assembly><name>maze_game</name></assembly>
 <members>
+<member name="P:maze_resolutor.Resolutor.SolutionType.map">
+<summary>
+map of cells representing the structure of the maze
+</summary>
+</member>
+<member name="P:maze_resolutor.Resolutor.SoluitonCellType.x">
+<summary>
+map of cells representing the structure of the maze
+</summary>
+</member>
+<member name="P:maze_resolutor.Resolutor.SEED">
+<summary>The seed used for generating random numbers used to find a path to the solution from the starting point</summary>
+</member>
 <member name="M:printing.print_map(FMaze.Core.ExpandedMazeType)">
 <summary>
  │    DESCRIPTION:   .
@@ -216,7 +229,7 @@ Cells, organized in a list constitute a map
 <param name="map">The cell map to search on for the cell</param>
 <returns>The index of the cell in the map, or <c>-1</c> if the cell is not present in the map.</returns>
 </member>
-<member name="M:FMaze.Core.Maze.MazeMap.replace_cell(System.Int32,FMaze.Core.CellType,Microsoft.FSharp.Collections.FSharpList{FMaze.Core.CellType})">
+<member name="M:FMaze.Core.Maze.MazeMap.replace_cell``1(System.Int32,``0,Microsoft.FSharp.Collections.FSharpList{``0})">
 <summary>Replace the cell at the given index in the cell list with the new given cell instance.</summary>
 <param name="position">Index of the cell to replace</param>
 <param name="cell">The new cell to replace in the map</param>

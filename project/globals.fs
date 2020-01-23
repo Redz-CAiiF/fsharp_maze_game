@@ -7,11 +7,10 @@ let ROWS = 5 //height of the map
 let COLUMNS = 10 //width of the map
 
 //map cell states
-let PORTAL = 3
-let PLAYER = 2
-let WALL = 1
 let PATH = 0
-
+let WALL = 1
+let PLAYER = 2
+let PORTAL = 3
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
 // │                                 OTHER 

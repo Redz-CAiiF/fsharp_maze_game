@@ -43,7 +43,7 @@ module Maze =
         ///<param name="cell">The new cell to replace in the map</param>
         ///<param name="map">The cell map to operate on</param>
         ///<returns>The map with the new replaced cell.</returns>
-        let replace_cell (position:int) (cell:CellType) (map: CellType list): CellType list = 
+        let replace_cell (position:int) (cell:'a) (map: 'a list): 'a list = 
             map.[..(position-1)]@[cell]@map.[(position+1)..]
                
         ///<summary>Given a cell find the index of that cell in the given map.</summary>
