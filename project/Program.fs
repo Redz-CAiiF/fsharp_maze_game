@@ -9,15 +9,15 @@ open globals
 [<EntryPoint>]
 let main argv =
     //old printing functions are used for printing the maze. TODO printing functions with the given GUI Engine library.    
-    let map = Maze.create ROWS COLUMNS
-    let expanded_map = Maze.Expand.convert_maze_to_expandedmaze map
-
-    printing.print_map expanded_map
-    printfn "%A" expanded_map
+    let maze = Maze.create ROWS COLUMNS
+    let expanded_maze = Maze.expand maze
     
-    let resolution = Maze.Resolutor.resolve expanded_map
+    printing.print_map expanded_maze
+    printfn "\n%A" expanded_maze
 
-    printfn "%A" resolution
+    let solution = Maze.solve expanded_maze
+
+    printfn "\n%A" solution.path
 
     System.Console.ReadKey() |> ignore
     0 // return exit code

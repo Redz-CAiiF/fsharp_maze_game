@@ -25,6 +25,14 @@ type ExpandedMazeType = {
     end_col: int
     }
 
+///The data structure representing a maze solution instance.
+type SolutionType = {
+    ///the path from the end to the start
+    path : int list;
+    map_rows : int
+    map_cols : int
+    }
+
 ///<summary>The <c>Maze</c> module contains functions to operate on <code>MazeType</code> instances.</summary>
 module Maze =
     open Utils
@@ -168,14 +176,21 @@ module Maze =
      
         ///<summary>Generate a maze from a default initialized <c>Maze</c> instance.</summary>
         ///<param name="maze">A default initialized maze.</param>
-        ///<returns>A new maze made of the concatenation of the 2 mazes.</returns>
+        ///<returns>A generated maze using recursive backtracker as the generating algorithm</returns>
         let generate (maze:MazeType): MazeType =
             recursive_backtracker maze 0
 
-    
+    ///<summary>Contain all the function to expand a maze map.</summary>
     module Expand = 
+
+        ///<summary>Convert a maze to its expanded form</summary>
+        ///<param name="maze">A generated maze.</param>
+        ///<returns>A new expanded maze made from the provided maze</returns>
         let convert_maze_to_expandedmaze (maze: MazeType):ExpandedMazeType = 
 
+            ///<summary>Convert a maze to a bool rapresentation of that maze</summary>
+            ///<param name="maze">A generated maze.</param>
+            ///<returns>A boolean rappresentation of the provided maze</returns>
             let map_to_bool (maze:MazeType) = 
         
                 let generate_default_map (rows:int) (cols:int):bool list = 
@@ -211,29 +226,17 @@ module Maze =
             let gen_coord (i:int) (f:int):int = Generator.SEED.Next(i,f) |> Utils.expand__coordinate_value
 
             {map = (map_to_bool maze); rows = (maze.rows |> Utils.expand__coordinate_value); cols = (maze.cols |> Utils.expand__coordinate_value); start_row = (gen_coord 0 maze.rows); start_col = (gen_coord 0 maze.cols); end_row = (gen_coord 0 maze.rows); end_col = (gen_coord 0 maze.cols)}
-    
 
-    ///<summary>Creates a new Maze from the given parameters.</summary>
-    ///<returns>The maze with the given parameters</returns>
-    let create (rows:int) (cols:int) : MazeType =
-        Generator.generate {map = (MazeMap.generate_map rows cols) ; rows = rows; cols = cols} 
-
-
-
-///
+    ///<summary>Contain all the function to solve a maze.</summary>
     module Resolutor =
         open MazeMap
 
-        type SolutionType = {
-            ///map of cells representing the structure of the maze
-            path : int list;
-            map_rows : int
-            map_cols : int
-            }
-
-        ///<summary>The seed used for generating random numbers used to find a path to the solution from the starting point</summary>
-        let SEED = System.Random()
-
+        ///<summary>Return the index of all the unvisited neighbours or the non wall parts of the maze</summary>
+        ///<param name="index">The index of the choosen cell</param>
+        ///<param name="maze">The maze to select the element from</param>
+        ///<param name="rows">The maze rows number</param>
+        ///<param name="cols">The maze columns number</param>
+        ///<returns>A list with the unvisited cells connected to the current one</returns>
         let get_unvisited_neighbours (index: int) (maze:bool list) (rows:int) (cols:int) : int list=
             let r,c = from_monodim_to_bidim index cols
             //neighbours cells
@@ -241,10 +244,13 @@ module Maze =
             let right  = from_bidim_to_monodim rows cols r (c+1)
             let bottom = from_bidim_to_monodim rows cols (r+1) c 
             let left   = from_bidim_to_monodim rows cols r (c-1) 
-            //the neighbours    
+            //the neighbours
             List.filter (fun (el:int) -> el <> -1 && not maze.[el] ) [top;right;bottom;left]
 
-        let resolve (expanded_map:ExpandedMazeType):SolutionType = 
+        ///<summary>Solve the given maze</summary>
+        ///<param name="expanded_map">The maze in its expanded form that will be used to find the solution</param>
+        ///<returns>A value of SolutionType type, containing the solution of the maze and the maze dimensions</returns>
+        let solve (expanded_map:ExpandedMazeType):SolutionType = 
             let rec aux (path:int list) (maze:bool list) (rows:int) (cols:int) (current:int) (exit:int):int list =
                 if current = exit then
                     //aggiungo current a path e ritorno il tutto
@@ -257,7 +263,7 @@ module Maze =
                     //se ci sono vicini
                     if unvisited_neighbours.Length > 0 then
                         //prendo un vicino a caso
-                        let next = unvisited_neighbours.[SEED.Next(0,unvisited_neighbours.Length)]
+                        let next = unvisited_neighbours.[Generator.SEED.Next(0,unvisited_neighbours.Length)]
                         //aggiungo current a path
                         let n_path = current::path
                         //richiamo la funzione con il nuovo path, la nuova mappa, start, il nuovo current e exit
@@ -275,3 +281,23 @@ module Maze =
             let ind_path = aux [] expanded_map.map expanded_map.rows expanded_map.cols start exit
         
             {path = ind_path; map_rows = expanded_map.rows; map_cols = expanded_map.cols}
+
+
+
+
+
+    ///<summary>Creates a new Maze from the given parameters.</summary>
+    ///<returns>The maze with the given parameters</returns>
+    let create (rows:int) (cols:int) : MazeType =
+        Generator.generate {map = (MazeMap.generate_map rows cols) ; rows = rows; cols = cols} 
+
+    ///<summary>Expand the provided maze.</summary>
+    ///<returns>The expanded maze</returns>
+    let expand (maze:MazeType) : ExpandedMazeType =
+        Expand.convert_maze_to_expandedmaze maze
+
+    ///<summary>Solve an expanded maze.</summary>
+    ///<returns>The solution of the provided maze</returns>
+    let solve (exp_maze:ExpandedMazeType) : SolutionType = 
+        Resolutor.solve exp_maze
+        

@@ -2,14 +2,6 @@
 <doc>
 <assembly><name>maze_game</name></assembly>
 <members>
-<member name="P:maze_resolutor.Resolutor.SolutionType.path">
-<summary>
-map of cells representing the structure of the maze
-</summary>
-</member>
-<member name="P:maze_resolutor.Resolutor.SEED">
-<summary>The seed used for generating random numbers used to find a path to the solution from the starting point</summary>
-</member>
 <member name="M:printing.print_map(FMaze.Core.ExpandedMazeType)">
 <summary>
  │    DESCRIPTION:   .
@@ -51,6 +43,16 @@ walls for the cell
 <member name="T:FMaze.Core.CellType">
 <summary>
 The cell data structure.
+</summary>
+</member>
+<member name="P:FMaze.Core.SolutionType.path">
+<summary>
+the path from the end to the start
+</summary>
+</member>
+<member name="T:FMaze.Core.SolutionType">
+<summary>
+The data structure representing a maze solution instance.
 </summary>
 </member>
 <member name="P:FMaze.Core.ExpandedMazeType.cols">
@@ -156,6 +158,14 @@ A cell is the basic component of the maze. It contains info on the walls and a b
 Cells, organized in a list constitute a map
 </remarks>
 </member>
+<member name="M:FMaze.Core.Maze.solve(FMaze.Core.ExpandedMazeType)">
+<summary>Solve an expanded maze.</summary>
+<returns>The solution of the provided maze</returns>
+</member>
+<member name="M:FMaze.Core.Maze.expand(FMaze.Core.MazeType)">
+<summary>Expand the provided maze.</summary>
+<returns>The expanded maze</returns>
+</member>
 <member name="M:FMaze.Core.Maze.create(System.Int32,System.Int32)">
 <summary>Creates a new Maze from the given parameters.</summary>
 <returns>The maze with the given parameters</returns>
@@ -172,10 +182,34 @@ Cells, organized in a list constitute a map
 <param name="map">The maze to select the element from</param>
 <returns>The cell at the specified index</returns>
 </member>
+<member name="M:FMaze.Core.Maze.Resolutor.solve(FMaze.Core.ExpandedMazeType)">
+<summary>Solve the given maze</summary>
+<param name="expanded_map">The maze in its expanded form that will be used to find the solution</param>
+<returns>A value of SolutionType type, containing the solution of the maze and the maze dimensions</returns>
+</member>
+<member name="M:FMaze.Core.Maze.Resolutor.get_unvisited_neighbours(System.Int32,Microsoft.FSharp.Collections.FSharpList{System.Boolean},System.Int32,System.Int32)">
+<summary>Return the index of all the unvisited neighbours or the non wall parts of the maze</summary>
+<param name="index">The index of the choosen cell</param>
+<param name="maze">The maze to select the element from</param>
+<param name="rows">The maze rows number</param>
+<param name="cols">The maze columns number</param>
+<returns>A list with the unvisited cells connected to the current one</returns>
+</member>
+<member name="T:FMaze.Core.Maze.Resolutor">
+<summary>Contain all the function to solve a maze.</summary>
+</member>
+<member name="M:FMaze.Core.Maze.Expand.convert_maze_to_expandedmaze(FMaze.Core.MazeType)">
+<summary>Convert a maze to its expanded form</summary>
+<param name="maze">A generated maze.</param>
+<returns>A new expanded maze made from the provided maze</returns>
+</member>
+<member name="T:FMaze.Core.Maze.Expand">
+<summary>Contain all the function to expand a maze map.</summary>
+</member>
 <member name="M:FMaze.Core.Maze.Generator.generate(FMaze.Core.MazeType)">
 <summary>Generate a maze from a default initialized <c>Maze</c> instance.</summary>
 <param name="maze">A default initialized maze.</param>
-<returns>A new maze made of the concatenation of the 2 mazes.</returns>
+<returns>A generated maze using recursive backtracker as the generating algorithm</returns>
 </member>
 <member name="M:FMaze.Core.Maze.Generator.recursive_backtracker(FMaze.Core.MazeType,System.Int32)">
 <summary>The recursive backtracker algorhythm used for generating the maze. See <a href="https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker">Maze generation on Wikipedia</a> for details about how the algorhythm.</summary>

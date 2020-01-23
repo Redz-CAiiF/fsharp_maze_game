@@ -16,7 +16,6 @@
     <Compile Include="Walls.fs" />
     <Compile Include="Cell.fs" />
     <Compile Include="Maze.fs" />
-    <Compile Include="maze_resolutor.fs" />
     <Compile Include="printing.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

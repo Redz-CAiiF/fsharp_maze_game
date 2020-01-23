@@ -3,8 +3,8 @@
 open System
 
 //map default dimensions
-let ROWS = 2 //height of the map
-let COLUMNS = 3 //width of the map
+let ROWS = 5 //height of the map
+let COLUMNS = 7 //width of the map
 
 //map cell states
 let PATH = 0
