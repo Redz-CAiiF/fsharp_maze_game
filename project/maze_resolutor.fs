@@ -41,7 +41,8 @@ module Resolutor =
 
         let rec aux (path:int list) (maze:bool list) (rows:int) (cols:int) (current:int) (exit:int):int list =
             if current = exit then
-                path
+                //aggiungo current a path e ritorno il tutto
+                current::path
             else
                 //setto sulla mappa current come visitato, cioè false
                 let n_maze = replace_cell current true maze
