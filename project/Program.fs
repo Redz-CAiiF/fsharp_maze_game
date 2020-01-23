@@ -15,7 +15,7 @@ let main argv =
     printing.print_map expanded_map
     printfn "%A" expanded_map
     
-    let resolution = maze_resolutor.Resolutor.resolve expanded_map
+    let resolution = Maze.Resolutor.resolve expanded_map
 
     printfn "%A" resolution
 

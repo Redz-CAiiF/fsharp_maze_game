@@ -2,12 +2,7 @@
 <doc>
 <assembly><name>maze_game</name></assembly>
 <members>
-<member name="P:maze_resolutor.Resolutor.SolutionType.map">
-<summary>
-map of cells representing the structure of the maze
-</summary>
-</member>
-<member name="P:maze_resolutor.Resolutor.SoluitonCellType.x">
+<member name="P:maze_resolutor.Resolutor.SolutionType.path">
 <summary>
 map of cells representing the structure of the maze
 </summary>
