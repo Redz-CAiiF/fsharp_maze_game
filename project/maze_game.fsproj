@@ -11,13 +11,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="engine\AssemblyInfo.fs" />
+    <Compile Include="engine\Prelude.fs" />
+    <Compile Include="engine\Config.fs" />
+    <Compile Include="engine\External.fs" />
+    <Compile Include="engine\Globals.fs" />
+    <Compile Include="engine\Gfx.fs" />
+    <Compile Include="engine\Engine.fs" />
     <Compile Include="globals.fs" />
     <Compile Include="Utils.fs" />
     <Compile Include="Walls.fs" />
     <Compile Include="Cell.fs" />
     <Compile Include="Maze.fs" />
     <Compile Include="maze_resolutor.fs" />
-    <Compile Include="printing.fs" />
+    <Compile Include="MazeGUI.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
