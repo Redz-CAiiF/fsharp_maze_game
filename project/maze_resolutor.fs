@@ -30,7 +30,7 @@ module Resolutor =
         let bottom = from_bidim_to_monodim rows cols (r+1) c 
         let left   = from_bidim_to_monodim rows cols r (c-1) 
         //the neighbours    
-        List.filter (fun (el:int) -> el <> -1 && maze.[el] ) [top;right;bottom;left]
+        List.filter (fun (el:int) -> el <> -1 && not maze.[el] ) [top;right;bottom;left]
 
 
 
@@ -44,7 +44,7 @@ module Resolutor =
                 path
             else
                 //setto sulla mappa current come visitato, cioè false
-                let n_maze = replace_cell current false maze
+                let n_maze = replace_cell current true maze
                 //trovo i vicini non visitati di current
                 let unvisited_neighbours = get_unvisited_neighbours current n_maze rows cols
                 //se ci sono vicini
