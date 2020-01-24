@@ -41,3 +41,18 @@ module Utils=
     ///<param name="x">The coordinate to expand</param>
     ///<returns><c>true</c> the expanded coordinate</returns>
     let expand__coordinate_value (x:int):int = x*2+1
+
+
+    let replace index new_el lst = 
+        let rec aux current l =
+            match l with 
+                [] -> failwith "index out of bounds!"
+                | x::xs -> if current = index then new_el::xs else x::aux (current+1) xs
+        aux 0 lst
+
+    
+    let to_array (l:bool list) : bool[] = 
+               let r = Array.create (List.length l) false
+               for i=0  to (List.length l)-1 do 
+                    r.[i]<- l.[i]
+               r

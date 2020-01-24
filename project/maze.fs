@@ -9,11 +9,25 @@ type MazeType = {
     rows: int
     ///number of columns the maze is made up of
     cols: int
-    ///start (row, column)
+    ///start cell (row, column)
     start: int*int
-    ///finish (row,column)
+    ///finish cell (row,column)
     finish: int*int
     }
+
+type ExpandedMazeType = {
+    ///map of cells representing the structure of the maze
+    map : bool list;
+    ///number of rows the maze is made up of
+    rows: int
+    ///number of columns the maze is made up of
+    cols: int
+    ///cell where the player will be first spawned at game startup.
+    start: (int*int)
+    ///cell that player must reach in order to succesfully end the game.
+    finish: (int*int)
+    }
+
 
 ///The data structure representing a maze solution instance.
 type SolutionType = {
@@ -91,6 +105,9 @@ module Maze =
         let fixed_coord = if SEED.Next(100) < 50 then 0 else (if is_row_fixed then rows-1 else cols-1)
         //randomize other coordinate and return
         if is_row_fixed then (fixed_coord,SEED.Next(cols)) else (SEED.Next(rows),fixed_coord)
+
+    
+
 
     ///<summary>Gets the cell at the specified index in the given Maze. Index is specified as 1-dimensional.</summary>
     ///<param name="position">The index of the desired element in the maze</param>
@@ -181,8 +198,14 @@ module Maze =
         let generate (maze:MazeType): MazeType =
             recursive_backtracker maze 0
 
-    ///<summary>Contain all the function to expand a maze map.</summary>
+    ///<summary>Contain routines used to expand a maze map.</summary>
     module Expand = 
+
+        let get_outer_expanded_coord (row:int,col:int) (maze:MazeType) :(int*int)=
+            if row = 0 then row, Utils.expand__coordinate_value col
+            else if col = 0 then Utils.expand__coordinate_value row, col
+            else if row=maze.rows-1 then (Utils.expand__coordinate_value row)+1, Utils.expand__coordinate_value col
+            else Utils.expand__coordinate_value row,(Utils.expand__coordinate_value col)+1
 
         ///<summary>Convert a maze to its expanded form</summary>
         ///<param name="maze">A generated maze.</param>
@@ -223,12 +246,25 @@ module Maze =
                         res <- replace_cell (exp_index (x+1) y) current.walls.bottom res
                     res
                 set_maze maze
-    
-            let gen_coord (i:int) (f:int):int = Generator.SEED.Next(i,f) |> Utils.expand__coordinate_value
+            
+            let sr,sc = get_outer_expanded_coord maze.start maze
+            let fr,fc = get_outer_expanded_coord maze.finish maze
+            let map = map_to_bool maze;
+            {
+                //map: the converted bool map with the outer start cell open and the outer finish cell open
+                map =  replace (from_bidim_to_monodim (expand__coordinate_value maze.rows) (expand__coordinate_value maze.cols) sr sc) Walls.OPEN (replace (from_bidim_to_monodim (expand__coordinate_value maze.rows) (expand__coordinate_value maze.cols) fr fc) Walls.OPEN map)
+                rows = (maze.rows |> Utils.expand__coordinate_value);
+                cols = (maze.cols |> Utils.expand__coordinate_value);
+                start= sr,sc
+                finish= fr,fc
+            }
 
-            {map = (map_to_bool maze); rows = (maze.rows |> Utils.expand__coordinate_value); cols = (maze.cols |> Utils.expand__coordinate_value); start_row = (gen_coord 0 maze.rows); start_col = (gen_coord 0 maze.cols); end_row = (gen_coord 0 maze.rows); end_col = (gen_coord 0 maze.cols)}
+        ///<summary>Expand the provided maze.</summary>
+        ///<returns>The expanded maze</returns>
+        let expand (maze:MazeType) : ExpandedMazeType =
+            convert_maze_to_expandedmaze maze
 
-    ///<summary>Contain all the function to solve a maze.</summary>
+    ///<summary>Contain used to solve a maze.</summary>
     module Resolutor =
         open MazeMap
 
@@ -264,7 +300,7 @@ module Maze =
                     //se ci sono vicini
                     if unvisited_neighbours.Length > 0 then
                         //prendo un vicino a caso
-                        let next = unvisited_neighbours.[Generator.SEED.Next(0,unvisited_neighbours.Length)]
+                        let next = unvisited_neighbours.[SEED.Next(0,unvisited_neighbours.Length)]
                         //aggiungo current a path
                         let n_path = current::path
                         //richiamo la funzione con il nuovo path, la nuova mappa, start, il nuovo current e exit
@@ -277,28 +313,12 @@ module Maze =
                         aux n_path maze rows cols next exit
 
             //all inizio current = start
-            let start = from_bidim_to_monodim expanded_map.rows expanded_map.cols expanded_map.start_row expanded_map.start_col
-            let exit = from_bidim_to_monodim expanded_map.rows expanded_map.cols expanded_map.end_row expanded_map.end_col
+            let start = from_bidim_to_monodim expanded_map.rows expanded_map.cols (fst expanded_map.start) (snd expanded_map.start)
+            let exit = from_bidim_to_monodim expanded_map.rows expanded_map.cols (fst expanded_map.finish) (snd expanded_map.finish)
             let ind_path = aux [] expanded_map.map expanded_map.rows expanded_map.cols start exit
         
             {path = ind_path; map_rows = expanded_map.rows; map_cols = expanded_map.cols}
 
-
-
-    ///<summary>Creates a new Maze from the given parameters.</summary>
-    ///<returns>The maze with the given parameters</returns>
-    let create (rows:int) (cols:int) : MazeType =
-        Generator.generate {map = (MazeMap.generate_map rows cols) ; rows = rows; cols = cols} 
-
-    ///<summary>Expand the provided maze.</summary>
-    ///<returns>The expanded maze</returns>
-    let expand (maze:MazeType) : ExpandedMazeType =
-        Expand.convert_maze_to_expandedmaze maze
-
-    ///<summary>Solve an expanded maze.</summary>
-    ///<returns>The solution of the provided maze</returns>
-    let solve (exp_maze:ExpandedMazeType) : SolutionType = 
-        Resolutor.solve exp_maze
         
     ///<summary>Creates a new Maze from the given parameters.</summary>
     ///<returns>The maze with the given parameters</returns>

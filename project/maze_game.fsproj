@@ -18,12 +18,10 @@
     <Compile Include="engine\Globals.fs" />
     <Compile Include="engine\Gfx.fs" />
     <Compile Include="engine\Engine.fs" />
-    <Compile Include="globals.fs" />
     <Compile Include="Utils.fs" />
     <Compile Include="Walls.fs" />
     <Compile Include="Cell.fs" />
     <Compile Include="Maze.fs" />
-    <Compile Include="maze_resolutor.fs" />
     <Compile Include="MazeGUI.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
