@@ -17,7 +17,8 @@ Our code should follow some basic rules in order to make it more readable.
 #### CONSTANTS
 
 Constants names should be upper-case, multiple words should be divided by an underscore
-> for example: 
+> for example:  
+>
 > ```F#
 > let ROWS = 3
 > let COLUMNS =7
@@ -28,7 +29,8 @@ Constants names should be upper-case, multiple words should be divided by an und
 #### VARIABLES
 
 Variables names should be lower-case, multiple words should be divided by an underscore
-> for example: 
+> for example:  
+>
 > ```F#
 > let test = 6
 > let maze_tot = generate ROWS COLUMNS 3
@@ -37,7 +39,8 @@ Variables names should be lower-case, multiple words should be divided by an und
 #### FUNCTION
 
 Function names should be lower-case, multiple words should be divided by an underscore
-> for example: 
+> for example:  
+>
 > ```F#
 > let rec generate rows cols chunk =
 >       match chunk with
@@ -53,7 +56,8 @@ Function names should be lower-case, multiple words should be divided by an unde
 
 Files names must begin with a capital letter and match the main module (or namespace) defined in the file.
 Files must be ordered from the more general ones to the more specific, the last file in the solution explorer must me the ```[<EntryPoint>]```
-> for example: 
+> for example:  
+>
 > ```F#
 > Maze.fs
 > Utils.fs
@@ -70,9 +74,7 @@ Comments should follow the [XML standard](https://docs.microsoft.com/en-us/dotne
 >    ///<returns>The cell at the specified index</returns>
 >    let get_cell (position:int) (maze:MazeType):CellType =
 
-```
-
-### TO DO:
+### TO DO
 
 - [x] basic maze generation algorithm, [Maze algorithm documentation](https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker)
 - [x] map expansion and map updater module
@@ -83,4 +85,3 @@ Comments should follow the [XML standard](https://docs.microsoft.com/en-us/dotne
 - [ ] game menu design
 - [ ] game menu module
 - [ ] more game modes, for example infinite maze mode
-
