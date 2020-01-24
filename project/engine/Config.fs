@@ -8,6 +8,13 @@ module LabProg2019.Config
 
 open Prelude
 
+///menu configuration
+let MENU_WIDTH = 101
+let MENU_HEIGHT = 30
+let TITLE_X = 20
+let TITLE_Y = 4
+let COPYRIGHT_NOTICE = "(C) 2020 Lorenzo Donatelli, Matteo Agnoletto, Matteo Libralesso"
+
 let filled_pixel_char = '*'
 let wall_pixel_char = '|'
 let empty_pixel_char = ' '

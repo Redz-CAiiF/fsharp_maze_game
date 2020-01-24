@@ -11,13 +11,58 @@ open System.Diagnostics
 open LabProg2019.Globals
 open LabProg2019
 open LabProg2019.Gfx
+open LabProg2019.Config
 open System.IO.Pipes
 open System.IO
 open FMaze.GUI
 
+let new_interactive_game () =
+    let gui = MazeGUI.create 10 30
+    let my_update (key : ConsoleKeyInfo) (screen : wronly_raster) (state : MazeGUIType) =
+        // TODO: move player, handle moving in the maze and finish the game
+        if key.KeyChar = 'q' then state.engine.resize (50,10)
+        state, false //TODO: add condition to end the game
+    gui.engine.loop_on_key my_update gui
+    ()
+
+let start_menu () =       
+    let engine = new Engine.engine (MENU_WIDTH, MENU_HEIGHT)
+
+    let handle_menu_selection (key : ConsoleKeyInfo) (screen : wronly_raster) (st : int) =
+        let st =
+            //handle menu selection: run the corresponding routine to start a different game mode
+            match key.KeyChar with 
+            | '1' -> new_interactive_game ()    //Interactive
+                     1
+            | '2' -> 2                          //Automatic Resolution
+            | '3' -> 3                          //Dark Labyrinth
+            | _   ->    0                       //Default: invalid selection
+        st, key.KeyChar = 'q'
+
+    //render the menu
+    let b = pixel.create(''', Color.Black)
+    let menu = engine.create_and_register_sprite (image.rectangle (MENU_WIDTH,MENU_HEIGHT, b),0, 0, 0)
+    menu.draw_text("oooooooooooo ooo        ooooo", TITLE_X , TITLE_Y, Color.White)
+    menu.draw_text(" `888'     `8 `88.       .888'", TITLE_X , TITLE_Y+1, Color.White)
+    menu.draw_text("  888          888b     d'888   .oooo.     oooooooo  .ooooo.", TITLE_X , TITLE_Y+2, Color.White)
+    menu.draw_text("  888oooo8     8 Y88. .P  888  `P  )88b   d'''7d8P  d88' `88b" , TITLE_X , TITLE_Y+3, Color.White)
+    menu.draw_text("  888    '     8  `888'   888   .oP'888     .d8P'   888ooo888", TITLE_X , TITLE_Y+4, Color.White)
+    menu.draw_text("  888          8    Y     888  d8(  888   .d8P'  .P 888    .o" , TITLE_X , TITLE_Y+5, Color.White)
+    menu.draw_text(" o888o        o8o        o888o `Y888''8o d8888888P  `Y8bod8P'", TITLE_X , TITLE_Y+6, Color.White)
+    menu.draw_text("A .NET functional console game", TITLE_X+16 , TITLE_Y+8, Color.White)
+    menu.draw_text("Game modes :\n", TITLE_X ,  TITLE_Y+12, Color.Yellow)
+    menu.draw_text("1 : Interactive", TITLE_X ,  TITLE_Y+14, Color.Cyan)
+    menu.draw_text("2 : Automatic resolution", TITLE_X ,  TITLE_Y+15, Color.Cyan)
+    menu.draw_text("3 : Dark Labyrinth", TITLE_X,  TITLE_Y+16, Color.Cyan)
+    menu.draw_text("Q : uscita", TITLE_X , TITLE_Y+18, Color.Yellow)
+    menu.draw_text(COPYRIGHT_NOTICE, TITLE_X , TITLE_Y+21, Color.White)
+   
+    //loop on menu selection
+    engine.loop_on_key handle_menu_selection 0
+
 // game mode (client)
 //
-  
+
 let main_game () =
     use p = new Process ()
     p.StartInfo.UseShellExecute <- true
@@ -29,15 +74,7 @@ let main_game () =
     use client = new NamedPipeClientStream (".", Config.log_pipe_name, PipeDirection.Out)
     client.Connect ()
     Log <- new remote_logger (client)
-
-    let main ()=
-        let gui = MazeGUI.create 10 30
-        let my_update (key : ConsoleKeyInfo) (screen : wronly_raster) (state : MazeGUIType) =
-            // TODO: move player, handle moving in the maze and finish the game
-            state, false //TODO: add condition to end the game
-        gui.engine.loop_on_key my_update gui
-
-    main ()
+    start_menu ()   //render the menu
     0
 
 // log mode (server)
