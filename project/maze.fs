@@ -9,20 +9,10 @@ type MazeType = {
     rows: int
     ///number of columns the maze is made up of
     cols: int
-    }
-
-type ExpandedMazeType = {
-    ///map of cells representing the structure of the maze
-    map : bool list;
-    ///number of rows the maze is made up of
-    rows: int
-    ///number of columns the maze is made up of
-    cols: int
-
-    start_row: int
-    start_col: int
-    end_row: int
-    end_col: int
+    ///start (row, column)
+    start: int*int
+    ///finish (row,column)
+    finish: int*int
     }
 
 ///The data structure representing a maze solution instance.
@@ -36,6 +26,9 @@ type SolutionType = {
 ///<summary>The <c>Maze</c> module contains functions to operate on <code>MazeType</code> instances.</summary>
 module Maze =
     open Utils
+
+    ///<summary>The seed used for generating random numbers and implementing randomness in the maze generator algorhythm</summary>
+    let SEED = System.Random()
 
     ///<summary>Defines operations on cell lists.</summary>
     module MazeMap =
@@ -87,17 +80,28 @@ module Maze =
             else
                 map
 
-     
+    ///<summary>Gets coordinates of a random outer cell for the given maze dimensions. An outer cell is defined as a cell which is on the sides of the maze (on the map limit).</summary>
+    ///<param name="rows">Number of rows the maze which the outer random coordinates must be generated is made up of.</param>
+    ///<param name="cols">Number of columns the maze which the outer random coordinates must be generated is made up of.</param>
+    ///<returns>A pair of int representing coordinates of a random outer cell of the given maze dimensions.</returns>
+    let generate_outer_coordinate (rows:int,cols:int) : (int*int) =
+        //which coordinate is fixed? 50%
+        let is_row_fixed = SEED.Next(100) < 50
+        //fixed coordinate: start or end of coordinate? 50%
+        let fixed_coord = if SEED.Next(100) < 50 then 0 else (if is_row_fixed then rows-1 else cols-1)
+        //randomize other coordinate and return
+        if is_row_fixed then (fixed_coord,SEED.Next(cols)) else (SEED.Next(rows),fixed_coord)
+
     ///<summary>Gets the cell at the specified index in the given Maze. Index is specified as 1-dimensional.</summary>
     ///<param name="position">The index of the desired element in the maze</param>
-    ///<param name="map">The maze to select the element from</param>
+    ///<param name="maze">The maze to select the element from</param>
     ///<returns>The cell at the specified index</returns>
     let get_cell (position:int) (maze:MazeType):CellType =
         maze.map.[position]
 
     ///<summary>Gets the cell at the specified index in the given Maze. Index is specified as 1-dimensional.</summary>
     ///<param name="position">The index of the desired element in the maze</param>
-    ///<param name="map">The maze to select the element from</param>
+    ///<param name="maze">The maze to select the element from</param>
     ///<returns>The cell at the specified index</returns>
     let get_bi_cell (x:int) (y:int) (maze:MazeType):CellType = 
         let i= (from_bidim_to_monodim maze.rows maze.cols x y)
@@ -108,9 +112,6 @@ module Maze =
     ///<summary>Routines used in the maze generation process.</summary>
     module Generator =
         open MazeMap
-
-        ///<summary>The seed used for generating random numbers for implementing randomness in the maze generator algorhythm</summary>
-        let SEED = System.Random()
       
         ///<summary>Given a cell map, check if the map has been entirely explored, i.e. all the cells have been visited by the generator algorhythm.</summary>
         ///<param name="map">The cell map which the check is performed on</param>
@@ -284,8 +285,6 @@ module Maze =
 
 
 
-
-
     ///<summary>Creates a new Maze from the given parameters.</summary>
     ///<returns>The maze with the given parameters</returns>
     let create (rows:int) (cols:int) : MazeType =
@@ -301,3 +300,8 @@ module Maze =
     let solve (exp_maze:ExpandedMazeType) : SolutionType = 
         Resolutor.solve exp_maze
         
+    ///<summary>Creates a new Maze from the given parameters.</summary>
+    ///<returns>The maze with the given parameters</returns>
+    let create (rows:int) (cols:int) : MazeType =
+        Generator.generate {map = (MazeMap.generate_map rows cols) ; rows = rows; cols = cols; start = generate_outer_coordinate (rows,cols); finish= generate_outer_coordinate (rows,cols)} 
+
