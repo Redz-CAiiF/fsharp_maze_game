@@ -236,6 +236,14 @@ type system_console_raster (w, h) =
         Console.SetBufferSize (w, h + 1)
         Log.msg "Console info:\n\tBufferWidth = %d\n\tBufferHeight = %d\n\tWindowWidth = %d\n\tWindowHeight = %d\n"
             Console.BufferWidth Console.BufferHeight Console.WindowWidth Console.WindowHeight
+    
+    ///resize console window with the given width and height values
+    static member resize (w : int, h : int) =
+        let w = min w Console.LargestWindowWidth
+        let h = min h (Console.LargestWindowHeight - 1)
+        Console.SetWindowSize (w, h + 1)    // +1 on both to prevent console scrolling down after commit
+        Console.SetBufferSize (w, h + 1)
+        Console.Title <- sprintf "%s (%d x %d)" Config.game_console_title w h
 
     /// Set the cursor position at coordinates (x, y) and set the current colors.
     static member internal at (x, y, fg, ?bg) =

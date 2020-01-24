@@ -54,11 +54,11 @@ type engine (w : int, h : int, ?fps_cap : int, ?flip_queue) =
     do
         assert (flip_queue >= 0)
         Log.msg "initializing engine:\n\twidth=%d height=%d fps=%d\n\tbuffers=%d type=%s" w h fps_cap flip_queue (buffers.[0].GetType().Name)
-        
+    
     /// Get the width of the output console.
-    member val screen_width = w
+    member val screen_width = w with get,set
     /// Get the height of the output console.
-    member val screen_height = h 
+    member val screen_height = h with get,set
 
     /// Register the given sprite so that the engine knows it and renders it each frame according to its z value.
     member __.register_sprite (spr : sprite) =
@@ -144,7 +144,11 @@ type engine (w : int, h : int, ?fps_cap : int, ?flip_queue) =
         timer.Elapsed.RemoveHandler handler
         Log.msg "exiting engine loop."
         
-
+    ///resize the engine window with the given width and height values
+    member this.resize (w : int, h : int) =
+        this.screen_height <- h
+        this.screen_width <- w
+        system_console_raster.resize (w,h)
 
 
         
