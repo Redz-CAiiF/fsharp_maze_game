@@ -20,9 +20,17 @@ let new_interactive_game () =
     let gui = MazeGUI.create 10 30
     let my_update (key : ConsoleKeyInfo) (screen : wronly_raster) (state : MazeGUIType) =
         // TODO: move player, handle moving in the maze and finish the game
-        if key.KeyChar = 'q' then state.engine.resize (50,10)
-        state, false //TODO: add condition to end the game
+        state, key.KeyChar = 'q' //TODO: add condition to end the game
     gui.engine.loop_on_key my_update gui
+    ()
+
+let automatic_resolution () =
+    let gui = MazeGUI.create 3 3
+    let handle_user_interaction (key : ConsoleKeyInfo) (screen : wronly_raster) (state : MazeGUIType) =
+        Log.msg "handle_user_interaction"
+        if key.KeyChar = 's' then  ignore (MazeGUI.display_solution (state))
+        state, key.KeyChar = 'q' //TODO: add condition to end the game
+    gui.engine.loop_on_key handle_user_interaction gui
     ()
 
 let start_menu () =       
@@ -30,11 +38,13 @@ let start_menu () =
 
     let handle_menu_selection (key : ConsoleKeyInfo) (screen : wronly_raster) (st : int) =
         let st =
+            Log.msg "handle_menu_selection"
             //handle menu selection: run the corresponding routine to start a different game mode
             match key.KeyChar with 
             | '1' -> new_interactive_game ()    //Interactive
                      1
-            | '2' -> 2                          //Automatic Resolution
+            | '2' -> automatic_resolution ()    //Automatic Resolution
+                     2                          
             | '3' -> 3                          //Dark Labyrinth
             | _   ->    0                       //Default: invalid selection
         st, key.KeyChar = 'q'
