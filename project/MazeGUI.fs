@@ -1,4 +1,16 @@
-﻿namespace FMaze.GUI
+﻿(*
+*  FMaze - A .NET functional console game
+*
+*  (C) 2020
+*  Lorenzo Donatelli  (https://github.com/whitedemond)
+*  Matteo Agnoletto   (https://github.com/EPMatt)
+*  Matteo Libralesso  (https://github.com/Redz-CAiiF)
+*  
+*  For licensing conditions related to this project, see LICENSE
+*
+*)
+
+namespace FMaze.GUI
 open FMaze.Core
 open LabProg2019.Gfx
 open LabProg2019.Prelude

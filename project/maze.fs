@@ -1,4 +1,16 @@
-﻿///The Core namespace includes all the related modules to logically handle a Maze game and its components.
+﻿(*
+*  FMaze - A .NET functional console game
+*
+*  (C) 2020
+*  Lorenzo Donatelli  (https://github.com/whitedemond)
+*  Matteo Agnoletto   (https://github.com/EPMatt)
+*  Matteo Libralesso  (https://github.com/Redz-CAiiF)
+*  
+*  For licensing conditions related to this project, see LICENSE
+*
+*)
+
+///The Core namespace includes all the related modules to logically handle a Maze game and its components.
 namespace FMaze.Core
 
 ///The data structure representing a maze instance.

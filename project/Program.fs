@@ -1,10 +1,19 @@
 ﻿(*
+*  FMaze - A .NET functional console game
+*
+*  (C) 2020
+*  Lorenzo Donatelli  (https://github.com/whitedemond)
+*  Matteo Agnoletto   (https://github.com/EPMatt)
+*  Matteo Libralesso  (https://github.com/Redz-CAiiF)
+*  
+*  For licensing conditions related to this project, see LICENSE
+*
+*)
+
+(*
 * LabProg2019 - Progetto di Programmazione a.a. 2019-20
 * Program.fs - game entry point
 * (C) 2019 Alvise Spano' @ Universita' Ca' Foscari di Venezia
-* 
-* (L) 2019 Libralesso Matteo / Agnoletto Matteo -> GNU General Public License v3.0
-*   (C) 2007 Free Software Foundation
 *)
 
 module FMaze.Program
