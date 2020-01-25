@@ -150,7 +150,8 @@ type engine (w : int, h : int, ?fps_cap : int, ?flip_queue) =
         this.screen_width <- w
         system_console_raster.resize (w,h)
 
-
-        
-
+    ///clear the screen and unregister sprites
+    member this.clear () =
+        con.clear
+        sprites <- []
 
