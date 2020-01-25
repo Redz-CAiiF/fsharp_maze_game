@@ -2,6 +2,9 @@
 * LabProg2019 - Progetto di Programmazione a.a. 2019-20
 * Program.fs - game entry point
 * (C) 2019 Alvise Spano' @ Universita' Ca' Foscari di Venezia
+* 
+* (L) 2019 Libralesso Matteo / Agnoletto Matteo -> GNU General Public License v3.0
+*   (C) 2007 Free Software Foundation
 *)
 
 module FMaze.Program

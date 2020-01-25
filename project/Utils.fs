@@ -42,17 +42,11 @@ module Utils=
     ///<returns><c>true</c> the expanded coordinate</returns>
     let expand__coordinate_value (x:int):int = x*2+1
 
-
-    let replace index new_el lst = 
-        let rec aux current l =
-            match l with 
-                [] -> failwith "index out of bounds!"
-                | x::xs -> if current = index then new_el::xs else x::aux (current+1) xs
-        aux 0 lst
-
-    
-    let to_array (l:bool list) : bool[] = 
-               let r = Array.create (List.length l) false
-               for i=0  to (List.length l)-1 do 
-                    r.[i]<- l.[i]
-               r
+    ///<summary>Replace the given element at the specified coordinate in the list</summary>
+    ///<param name="index">The position of the element to replace</param>
+    ///<param name="new_el">The new element</param>
+    ///<param name="lst">The list</param>
+    ///<returns>the list with the replaced element</returns>
+    let replace (index:int) (new_el:'a) (lst:'a list) = 
+        if lst.Length <= index then failwith "index out of bounds!"
+        else lst.[..(index-1)]@[new_el]@lst.[(index+1)..]
