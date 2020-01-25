@@ -105,7 +105,7 @@ module Maze =
         let fixed_coord = if SEED.Next(100) < 50 then 0 else (if is_row_fixed then rows-1 else cols-1)
         //randomize other coordinate and return
         if is_row_fixed then (fixed_coord,SEED.Next(cols)) else (SEED.Next(rows),fixed_coord)
-
+    
     
 
 
@@ -217,6 +217,10 @@ module Maze =
             ///<returns>A boolean rappresentation of the provided maze</returns>
             let map_to_bool (maze:MazeType) = 
         
+                ///<summary>It generate a default map, with all the borders as walls and all the odd coordinates as paths</summary>
+                ///<param name="rows">The rows of the maze.</param>
+                ///<param name="cols">The cols of the maze.</param>
+                ///<returns>A boolean rappresentation of an expanded default maze with no connections between 2 paths</returns>
                 let generate_default_map (rows:int) (cols:int):bool list = 
                     let mutable res = []
                     for x in 0..(rows-1) do
@@ -227,7 +231,10 @@ module Maze =
     
                         res <- row@res
                     res
-    
+                
+                ///<summary>It fill a default expanded map with the paths of a generated maze</summary>
+                ///<param name="maze">A generated maze.</param>
+                ///<returns>A boolean rappresentation of a maze</returns>
                 let set_maze (maze:MazeType) = 
                     let mutable res = generate_default_map (maze.rows |> Utils.expand__coordinate_value) (maze.cols |> Utils.expand__coordinate_value)
                     for index in 0..(maze.map.Length-1) do
@@ -323,5 +330,5 @@ module Maze =
     ///<summary>Creates a new Maze from the given parameters.</summary>
     ///<returns>The maze with the given parameters</returns>
     let create (rows:int) (cols:int) : MazeType =
-        Generator.generate {map = (MazeMap.generate_map rows cols) ; rows = rows; cols = cols; start = generate_outer_coordinate (rows,cols); finish= generate_outer_coordinate (rows,cols)} 
+        Generator.generate {map = (MazeMap.generate_map rows cols) ; rows = rows; cols = cols; start = generate_outer_coordinate (rows,cols); finish= generate_outer_coordinate (rows,cols)}
 

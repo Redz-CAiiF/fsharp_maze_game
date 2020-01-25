@@ -2,13 +2,13 @@
 namespace FMaze.Core
 ///<summary>Defines walls for a cell. Values: OPEN/CLOSED</summary>
 type WallsType = {
-    ///Open/Closed status for the cell's top wall
+    ///<summary>Open/Closed status for the cell's top wall</summary>
     top:bool;
-    ///Open/Closed status for the cell's right wall
+    ///<summary>Open/Closed status for the cell's right wall</summary>
     right:bool;
-    ///Open/Closed status for the cell's bottom wall
+    ///<summary>Open/Closed status for the cell's bottom wall</summary>
     bottom:bool;
-    ///Open/Closed status for the cell's left wall
+    ///<summary>Open/Closed status for the cell's left wall</summary>
     left:bool
     }
 

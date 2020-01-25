@@ -3,9 +3,9 @@ namespace FMaze.Core
 
 ///The cell data structure.
 type CellType = {
-    ///walls for the cell
+    ///<summary>walls for the cell</summary>
     walls:WallsType; 
-    ///whether the cell was visited by generator algorhythm or not
+    ///<summary>whether the cell was visited by generator algorhythm or not</summary>
     visited:bool
     }
 
