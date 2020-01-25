@@ -15,6 +15,10 @@ let TITLE_X = 20
 let TITLE_Y = 4
 let COPYRIGHT_NOTICE = "(C) 2020 Lorenzo Donatelli, Matteo Agnoletto, Matteo Libralesso"
 
+//maze configuration
+let MAZE_ROWS = 20
+let MAZE_COLS = 30
+
 let filled_pixel_char = '*'
 let wall_pixel_char = '|'
 let empty_pixel_char = ' '

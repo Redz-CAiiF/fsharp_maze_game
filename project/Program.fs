@@ -30,40 +30,9 @@ open System.IO.Pipes
 open System.IO
 open FMaze.GUI
 
-let new_interactive_game () =
-    let gui = MazeGUI.create 10 30
-    let my_update (key : ConsoleKeyInfo) (screen : wronly_raster) (state : MazeGUIType) =
-        // TODO: move player, handle moving in the maze and finish the game
-        state, key.KeyChar = 'q' //TODO: add condition to end the game
-    gui.engine.loop_on_key my_update gui
-    ()
-
-let automatic_resolution () =
-    let gui = MazeGUI.create 3 3
-    let handle_user_interaction (key : ConsoleKeyInfo) (screen : wronly_raster) (state : MazeGUIType) =
-        Log.msg "handle_user_interaction"
-        if key.KeyChar = 's' then  ignore (MazeGUI.display_solution (state))
-        state, key.KeyChar = 'q' //TODO: add condition to end the game
-    gui.engine.loop_on_key handle_user_interaction gui
-    ()
-
-let start_menu () =       
+let render_menu () : Engine.engine =
     let engine = new Engine.engine (MENU_WIDTH, MENU_HEIGHT)
 
-    let handle_menu_selection (key : ConsoleKeyInfo) (screen : wronly_raster) (st : int) =
-        let st =
-            Log.msg "handle_menu_selection"
-            //handle menu selection: run the corresponding routine to start a different game mode
-            match key.KeyChar with 
-            | '1' -> new_interactive_game ()    //Interactive
-                     1
-            | '2' -> automatic_resolution ()    //Automatic Resolution
-                     2                          
-            | '3' -> 3                          //Dark Labyrinth
-            | _   ->    0                       //Default: invalid selection
-        st, key.KeyChar = 'q'
-
-    //render the menu
     let b = pixel.create(''', Color.Black)
     let menu = engine.create_and_register_sprite (image.rectangle (MENU_WIDTH,MENU_HEIGHT, b),0, 0, 0)
     menu.draw_text("oooooooooooo ooo        ooooo", TITLE_X , TITLE_Y, Color.White)
@@ -80,7 +49,44 @@ let start_menu () =
     menu.draw_text("3 : Dark Labyrinth", TITLE_X,  TITLE_Y+16, Color.Cyan)
     menu.draw_text("Q : uscita", TITLE_X , TITLE_Y+18, Color.Yellow)
     menu.draw_text(COPYRIGHT_NOTICE, TITLE_X , TITLE_Y+21, Color.White)
-   
+    engine
+
+let new_interactive_game () =
+    let gui = MazeGUI.create MAZE_ROWS MAZE_COLS
+    let my_update (key : ConsoleKeyInfo) (screen : wronly_raster) (state : MazeGUIType) =
+        // TODO: move player, handle moving in the maze and finish the game
+        state, key.KeyChar = 'q' //TODO: add condition to end the game
+    gui.engine.loop_on_key my_update gui
+    ()
+
+let automatic_resolution () =
+    let gui = MazeGUI.create MAZE_ROWS MAZE_COLS
+    let handle_user_interaction (key : ConsoleKeyInfo) (screen : wronly_raster) ((state : MazeGUIType) , (lock_input : bool)) =
+        if key.KeyChar = 's' && not lock_input then ignore (MazeGUI.display_solution (state))
+        elif key.KeyChar = 'q' then state.engine.clear () //clear the screen
+        (state, key.KeyChar='s'), key.KeyChar = 'q'
+    gui.engine.loop_on_key handle_user_interaction (gui,false)
+    ()
+
+let start_menu () =     
+    let handle_menu_selection (key : ConsoleKeyInfo) (screen : wronly_raster) (st : int) =
+        let st =
+            Log.msg "handle_menu_selection"
+            //handle menu selection: run the corresponding routine to start a different game mode
+            match key.KeyChar with 
+            | '1' -> new_interactive_game ()    //Interactive
+                     ignore (render_menu ())
+                     1
+            | '2' -> automatic_resolution ()    //Automatic Resolution
+                     ignore (render_menu ())
+                     2                          
+            | '3' -> engine.clear ()
+                     3                          //Dark Labyrinth
+            | _   ->    0                       //Default: invalid selection
+        st, key.KeyChar = 'q'
+
+    //render the menu
+    let engine = render_menu ()
     //loop on menu selection
     engine.loop_on_key handle_menu_selection 0
 

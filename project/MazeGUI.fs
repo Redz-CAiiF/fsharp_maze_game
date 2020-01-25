@@ -28,8 +28,6 @@ type MazeGUIType = {
     maze_sprite: sprite
     ///<summary>the sprite for the player.<\summary>
     player_sprite: sprite
-    ///the sprite for the solution
-    //solution_sprite: sprite
 }
 
 ///<summary>The <c>MazeGUI</c> module contains functions to operate on <code>MazeGUIType</code> instances. It exposes a constructor for generating a maze game with a graphical user interface.</summary>
@@ -66,10 +64,12 @@ module MazeGUI =
         List.iter (fun e -> pxs.[e] <- PATH_PIXEL) solution.path
         new image (solution.map_cols,solution.map_rows,pxs)
 
+
     let display_solution (maze : MazeGUIType) :unit =
-        let sol =Maze.Resolutor.solve maze.expanded_maze    //test:solve the maze
-        //ignore (maze.engine.create_and_register_sprite(solution_to_image (sol),MAZE_X_OFFSET,MAZE_Y_OFFSET,10)) //this would be the correct render
-        ignore (maze.engine.create_and_register_sprite(image.rectangle(5,5,PATH_PIXEL),MAZE_X_OFFSET,MAZE_Y_OFFSET,10)) //render a sample rectangle just to check the engine is working
+        //solve maze and store the solution
+        let sol =Maze.Resolutor.solve maze.expanded_maze
+        //render the path
+        ignore (maze.engine.create_and_register_sprite(solution_to_image (sol),MAZE_X_OFFSET,MAZE_Y_OFFSET,10)) 
         
 
     ///<summary>Creates a new MazeGUI from the given parameters. It generates and initializes all the necessary items to handle a graphical maze game.</summary>
