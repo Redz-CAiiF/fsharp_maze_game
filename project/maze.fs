@@ -319,7 +319,7 @@ module Maze =
                     //se ci sono vicini
                     if unvisited_neighbours.Length > 0 then
                         //prendo un vicino a caso
-                        let next = unvisited_neighbours.[SEED.Next(0,unvisited_neighbours.Length)]
+                        let next = unvisited_neighbours.[0]
                         //aggiungo current a path
                         let n_path = current::path
                         //richiamo la funzione con il nuovo path, la nuova mappa, start, il nuovo current e exit
@@ -329,7 +329,7 @@ module Maze =
                         //tolgo un elemento da path e lo setto come current
                         let next::n_path = path
                         //e richiamo la funzione con il nuovo path, la nuova mappa, start, il nuovo current e exit
-                        aux n_path maze rows cols next exit
+                        aux n_path n_maze rows cols next exit
 
             //all inizio current = start
             let start = from_bidim_to_monodim expanded_map.rows expanded_map.cols (fst expanded_map.start) (snd expanded_map.start)
