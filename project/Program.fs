@@ -16,10 +16,10 @@
 * (C) 2019 Alvise Spano' @ Universita' Ca' Foscari di Venezia
 *)
 
-
-
 module FMaze.Program
 
+open FMaze.Core.Utils
+open FMaze.Core
 open System
 open System.Diagnostics
 open LabProg2019.Globals
@@ -51,11 +51,31 @@ let render_menu () : Engine.engine =
     menu.draw_text(COPYRIGHT_NOTICE, TITLE_X , TITLE_Y+21, Color.White)
     engine
 
+let winner (engine:Engine.engine) =
+   let b = pixel.create(''', Color.Blue,Color.DarkBlue )
+   let wineer = engine.create_and_register_sprite (image.rectangle (15,15, b,b),5,15, 5)
+   wineer.draw_text("    ########## ",10,10, Color.Yellow,Color.Magenta)
+   wineer.draw_text("    #VICTORY!#   ",15,11, Color.Yellow,Color.Magenta)
+   wineer.draw_text("    ########## ",15,17, Color.Yellow,Color.Magenta)
+
+
 let new_interactive_game () =
     let gui = MazeGUI.create MAZE_ROWS MAZE_COLS
     let my_update (key : ConsoleKeyInfo) (screen : wronly_raster) (state : MazeGUIType) =
-        // TODO: move player, handle moving in the maze and finish the game
-        state, key.KeyChar = 'q' //TODO: add condition to end the game
+        let dx, dy =
+         match key.KeyChar with 
+          |'w' -> 0, -1
+          |'a'->  -1, 0
+          |'d' ->  1 ,0
+          |'s' ->  0, 1
+          | _ ->   0, 0
+        let new_player_position =
+            if (are_coordinates_valid state.expanded_maze.rows state.expanded_maze.cols ((fst state.player_position)+dy) ((snd state.player_position)+dx)) && (state.expanded_maze.map.[from_bidim_to_monodim state.expanded_maze.rows state.expanded_maze.cols ((fst state.player_position)+dy) ((snd state.player_position)+dx)] = Walls.OPEN ) 
+                then  state.player_sprite.move_by(dx,dy) 
+                      ((fst state.player_position)+dy),((snd state.player_position)+dx)
+            else state.player_position
+        if(state.expanded_maze.finish = state.player_position) then winner state.engine else ()
+        {state with player_position = new_player_position}, key.KeyChar = 'q' //TODO: add condition to end the game
     gui.engine.loop_on_key my_update gui
     ()
 
