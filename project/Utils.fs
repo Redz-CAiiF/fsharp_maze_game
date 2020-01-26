@@ -59,6 +59,6 @@ module Utils=
     ///<param name="new_el">The new element</param>
     ///<param name="lst">The list</param>
     ///<returns>the list with the replaced element</returns>
-    let replace (index:int) (new_el:'a) (lst:'a list) = 
+    let replace (index:int) (new_el:'a) (lst:'a list): 'a list = 
         if lst.Length <= index then failwith "index out of bounds!"
         else lst.[..(index-1)]@[new_el]@lst.[(index+1)..]

@@ -64,14 +64,6 @@ module Maze =
         ///<returns>A new map of <code>rows</code> rows and <code>cols</code> columns whose elements are <code>CellType</code> instances initialized to default value.</returns>
         let generate_map (rows:int) (cols:int) =
             List.init (rows*cols) (fun i -> Cell.ERROR_CELL)
-
-        ///<summary>Replace the cell at the given index in the cell list with the new given cell instance.</summary>
-        ///<param name="position">Index of the cell to replace</param>
-        ///<param name="cell">The new cell to replace in the map</param>
-        ///<param name="map">The cell map to operate on</param>
-        ///<returns>The map with the new replaced cell.</returns>
-        let replace_cell (position:int) (cell:'a) (map: 'a list): 'a list = 
-            map.[..(position-1)]@[cell]@map.[(position+1)..]
                
         ///<summary>Given a cell find the index of that cell in the given map.</summary>
         ///<param name="cell">The new cell to look for in the map</param>
@@ -96,13 +88,13 @@ module Maze =
             let current_cell = map.[current]
             let next_cell = map.[next]
             if on_same_row && (c_y = (n_y-1)) then
-                replace_cell current {current_cell with walls= {current_cell.walls with right=Walls.OPEN}} (replace_cell next {next_cell with walls= {next_cell.walls with left=Walls.OPEN}} map)
+                Utils.replace current {current_cell with walls= {current_cell.walls with right=Walls.OPEN}} (Utils.replace next {next_cell with walls= {next_cell.walls with left=Walls.OPEN}} map)
             elif on_same_row && (c_y = (n_y+1)) then
-                replace_cell current {current_cell with walls= {current_cell.walls with left=Walls.OPEN}} (replace_cell next {next_cell with walls= {next_cell.walls with right=Walls.OPEN}} map)
+                Utils.replace current {current_cell with walls= {current_cell.walls with left=Walls.OPEN}} (Utils.replace next {next_cell with walls= {next_cell.walls with right=Walls.OPEN}} map)
             elif on_same_column && (c_x = (n_x-1)) then
-                replace_cell current {current_cell with walls= {current_cell.walls with bottom=Walls.OPEN}} (replace_cell next {next_cell with walls= {next_cell.walls with top=Walls.OPEN}} map)
+                Utils.replace current {current_cell with walls= {current_cell.walls with bottom=Walls.OPEN}} (Utils.replace next {next_cell with walls= {next_cell.walls with top=Walls.OPEN}} map)
             elif on_same_column && (c_x = (n_x+1)) then
-                replace_cell current {current_cell with walls= {current_cell.walls with top=Walls.OPEN}} (replace_cell next {next_cell with walls= {next_cell.walls with bottom=Walls.OPEN}} map)
+                Utils.replace current {current_cell with walls= {current_cell.walls with top=Walls.OPEN}} (Utils.replace next {next_cell with walls= {next_cell.walls with bottom=Walls.OPEN}} map)
             else
                 map
 
@@ -188,7 +180,7 @@ module Maze =
         let recursive_backtracker (maze:MazeType) (start: int):MazeType = 
             let rec aux (stack:int list) (maze:MazeType) (current:int):MazeType =
                 let current_cell = Cell.set_visited (get_cell current maze) true //just visited the cell
-                let map = replace_cell (current) (current_cell) maze.map        //updated cell map
+                let map = Utils.replace (current) (current_cell) maze.map        //updated cell map
                 if not (is_explored map) then
                     let unvisited_neighbours = get_unvisited_neighbours current maze //get neighbours of current cell
                     let unvisited_neighbours_number = unvisited_neighbours.Length
@@ -271,7 +263,7 @@ module Maze =
             let map = map_to_bool maze;
             {
                 //map: the converted bool map with the outer start cell open and the outer finish cell open
-                map =  replace (from_bidim_to_monodim (expand__coordinate_value maze.rows) (expand__coordinate_value maze.cols) sr sc) Walls.OPEN (replace (from_bidim_to_monodim (expand__coordinate_value maze.rows) (expand__coordinate_value maze.cols) fr fc) Walls.OPEN map)
+                map =  Utils.replace (from_bidim_to_monodim (expand__coordinate_value maze.rows) (expand__coordinate_value maze.cols) sr sc) Walls.OPEN (Utils.replace (from_bidim_to_monodim (expand__coordinate_value maze.rows) (expand__coordinate_value maze.cols) fr fc) Walls.OPEN map)
                 rows = (maze.rows |> Utils.expand__coordinate_value);
                 cols = (maze.cols |> Utils.expand__coordinate_value);
                 start= sr,sc
@@ -313,7 +305,7 @@ module Maze =
                     current::path
                 else
                     //setto sulla mappa current come visitato, cioè false
-                    let n_maze = replace_cell current true maze
+                    let n_maze = Utils.replace current true maze
                     //trovo i vicini non visitati di current
                     let unvisited_neighbours = get_unvisited_neighbours current n_maze rows cols
                     //se ci sono vicini
