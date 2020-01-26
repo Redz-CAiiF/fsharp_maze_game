@@ -32,8 +32,7 @@ open FMaze.GUI
 
 let render_menu () : Engine.engine =
     let engine = new Engine.engine (MENU_WIDTH, MENU_HEIGHT)
-    let b = pixel.create(''', Color.Black)
-    let menu = engine.create_and_register_sprite (image.rectangle (MENU_WIDTH,MENU_HEIGHT, b),0, 0, 0)
+    let menu = engine.create_and_register_sprite (image.rectangle (MENU_WIDTH,MENU_HEIGHT, MazeGUI.BLACK_PIXEL),0, 0, 0)
     menu.draw_text("oooooooooooo ooo        ooooo", TITLE_X , TITLE_Y, Color.White)
     menu.draw_text(" `888'     `8 `88.       .888'", TITLE_X , TITLE_Y+1, Color.White)
     menu.draw_text("  888          888b     d'888   .oooo.     oooooooo  .ooooo.", TITLE_X , TITLE_Y+2, Color.White)
@@ -51,6 +50,7 @@ let render_menu () : Engine.engine =
     engine
 
 
+///prompt user to select a difficulty for the required game mode, and start the game
 let select_difficulty (engine:Engine.engine) (start_game: int -> unit) : unit =
     let diff_banner = GUI.Utils.render_banner engine ["Select game difficulty";"";"1: Easy";"2: Medium";"3: Difficult";"4: Impossible"]
     let handle_menu_selection (key : ConsoleKeyInfo) (screen : wronly_raster) (st : bool) =
@@ -71,7 +71,7 @@ let winner (engine:Engine.engine) (maze_rows:int) (maze_cols:int) :unit =
      (GUI.Utils.render_banner engine ["Victory!";"";"Press Q to go back to main menu"]) |> ignore
      ()
 
-
+///initialize an interactive game with the given difficulty
 let mode_interactive (difficulty:int) =
     let gui = MazeGUI.create_with_difficulty (difficulty)
     let upper_text = gui.engine.create_and_register_sprite (image.rectangle (MENU_WIDTH,MENU_HEIGHT, MazeGUI.EMPTY_PIXEL),1, 1, 1)
@@ -113,6 +113,30 @@ let mode_interactive (difficulty:int) =
     gui.engine.loop_on_key handle_user_interaction (gui,false)
     ()
 
+///given the current game instance, uncover an area of the maze by the given range, by emptying pixels in the given mask sprite
+let uncover_mask (mask:sprite) (maze: MazeGUIType) (range:int) :sprite =
+    let player_row, player_column = maze.player_position
+    let new_pxs = mask.pixels
+    for i=player_row-range to player_row+range do
+        for j = player_column-range to player_column + range do
+            if are_coordinates_valid maze.expanded_maze.rows maze.expanded_maze.cols i j then
+               new_pxs.[from_bidim_to_monodim maze.expanded_maze.rows maze.expanded_maze.cols i j] <- MazeGUI.EMPTY_PIXEL
+    let new_mask = maze.engine.create_and_register_sprite (new image(maze.expanded_maze.cols, maze.expanded_maze.rows, new_pxs), MazeGUI.MAZE_X_OFFSET, MazeGUI.MAZE_Y_OFFSET, 3)
+    //unregister old mask
+    maze.engine.unregister_sprite mask
+    //return new mask
+    new_mask
+
+///completely uncover the given mask.
+let uncover_all (mask:sprite) (maze: MazeGUIType) :sprite =
+    //create a new mask from scratch, completely empty
+    let new_mask = maze.engine.create_and_register_sprite (new image(maze.expanded_maze.cols, maze.expanded_maze.rows, MazeGUI.EMPTY_PIXEL), MazeGUI.MAZE_X_OFFSET, MazeGUI.MAZE_Y_OFFSET, 3)
+    //unregister old mask
+    maze.engine.unregister_sprite mask
+    //return new mask
+    new_mask
+
+///initialize an automatic solver demonstration with the given difficulty
 let mode_automatic_resolution (difficulty:int) =
     let gui = MazeGUI.create_with_difficulty difficulty
     let upper_text = gui.engine.create_and_register_sprite (image.rectangle (MENU_WIDTH,MENU_HEIGHT, MazeGUI.EMPTY_PIXEL),1, 1, 1)
@@ -133,8 +157,17 @@ let mode_automatic_resolution (difficulty:int) =
     gui.engine.loop_on_key handle_user_interaction (gui,false)
     ()
 
-let mode_dark_labyrinth (difficulty:int) = //TODO: Implement dark labyrinth
-    let gui = MazeGUI.create_with_difficulty difficulty
+///initialize a dark labyrinth game with the given difficulty
+let mode_dark_labyrinth (difficulty:int) =
+    let gui = MazeGUI.create_with_difficulty (difficulty)
+    let mutable mask = gui.engine.create_and_register_sprite (image.rectangle (gui.expanded_maze.cols, gui.expanded_maze.rows, MazeGUI.BLACK_PIXEL,MazeGUI.BLACK_PIXEL),MazeGUI.MAZE_X_OFFSET, MazeGUI.MAZE_Y_OFFSET, 3)
+    mask <- uncover_mask mask gui PLAYER_VISIBILITY_RANGE
+    let upper_text = gui.engine.create_and_register_sprite (image.rectangle (MENU_WIDTH,MENU_HEIGHT, MazeGUI.EMPTY_PIXEL),1, 1, 1)
+    upper_text.draw_text("Dark Labyrinth Mode:",0,0,Color.White)
+    upper_text.draw_text("You're the red dot. Exit the maze!",0,1,Color.White)
+    upper_text.draw_text("W: up , A: left , S: down , D: right",0,2,Color.White)
+    upper_text.draw_text("R: solve maze , Q: main menu",0,3,Color.White)
+
     let handle_user_interaction (key : ConsoleKeyInfo) (screen : wronly_raster) ((state : MazeGUIType), (lock_input : bool)) =
         let dx, dy =
             match key.KeyChar,lock_input with 
@@ -143,24 +176,34 @@ let mode_dark_labyrinth (difficulty:int) = //TODO: Implement dark labyrinth
               | 'a',_ ->  -1, 0
               | 'd',_ ->  1, 0
               | 's',_ ->  0, 1
+              | 'r',_ ->  
+                          ignore (MazeGUI.display_solution (state)) //display solution on the screen
+                          mask <- uncover_all mask state      //remove the mask and show the whole maze
+                          upper_text.draw_text("Q: main menu                            ",0,2,Color.White)
+                          upper_text.draw_text("                                        ",0,3,Color.White)
+                          0, 0
               | k, _ when k = QUIT_KEY ->
                           state.engine.clear () //clear the screen before exiting
                           0, 0
-              | _ ->   0, 0
+              | _ ->      0, 0
         //define new player position: move only if new coordinates are valid
         let new_player_position =
             if are_coordinates_valid state.expanded_maze.rows state.expanded_maze.cols ((fst state.player_position)+dy) ((snd state.player_position)+dx) && state.expanded_maze.map.[from_bidim_to_monodim state.expanded_maze.rows state.expanded_maze.cols ((fst state.player_position)+dy) ((snd state.player_position)+dx)] = Walls.OPEN then
-                state.player_sprite.move_by(dx,dy) 
+                state.player_sprite.move_by(dx,dy)
+                mask <- uncover_mask mask {gui with player_position= ((fst state.player_position)+dy,(snd state.player_position)+dx)} PLAYER_VISIBILITY_RANGE
                 (fst state.player_position)+dy,(snd state.player_position)+dx
             else state.player_position
         //check if reached the end
         if state.expanded_maze.finish = state.player_position  && not lock_input then
             winner state.engine state.expanded_maze.rows state.expanded_maze.cols //show victory banner
             ({state with player_position = new_player_position},true), key.KeyChar = QUIT_KEY    //return with lock_input enabled: do not accept further commands
+        elif key.KeyChar = 'r' then
+            ({state with player_position = new_player_position},true), key.KeyChar = QUIT_KEY    //return with lock_input enabled: do not accept further commands
         else
-            ({state with player_position = new_player_position},false), key.KeyChar = QUIT_KEY  //continue playing
+            ({state with player_position = new_player_position},lock_input || false), key.KeyChar = QUIT_KEY  //continue playing
     gui.engine.loop_on_key handle_user_interaction (gui,false)
     ()
+    
 
 
 let start_menu () =     

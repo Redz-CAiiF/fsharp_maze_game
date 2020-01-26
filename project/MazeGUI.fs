@@ -43,6 +43,8 @@ module MazeGUI =
     let PATH_PIXEL = pixel.create('@',Color.Green, Color.Green)
     ///an empty and transparent pixel
     let EMPTY_PIXEL = pixel.create(' ', Color.Black)
+    ///a black filled pixel
+    let BLACK_PIXEL = pixel.create(''', Color.Black)
     ///the image which is used to represent the player's position in the graphical user interface
     let PLAYER_IMAGE = image.rectangle(1,1,pixel.create('@',Color.Red,Color.Red))
     //offsets used for displaying the maze in the engine

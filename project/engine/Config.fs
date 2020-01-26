@@ -17,6 +17,7 @@ let COPYRIGHT_NOTICE = "(C) 2020 Lorenzo Donatelli, Matteo Agnoletto, Matteo Lib
 
 //maze configuration
 let MAZE_DIMENSIONS = [(4,15);(10,20);(20,40);(25,60)] //different dimensions for different difficulties
+let PLAYER_VISIBILITY_RANGE = 3     //player visibility in dark labyrinth mode. defines an nxn square around the player
 
 //keys
 let QUIT_KEY = 'q'  //used to quit a window and go back to the previous one in any point in the application

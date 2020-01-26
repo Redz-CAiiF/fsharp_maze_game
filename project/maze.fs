@@ -110,7 +110,16 @@ module Maze =
         //randomize other coordinate and return
         if is_row_fixed then (fixed_coord,SEED.Next(cols)) else (SEED.Next(rows),fixed_coord)
     
-    
+    ///<summary>Gets coordinates of a random outer cell for the given maze dimensions, different from the given one. An outer cell is defined as a cell which is on the sides of the maze (on the map limit).</summary>
+    ///<param name="rows">Number of rows the maze which the outer random coordinates must be generated is made up of.</param>
+    ///<param name="cols">Number of columns the maze which the outer random coordinates must be generated is made up of.</param>
+    ///<param name="coord">The coordinate which the newly generated coordinate must be different from.</param>
+    ///<returns>A pair of int representing coordinates of a random outer cell of the given maze dimensions.</returns>
+    let rec generate_different_outer_coordinate (rows:int,cols:int) (coord:int*int): (int*int) =
+        let generated = generate_outer_coordinate (rows,cols)
+        if generated = coord then
+            generate_different_outer_coordinate (rows,cols) coord 
+        else generated
 
 
     ///<summary>Gets the cell at the specified index in the given Maze. Index is specified as 1-dimensional.</summary>
@@ -334,5 +343,6 @@ module Maze =
     ///<summary>Creates a new Maze from the given parameters.</summary>
     ///<returns>The maze with the given parameters</returns>
     let create (rows:int) (cols:int) : MazeType =
-        Generator.generate {map = (MazeMap.generate_map rows cols) ; rows = rows; cols = cols; start = generate_outer_coordinate (rows,cols); finish= generate_outer_coordinate (rows,cols)}
+        let start =  generate_outer_coordinate (rows,cols)
+        Generator.generate {map = (MazeMap.generate_map rows cols) ; rows = rows; cols = cols; start = start; finish= generate_different_outer_coordinate (rows,cols) start}
 
