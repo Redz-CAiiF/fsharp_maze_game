@@ -18,22 +18,24 @@ open LabProg2019.Engine
 
 ///<summary>The data structure representing an instance of a maze game rendered with the given Engine.<\summary>
 type MazeGUIType = {
-    ///<summary>the data structure representing the game logic.<\summary>
+    ///the data structure representing the game logic.
     logic: MazeType
-    ///<summary>the data structure representing the expanded maze<\summary>
+    ///the data structure representing the expanded maze
     expanded_maze: ExpandedMazeType
-    ///<summary>the engine responsible for rendering the graphical user interface for the game.<\summary>
+    ///the engine responsible for rendering the graphical user interface for the game.
     engine: engine
-    ///<summary>the sprite for the maze. Contains an image with pixels representing the current maze 2D structure.<\summary>
+    ///the sprite for the maze. Contains an image with pixels representing the current maze 2D structure.
     maze_sprite: sprite
-    ///<summary>the sprite for the player.<\summary>
+    ///the sprite for the player.
     player_sprite: sprite
+    ///current player position
+    player_position: (int*int)
 }
 
 ///<summary>The <c>MazeGUI</c> module contains functions to operate on <code>MazeGUIType</code> instances. It exposes a constructor for generating a maze game with a graphical user interface.</summary>
 module MazeGUI = 
 
-    ///<summary>the pixel value which is used to represent walls in the graphical user interface.<\summary>
+    ///the pixel value which is used to represent walls in the graphical user interface.
     let WALL_PIXEL = pixel.create ('@',Color.White, Color.White)
     ///the pixel value which is used to highlight the correct path in the graphical user interface
     let PATH_PIXEL = pixel.create('@',Color.Green, Color.Green)
@@ -86,4 +88,5 @@ module MazeGUI =
             engine=engine;
             maze_sprite=engine.create_and_register_sprite(to_image expanded_maze, MAZE_X_OFFSET,MAZE_Y_OFFSET,0);
             player_sprite=engine.create_and_register_sprite(PLAYER_IMAGE, snd expanded_maze.start+MAZE_X_OFFSET, fst expanded_maze.start+MAZE_Y_OFFSET ,0);
+            player_position = expanded_maze.start
         }
