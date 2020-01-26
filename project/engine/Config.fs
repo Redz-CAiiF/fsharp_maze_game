@@ -16,14 +16,12 @@ let TITLE_Y = 4
 let COPYRIGHT_NOTICE = "(C) 2020 Lorenzo Donatelli, Matteo Agnoletto, Matteo Libralesso"
 
 //maze configuration
-let MAZE_ROWS = 20
-let MAZE_COLS = 30
+let MAZE_DIMENSIONS = [(4,15);(10,20);(20,40);(25,60)] //different dimensions for different difficulties
 
 //keys
 let QUIT_KEY = 'q'  //used to quit a window and go back to the previous one in any point in the application
 
 let filled_pixel_char = '*'
-let wall_pixel_char = '|'
 let empty_pixel_char = ' '
 
 let default_flip_queue = 2  // double buffering

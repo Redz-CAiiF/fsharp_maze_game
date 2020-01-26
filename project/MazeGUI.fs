@@ -16,6 +16,7 @@ open FMaze.Core
 open LabProg2019.Gfx
 open LabProg2019.Prelude
 open LabProg2019.Engine
+open LabProg2019
 
 ///<summary>The data structure representing an instance of a maze game rendered with the given Engine.<\summary>
 type MazeGUIType = {
@@ -91,3 +92,6 @@ module MazeGUI =
             player_sprite=engine.create_and_register_sprite(PLAYER_IMAGE, snd expanded_maze.start+MAZE_X_OFFSET, fst expanded_maze.start+MAZE_Y_OFFSET ,0);
             player_position = expanded_maze.start
         }
+
+    let create_with_difficulty (difficulty:int):MazeGUIType=
+        create (fst Config.MAZE_DIMENSIONS.[difficulty]) (snd Config.MAZE_DIMENSIONS.[difficulty])

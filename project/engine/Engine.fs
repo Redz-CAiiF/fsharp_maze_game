@@ -155,3 +155,9 @@ type engine (w : int, h : int, ?fps_cap : int, ?flip_queue) =
         con.clear
         sprites <- []
 
+    ///unregister a sprite and update the screen
+    member this.unregister_sprite (s:sprite) : unit =
+        sprites <- List.filter (fun t -> t <> s) sprites
+        let data = { state = 0; frame_cnt = 0; quit = false; elapsed = new TimeSpan (); now = DateTime.Now }
+        this.shoot (fun _ st -> st, false) data |> ignore
+

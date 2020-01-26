@@ -50,13 +50,30 @@ let render_menu () : Engine.engine =
     menu.draw_text(COPYRIGHT_NOTICE, TITLE_X , TITLE_Y+21, Color.White)
     engine
 
+
+let select_difficulty (engine:Engine.engine) (start_game: int -> unit) : unit =
+    let diff_banner = GUI.Utils.render_banner engine ["Select game difficulty";"";"1: Easy";"2: Medium";"3: Difficult";"4: Impossible"]
+    let handle_menu_selection (key : ConsoleKeyInfo) (screen : wronly_raster) (st : bool) =
+        let st =
+            //handle menu selection: run the corresponding routine to start a different game mode
+            match key.KeyChar with 
+                 '1' | '2' | '3' | '4' -> start_game (int key.KeyChar - int '0'-1) //start game with desired difficulty: inline char to int conversion
+                                          ignore (engine.unregister_sprite diff_banner)
+                                          true
+                | _   ->                  false                           //Default: invalid selection
+        st, st
+
+    //loop on menu selection
+    engine.loop_on_key handle_menu_selection false
+    ()
+
 let winner (engine:Engine.engine) (maze_rows:int) (maze_cols:int) :unit =
      (GUI.Utils.render_banner engine ["Victory!";"";"Press Q to go back to main menu"]) |> ignore
      ()
 
 
-let mode_interactive () =
-    let gui = MazeGUI.create MAZE_ROWS MAZE_COLS
+let mode_interactive (difficulty:int) =
+    let gui = MazeGUI.create_with_difficulty (difficulty)
     let handle_user_interaction (key : ConsoleKeyInfo) (screen : wronly_raster) ((state : MazeGUIType), (lock_input : bool)) =
         let dx, dy =
             match key.KeyChar,lock_input with 
@@ -84,8 +101,8 @@ let mode_interactive () =
     gui.engine.loop_on_key handle_user_interaction (gui,false)
     ()
 
-let mode_automatic_resolution () =
-    let gui = MazeGUI.create MAZE_ROWS MAZE_COLS
+let mode_automatic_resolution (difficulty:int) =
+    let gui = MazeGUI.create_with_difficulty difficulty
     let handle_user_interaction (key : ConsoleKeyInfo) (screen : wronly_raster) ((state : MazeGUIType) , (lock_input : bool)) =
         let lock_next_input =
             match key.KeyChar, lock_input with
@@ -99,8 +116,8 @@ let mode_automatic_resolution () =
     gui.engine.loop_on_key handle_user_interaction (gui,false)
     ()
 
-let mode_dark_labyrinth () = //TODO: Implement dark labyrinth
-    let gui = MazeGUI.create MAZE_ROWS MAZE_COLS
+let mode_dark_labyrinth (difficulty:int) = //TODO: Implement dark labyrinth
+    let gui = MazeGUI.create_with_difficulty difficulty
     let handle_user_interaction (key : ConsoleKeyInfo) (screen : wronly_raster) ((state : MazeGUIType), (lock_input : bool)) =
         let dx, dy =
             match key.KeyChar,lock_input with 
@@ -130,24 +147,24 @@ let mode_dark_labyrinth () = //TODO: Implement dark labyrinth
 
 
 let start_menu () =     
+    //render the menu
     let engine = render_menu ()
     let handle_menu_selection (key : ConsoleKeyInfo) (screen : wronly_raster) (st : int) =
         let st =
-            Log.msg "handle_menu_selection"
             //handle menu selection: run the corresponding routine to start a different game mode
             match key.KeyChar with 
-            | '1' -> mode_interactive ()    //Interactive
+            | '1' -> select_difficulty engine mode_interactive    //Interactive
                      ignore (render_menu ())
                      1
-            | '2' -> mode_automatic_resolution ()    //Automatic Resolution
+            | '2' -> select_difficulty engine mode_automatic_resolution  //Automatic Resolution
                      ignore (render_menu ())
                      2                          
-            | '3' -> let bn = GUI.Utils.render_banner engine engine.screen_width engine.screen_height ["WOW";"this is multiline"]
-                     3                          //Dark Labyrinth
-            | _   -> 0                          //Default: invalid selection
+            | '3' -> select_difficulty engine mode_dark_labyrinth         //Dark Labyrinth
+                     ignore (render_menu ())
+                     3                      
+            | _   -> 0                              //Default: invalid selection
         st, key.KeyChar = QUIT_KEY
 
-    //render the menu
     //loop on menu selection
     engine.loop_on_key handle_menu_selection 0
 
