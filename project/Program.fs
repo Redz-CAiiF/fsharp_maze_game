@@ -182,7 +182,7 @@ let mode_dark_labyrinth (difficulty : int) : unit =
     mask <- uncover_mask mask gui PLAYER_VISIBILITY_RANGE
     let upper_text = gui.engine.create_and_register_sprite (image.rectangle (MENU_WIDTH,MENU_HEIGHT, MazeGUI.EMPTY_PIXEL),1, 1, 1)
     upper_text.draw_text("Dark Labyrinth Mode:",0,0,Color.White)
-    upper_text.draw_text("You're the red dot. Exit the maze!",0,1,Color.White)
+    upper_text.draw_text("Explore and exit the maze!",0,1,Color.White)
     upper_text.draw_text("W: up , A: left , S: down , D: right",0,2,Color.White)
     upper_text.draw_text("R: solve maze , Q: main menu",0,3,Color.White)
 
