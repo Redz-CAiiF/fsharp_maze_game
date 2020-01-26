@@ -19,6 +19,9 @@ let COPYRIGHT_NOTICE = "(C) 2020 Lorenzo Donatelli, Matteo Agnoletto, Matteo Lib
 let MAZE_ROWS = 20
 let MAZE_COLS = 30
 
+//keys
+let QUIT_KEY = 'q'  //used to quit a window and go back to the previous one in any point in the application
+
 let filled_pixel_char = '*'
 let wall_pixel_char = '|'
 let empty_pixel_char = ' '

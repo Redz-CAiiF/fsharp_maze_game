@@ -18,7 +18,8 @@
     <Compile Include="engine\Globals.fs" />
     <Compile Include="engine\Gfx.fs" />
     <Compile Include="engine\Engine.fs" />
-    <Compile Include="Utils.fs" />
+    <Compile Include="CoreUtils.fs" />
+    <Compile Include="GUIUtils.fs" />
     <Compile Include="Walls.fs" />
     <Compile Include="Cell.fs" />
     <Compile Include="Maze.fs" />

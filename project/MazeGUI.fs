@@ -10,6 +10,7 @@
 *
 *)
 
+///The GUI namespace includes all the related modules to handle a Maze game through a graphical user interface
 namespace FMaze.GUI
 open FMaze.Core
 open LabProg2019.Gfx

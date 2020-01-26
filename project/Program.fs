@@ -32,7 +32,6 @@ open FMaze.GUI
 
 let render_menu () : Engine.engine =
     let engine = new Engine.engine (MENU_WIDTH, MENU_HEIGHT)
-
     let b = pixel.create(''', Color.Black)
     let menu = engine.create_and_register_sprite (image.rectangle (MENU_WIDTH,MENU_HEIGHT, b),0, 0, 0)
     menu.draw_text("oooooooooooo ooo        ooooo", TITLE_X , TITLE_Y, Color.White)
@@ -51,62 +50,104 @@ let render_menu () : Engine.engine =
     menu.draw_text(COPYRIGHT_NOTICE, TITLE_X , TITLE_Y+21, Color.White)
     engine
 
-let winner (engine:Engine.engine) =
-   let b = pixel.create(''', Color.Blue,Color.DarkBlue )
-   let wineer = engine.create_and_register_sprite (image.rectangle (15,15, b,b),5,15, 5)
-   wineer.draw_text("    ########## ",10,10, Color.Yellow,Color.Magenta)
-   wineer.draw_text("    #VICTORY!#   ",15,11, Color.Yellow,Color.Magenta)
-   wineer.draw_text("    ########## ",15,17, Color.Yellow,Color.Magenta)
+let winner (engine:Engine.engine) (maze_rows:int) (maze_cols:int) :unit =
+     (GUI.Utils.render_banner engine ["Victory!";"";"Press Q to go back to main menu"]) |> ignore
+     ()
 
 
-let new_interactive_game () =
+let mode_interactive () =
     let gui = MazeGUI.create MAZE_ROWS MAZE_COLS
-    let my_update (key : ConsoleKeyInfo) (screen : wronly_raster) (state : MazeGUIType) =
+    let handle_user_interaction (key : ConsoleKeyInfo) (screen : wronly_raster) ((state : MazeGUIType), (lock_input : bool)) =
         let dx, dy =
-         match key.KeyChar with 
-          |'w' -> 0, -1
-          |'a'->  -1, 0
-          |'d' ->  1 ,0
-          |'s' ->  0, 1
-          | _ ->   0, 0
+            match key.KeyChar,lock_input with 
+                _ , true -> 0,0 //don't move player if input is locked
+              | 'w',_ -> 0, -1
+              | 'a',_ ->  -1, 0
+              | 'd',_ ->  1, 0
+              | 's',_ ->  0, 1
+              | k, _ when k = QUIT_KEY ->
+                          state.engine.clear () //clear the screen before exiting
+                          0, 0
+              | _ ->   0, 0
+        //define new player position: move only if new coordinates are valid
         let new_player_position =
-            if (are_coordinates_valid state.expanded_maze.rows state.expanded_maze.cols ((fst state.player_position)+dy) ((snd state.player_position)+dx)) && (state.expanded_maze.map.[from_bidim_to_monodim state.expanded_maze.rows state.expanded_maze.cols ((fst state.player_position)+dy) ((snd state.player_position)+dx)] = Walls.OPEN ) 
-                then  state.player_sprite.move_by(dx,dy) 
-                      ((fst state.player_position)+dy),((snd state.player_position)+dx)
+            if are_coordinates_valid state.expanded_maze.rows state.expanded_maze.cols ((fst state.player_position)+dy) ((snd state.player_position)+dx) && state.expanded_maze.map.[from_bidim_to_monodim state.expanded_maze.rows state.expanded_maze.cols ((fst state.player_position)+dy) ((snd state.player_position)+dx)] = Walls.OPEN then
+                state.player_sprite.move_by(dx,dy) 
+                (fst state.player_position)+dy,(snd state.player_position)+dx
             else state.player_position
-        if(state.expanded_maze.finish = state.player_position) then winner state.engine else ()
-        {state with player_position = new_player_position}, key.KeyChar = 'q' //TODO: add condition to end the game
-    gui.engine.loop_on_key my_update gui
-    ()
-
-let automatic_resolution () =
-    let gui = MazeGUI.create MAZE_ROWS MAZE_COLS
-    let handle_user_interaction (key : ConsoleKeyInfo) (screen : wronly_raster) ((state : MazeGUIType) , (lock_input : bool)) =
-        if key.KeyChar = 's' && not lock_input then ignore (MazeGUI.display_solution (state))
-        elif key.KeyChar = 'q' then state.engine.clear () //clear the screen
-        (state, key.KeyChar='s'), key.KeyChar = 'q'
+        //check if reached the end
+        if state.expanded_maze.finish = state.player_position  && not lock_input then
+            winner state.engine state.expanded_maze.rows state.expanded_maze.cols //show victory banner
+            ({state with player_position = new_player_position},true), key.KeyChar = QUIT_KEY    //return with lock_input enabled: do not accept further commands
+        else
+            ({state with player_position = new_player_position},false), key.KeyChar = QUIT_KEY  //continue playing
     gui.engine.loop_on_key handle_user_interaction (gui,false)
     ()
 
+let mode_automatic_resolution () =
+    let gui = MazeGUI.create MAZE_ROWS MAZE_COLS
+    let handle_user_interaction (key : ConsoleKeyInfo) (screen : wronly_raster) ((state : MazeGUIType) , (lock_input : bool)) =
+        let lock_next_input =
+            match key.KeyChar, lock_input with
+                's', false -> ignore (MazeGUI.display_solution (state)) //display solution on the screen
+                              true
+              | k, _ when k = QUIT_KEY ->
+                              state.engine.clear () //clear the screen
+                              true
+              | _ ->          false
+        (state, lock_next_input), key.KeyChar = QUIT_KEY
+    gui.engine.loop_on_key handle_user_interaction (gui,false)
+    ()
+
+let mode_dark_labyrinth () = //TODO: Implement dark labyrinth
+    let gui = MazeGUI.create MAZE_ROWS MAZE_COLS
+    let handle_user_interaction (key : ConsoleKeyInfo) (screen : wronly_raster) ((state : MazeGUIType), (lock_input : bool)) =
+        let dx, dy =
+            match key.KeyChar,lock_input with 
+                _ , true -> 0,0 //don't move player if input is locked
+              | 'w',_ -> 0, -1
+              | 'a',_ ->  -1, 0
+              | 'd',_ ->  1, 0
+              | 's',_ ->  0, 1
+              | k, _ when k = QUIT_KEY ->
+                          state.engine.clear () //clear the screen before exiting
+                          0, 0
+              | _ ->   0, 0
+        //define new player position: move only if new coordinates are valid
+        let new_player_position =
+            if are_coordinates_valid state.expanded_maze.rows state.expanded_maze.cols ((fst state.player_position)+dy) ((snd state.player_position)+dx) && state.expanded_maze.map.[from_bidim_to_monodim state.expanded_maze.rows state.expanded_maze.cols ((fst state.player_position)+dy) ((snd state.player_position)+dx)] = Walls.OPEN then
+                state.player_sprite.move_by(dx,dy) 
+                (fst state.player_position)+dy,(snd state.player_position)+dx
+            else state.player_position
+        //check if reached the end
+        if state.expanded_maze.finish = state.player_position  && not lock_input then
+            winner state.engine state.expanded_maze.rows state.expanded_maze.cols //show victory banner
+            ({state with player_position = new_player_position},true), key.KeyChar = QUIT_KEY    //return with lock_input enabled: do not accept further commands
+        else
+            ({state with player_position = new_player_position},false), key.KeyChar = QUIT_KEY  //continue playing
+    gui.engine.loop_on_key handle_user_interaction (gui,false)
+    ()
+
+
 let start_menu () =     
+    let engine = render_menu ()
     let handle_menu_selection (key : ConsoleKeyInfo) (screen : wronly_raster) (st : int) =
         let st =
             Log.msg "handle_menu_selection"
             //handle menu selection: run the corresponding routine to start a different game mode
             match key.KeyChar with 
-            | '1' -> new_interactive_game ()    //Interactive
+            | '1' -> mode_interactive ()    //Interactive
                      ignore (render_menu ())
                      1
-            | '2' -> automatic_resolution ()    //Automatic Resolution
+            | '2' -> mode_automatic_resolution ()    //Automatic Resolution
                      ignore (render_menu ())
                      2                          
-            | '3' -> engine.clear ()
+            | '3' -> let bn = GUI.Utils.render_banner engine engine.screen_width engine.screen_height ["WOW";"this is multiline"]
                      3                          //Dark Labyrinth
-            | _   ->    0                       //Default: invalid selection
-        st, key.KeyChar = 'q'
+            | _   -> 0                          //Default: invalid selection
+        st, key.KeyChar = QUIT_KEY
 
     //render the menu
-    let engine = render_menu ()
     //loop on menu selection
     engine.loop_on_key handle_menu_selection 0
 
