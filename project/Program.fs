@@ -74,6 +74,12 @@ let winner (engine:Engine.engine) (maze_rows:int) (maze_cols:int) :unit =
 
 let mode_interactive (difficulty:int) =
     let gui = MazeGUI.create_with_difficulty (difficulty)
+    let upper_text = gui.engine.create_and_register_sprite (image.rectangle (MENU_WIDTH,MENU_HEIGHT, MazeGUI.EMPTY_PIXEL),1, 1, 1)
+    upper_text.draw_text("Interactive Mode:",0,0,Color.White)
+    upper_text.draw_text("You're the red dot. Exit the maze!",0,1,Color.White)
+    upper_text.draw_text("W: up , A: left , S: down , D: right",0,2,Color.White)
+    upper_text.draw_text("R: solve maze , Q: main menu",0,3,Color.White)
+
     let handle_user_interaction (key : ConsoleKeyInfo) (screen : wronly_raster) ((state : MazeGUIType), (lock_input : bool)) =
         let dx, dy =
             match key.KeyChar,lock_input with 
@@ -82,10 +88,14 @@ let mode_interactive (difficulty:int) =
               | 'a',_ ->  -1, 0
               | 'd',_ ->  1, 0
               | 's',_ ->  0, 1
+              | 'r',_ ->  ignore (MazeGUI.display_solution (state)) //display solution on the screen
+                          upper_text.draw_text("Q: main menu                            ",0,2,Color.White)
+                          upper_text.draw_text("                                        ",0,3,Color.White)
+                          0, 0
               | k, _ when k = QUIT_KEY ->
                           state.engine.clear () //clear the screen before exiting
                           0, 0
-              | _ ->   0, 0
+              | _ ->      0, 0
         //define new player position: move only if new coordinates are valid
         let new_player_position =
             if are_coordinates_valid state.expanded_maze.rows state.expanded_maze.cols ((fst state.player_position)+dy) ((snd state.player_position)+dx) && state.expanded_maze.map.[from_bidim_to_monodim state.expanded_maze.rows state.expanded_maze.cols ((fst state.player_position)+dy) ((snd state.player_position)+dx)] = Walls.OPEN then
@@ -96,22 +106,29 @@ let mode_interactive (difficulty:int) =
         if state.expanded_maze.finish = state.player_position  && not lock_input then
             winner state.engine state.expanded_maze.rows state.expanded_maze.cols //show victory banner
             ({state with player_position = new_player_position},true), key.KeyChar = QUIT_KEY    //return with lock_input enabled: do not accept further commands
+        elif key.KeyChar = 'r' then
+            ({state with player_position = new_player_position},true), key.KeyChar = QUIT_KEY    //return with lock_input enabled: do not accept further commands
         else
-            ({state with player_position = new_player_position},false), key.KeyChar = QUIT_KEY  //continue playing
+            ({state with player_position = new_player_position},lock_input || false), key.KeyChar = QUIT_KEY  //continue playing
     gui.engine.loop_on_key handle_user_interaction (gui,false)
     ()
 
 let mode_automatic_resolution (difficulty:int) =
     let gui = MazeGUI.create_with_difficulty difficulty
+    let upper_text = gui.engine.create_and_register_sprite (image.rectangle (MENU_WIDTH,MENU_HEIGHT, MazeGUI.EMPTY_PIXEL),1, 1, 1)
+    upper_text.draw_text("Automatic Mode:",0,0,Color.White)
+    upper_text.draw_text("Demonstration of the solver algorithm",0,1,Color.White)
+    upper_text.draw_text("S: solve maze , Q: main menu",0,2,Color.White)
     let handle_user_interaction (key : ConsoleKeyInfo) (screen : wronly_raster) ((state : MazeGUIType) , (lock_input : bool)) =
         let lock_next_input =
             match key.KeyChar, lock_input with
                 's', false -> ignore (MazeGUI.display_solution (state)) //display solution on the screen
+                              upper_text.draw_text("Q: main menu                            ",0,2,Color.White)
                               true
               | k, _ when k = QUIT_KEY ->
                               state.engine.clear () //clear the screen
                               true
-              | _ ->          false
+              | _ ->          lock_input
         (state, lock_next_input), key.KeyChar = QUIT_KEY
     gui.engine.loop_on_key handle_user_interaction (gui,false)
     ()

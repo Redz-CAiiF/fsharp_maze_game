@@ -44,10 +44,10 @@ module MazeGUI =
     ///an empty and transparent pixel
     let EMPTY_PIXEL = pixel.create(' ', Color.Black)
     ///the image which is used to represent the player's position in the graphical user interface
-    let PLAYER_IMAGE = image.rectangle(1,1,pixel.create('@',Color.Yellow))
+    let PLAYER_IMAGE = image.rectangle(1,1,pixel.create('@',Color.Red,Color.Red))
     //offsets used for displaying the maze in the engine
-    let MAZE_X_OFFSET = 5
-    let MAZE_Y_OFFSET = 5
+    let MAZE_X_OFFSET = 6
+    let MAZE_Y_OFFSET = 6
 
     ///<summary>Convert an ExpandedMaze to a pixel array.</summary>
     ///<param name="expanded_maze">The expanded maze that we want to convert</param>
@@ -73,7 +73,7 @@ module MazeGUI =
         //solve maze and store the solution
         let sol =Maze.Resolutor.solve maze.expanded_maze
         //render the path
-        ignore (maze.engine.create_and_register_sprite(solution_to_image (sol),MAZE_X_OFFSET,MAZE_Y_OFFSET,10)) 
+        ignore (maze.engine.create_and_register_sprite(solution_to_image (sol),MAZE_X_OFFSET,MAZE_Y_OFFSET,2)) 
         
 
     ///<summary>Creates a new MazeGUI from the given parameters. It generates and initializes all the necessary items to handle a graphical maze game.</summary>
@@ -83,13 +83,13 @@ module MazeGUI =
     let create (rows: int) (cols:int): MazeGUIType =
         let logic =Maze.create rows cols
         let expanded_maze = Maze.Expand.expand logic
-        let engine= new engine(expanded_maze.cols+10, expanded_maze.rows+10)
+        let engine= new engine(expanded_maze.cols+2*MAZE_X_OFFSET, expanded_maze.rows+2*MAZE_Y_OFFSET)
         {
             logic=logic;
             expanded_maze= expanded_maze;
             engine=engine;
-            maze_sprite=engine.create_and_register_sprite(to_image expanded_maze, MAZE_X_OFFSET,MAZE_Y_OFFSET,0);
-            player_sprite=engine.create_and_register_sprite(PLAYER_IMAGE, snd expanded_maze.start+MAZE_X_OFFSET, fst expanded_maze.start+MAZE_Y_OFFSET ,0);
+            maze_sprite=engine.create_and_register_sprite(to_image expanded_maze, MAZE_X_OFFSET,MAZE_Y_OFFSET,1);
+            player_sprite=engine.create_and_register_sprite(PLAYER_IMAGE, snd expanded_maze.start+MAZE_X_OFFSET, fst expanded_maze.start+MAZE_Y_OFFSET ,5);
             player_position = expanded_maze.start
         }
 

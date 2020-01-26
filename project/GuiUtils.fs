@@ -29,10 +29,12 @@ module Utils =
         //screen size
         let w,h = engine.screen_width, engine.screen_height
         //banner size
-        let banner_width, banner_height = (List.max text).Length+2,text.Length+2
+        let banner_width, banner_height = (List.max (List.map (fun (e:string) -> e.Length) text))+2,text.Length+2
         let fill_px = pixel.create(''', BANNER_BACKGROUND,BANNER_BACKGROUND)
         //create banner
-        let banner = engine.create_and_register_sprite (image.rectangle (banner_width,banner_height, fill_px,fill_px),w/2-banner_width/2,h/2-banner_height/2, 100)
+        let banner = engine.create_and_register_sprite (image.rectangle (banner_width,banner_height, fill_px,fill_px),w/2-banner_width/2,h/2-banner_height/2, 1000)
         //print text in the banner
-        List.iteri (fun i e -> banner.draw_text(e,(banner_width - e.Length)/2,1+i, BANNER_FOREGROUND)) (text)
+        List.iteri (fun i e ->  banner.draw_text(e,(banner_width - e.Length)/2,1+i, BANNER_FOREGROUND, BANNER_BACKGROUND)
+                                String.iteri (fun j c -> if c = ' ' then banner.draw_text("@",(banner_width - e.Length)/2+j,1+i, BANNER_BACKGROUND, BANNER_BACKGROUND) else ()) e
+                   ) (text)
         banner
