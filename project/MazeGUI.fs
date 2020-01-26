@@ -59,18 +59,22 @@ module MazeGUI =
         arr
     
     ///<summary>Convert an ExpandedMaze to an image.</summary>
-    ///<param name="expanded_maze">The expanded maze that we want to convert</param>
+    ///<param name="expanded_maze">The expanded maze that we want to convert.</param>
     ///<returns>An image from the expanded maze.</returns>
     let to_image (expanded_maze: ExpandedMazeType): image =
         new image (expanded_maze.cols, expanded_maze.rows, to_pixel_array expanded_maze)
     
-    
+    ///<summary>Convert an SolutionType to image. </summary>
+    ///<param name = "solution"> the Solution that we wanto convert. </param>
+    ///<return> image from Solution. </returns>
     let solution_to_image (solution: SolutionType) : image =
         let pxs = Array.create (solution.map_cols*solution.map_rows) EMPTY_PIXEL
         List.iter (fun e -> pxs.[e] <- PATH_PIXEL) solution.path
         new image (solution.map_cols,solution.map_rows,pxs)
 
-
+    ///<summary> Solve a maze and store the solution. </summary>
+    ///<param name = "maze" > the maze we want solve. </param>
+    /// <return> return a unit e render the path  </returns>
     let display_solution (maze : MazeGUIType) :unit =
         //solve maze and store the solution
         let sol =Maze.Resolutor.solve maze.expanded_maze
@@ -95,5 +99,8 @@ module MazeGUI =
             player_position = expanded_maze.start
         }
 
+    /// <summary> Create a new MazeGui from the difficulty given.</summary>
+    /// <param name = "difficulty" > the difficulty of the maze</param>
+    /// <returns>return a MazeGui instance from the difficulty given. </returns>
     let create_with_difficulty (difficulty:int):MazeGUIType=
         create (fst Config.MAZE_DIMENSIONS.[difficulty]) (snd Config.MAZE_DIMENSIONS.[difficulty])

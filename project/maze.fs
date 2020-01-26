@@ -341,7 +341,9 @@ module Maze =
 
         
     ///<summary>Creates a new Maze from the given parameters.</summary>
-    ///<returns>The maze with the given parameters</returns>
+    ///<param name = "rows "> the rows of the maze. </param>
+    ///<param name = "cols" > the cols of the maze </param>
+    ///<returns> The maze with the given parameters. </returns>
     let create (rows:int) (cols:int) : MazeType =
         let start =  generate_outer_coordinate (rows,cols)
         Generator.generate {map = (MazeMap.generate_map rows cols) ; rows = rows; cols = cols; start = start; finish= generate_different_outer_coordinate (rows,cols) start}
