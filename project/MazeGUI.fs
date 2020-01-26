@@ -86,7 +86,7 @@ module MazeGUI =
     ///<param name="rows">The rows of the mazegui</param>
     ///<param name="cols">The cols of the mazegui</param>
     ///<returns>The MazeGUI instance created with the given parameters.</returns>
-    let create (rows: int) (cols:int): MazeGUIType =
+    let create (rows: int) (cols : int): MazeGUIType =
         let logic =Maze.create rows cols
         let expanded_maze = Maze.Expand.expand logic
         let engine= new engine(expanded_maze.cols+2*MAZE_X_OFFSET, expanded_maze.rows+2*MAZE_Y_OFFSET)
@@ -102,5 +102,5 @@ module MazeGUI =
     /// <summary> Create a new MazeGui from the difficulty given.</summary>
     /// <param name = "difficulty" > the difficulty of the maze</param>
     /// <returns>return a MazeGui instance from the difficulty given. </returns>
-    let create_with_difficulty (difficulty:int):MazeGUIType=
+    let create_with_difficulty (difficulty : int) : MazeGUIType=
         create (fst Config.MAZE_DIMENSIONS.[difficulty]) (snd Config.MAZE_DIMENSIONS.[difficulty])

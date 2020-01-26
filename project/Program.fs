@@ -51,7 +51,7 @@ let render_menu () : Engine.engine =
 
 
 ///prompt user to select a difficulty for the required game mode, and start the game
-let select_difficulty (engine:Engine.engine) (start_game: int -> unit) : unit =
+let select_difficulty (engine : Engine.engine) (start_game: int -> unit) : unit =
     let diff_banner = GUI.Utils.render_banner engine ["Select game difficulty";"";"1: Easy";"2: Medium";"3: Difficult";"4: Impossible"]
     let handle_menu_selection (key : ConsoleKeyInfo) (screen : wronly_raster) (st : bool) =
         let st =
@@ -67,12 +67,13 @@ let select_difficulty (engine:Engine.engine) (start_game: int -> unit) : unit =
     engine.loop_on_key handle_menu_selection false
     ()
 
-let winner (engine:Engine.engine) (maze_rows:int) (maze_cols:int) :unit =
+///show the victory banner to the player
+let winner (engine:Engine.engine) :unit =
      (GUI.Utils.render_banner engine ["Victory!";"";"Press Q to go back to main menu"]) |> ignore
      ()
 
 ///initialize an interactive game with the given difficulty
-let mode_interactive (difficulty:int) =
+let mode_interactive (difficulty : int) : unit=
     let gui = MazeGUI.create_with_difficulty (difficulty)
     let upper_text = gui.engine.create_and_register_sprite (image.rectangle (MENU_WIDTH,MENU_HEIGHT, MazeGUI.EMPTY_PIXEL),1, 1, 1)
     upper_text.draw_text("Interactive Mode:",0,0,Color.White)
@@ -84,7 +85,6 @@ let mode_interactive (difficulty:int) =
 /// <param name "lock_input">a bool that when false accept other commands, when true not accept commands  </param>
 /// <param name "screen"> the screen of the program </param>
 /// <param name "key"> the key with the player can move the player_sprite or resolve the maze  </param>
-
     let handle_user_interaction (key : ConsoleKeyInfo) (screen : wronly_raster) ((state : MazeGUIType), (lock_input : bool)) =
         let dx, dy =
             match key.KeyChar,lock_input with 
@@ -109,7 +109,7 @@ let mode_interactive (difficulty:int) =
             else state.player_position
         //check if reached the end
         if state.expanded_maze.finish = state.player_position  && not lock_input then
-            winner state.engine state.expanded_maze.rows state.expanded_maze.cols //show victory banner
+            winner state.engine //show victory banner
             ({state with player_position = new_player_position},true), key.KeyChar = QUIT_KEY    //return with lock_input enabled: do not accept further commands
         elif key.KeyChar = 'r' then
             ({state with player_position = new_player_position},true), key.KeyChar = QUIT_KEY    //return with lock_input enabled: do not accept further commands
@@ -123,7 +123,7 @@ let mode_interactive (difficulty:int) =
 ///<param name = "maze"> the maze where the player play  </param>
 ///<param name = "range"> the dimension of the mask  </param>
 /// <return> the new sprite of the mask </returns>
-let uncover_mask (mask:sprite) (maze: MazeGUIType) (range:int) :sprite =
+let uncover_mask (mask : sprite) (maze : MazeGUIType) (range : int) : sprite =
     let player_row, player_column = maze.player_position
     let new_pxs = mask.pixels
     for i=player_row-range to player_row+range do
@@ -140,7 +140,7 @@ let uncover_mask (mask:sprite) (maze: MazeGUIType) (range:int) :sprite =
 ///<param name = "mask" > a sprite to hide the maze </param>
 ///<param name = "maze"> our maze where the player play</param>
 ///<returns> delete the mask </returns>
-let uncover_all (mask:sprite) (maze: MazeGUIType) :sprite =
+let uncover_all (mask:sprite) (maze : MazeGUIType) :sprite =
     //create a new mask from scratch, completely empty
     let new_mask = maze.engine.create_and_register_sprite (new image(maze.expanded_maze.cols, maze.expanded_maze.rows, MazeGUI.EMPTY_PIXEL), MazeGUI.MAZE_X_OFFSET, MazeGUI.MAZE_Y_OFFSET, 3)
     //unregister old mask
@@ -152,7 +152,7 @@ let uncover_all (mask:sprite) (maze: MazeGUIType) :sprite =
 ///<summary> mode automatich resoluton of a maze </summary>
 ///<param name ="difficulty"> level of difficulty </param>
 ///<returns> return the solution of the maze </returns>
-let mode_automatic_resolution (difficulty:int) =
+let mode_automatic_resolution (difficulty : int) : unit =
     let gui = MazeGUI.create_with_difficulty difficulty
     let upper_text = gui.engine.create_and_register_sprite (image.rectangle (MENU_WIDTH,MENU_HEIGHT, MazeGUI.EMPTY_PIXEL),1, 1, 1)
     upper_text.draw_text("Automatic Mode:",0,0,Color.White)
@@ -176,7 +176,7 @@ let mode_automatic_resolution (difficulty:int) =
 /// <summary> mode wiht a mask to hide the maze </summary>
 ///<param name ="difficulty"> level of difficulty </param>
 /// <returns> a player mode </returns>
-let mode_dark_labyrinth (difficulty:int) =
+let mode_dark_labyrinth (difficulty : int) : unit =
     let gui = MazeGUI.create_with_difficulty (difficulty)
     let mutable mask = gui.engine.create_and_register_sprite (image.rectangle (gui.expanded_maze.cols, gui.expanded_maze.rows, MazeGUI.BLACK_PIXEL,MazeGUI.BLACK_PIXEL),MazeGUI.MAZE_X_OFFSET, MazeGUI.MAZE_Y_OFFSET, 3)
     mask <- uncover_mask mask gui PLAYER_VISIBILITY_RANGE
@@ -186,7 +186,7 @@ let mode_dark_labyrinth (difficulty:int) =
     upper_text.draw_text("W: up , A: left , S: down , D: right",0,2,Color.White)
     upper_text.draw_text("R: solve maze , Q: main menu",0,3,Color.White)
 
-///<same fuction on the line 87>
+    ///<same fuction on the line 87>
     let handle_user_interaction (key : ConsoleKeyInfo) (screen : wronly_raster) ((state : MazeGUIType), (lock_input : bool)) =
         let dx, dy =
             match key.KeyChar,lock_input with 
@@ -214,7 +214,7 @@ let mode_dark_labyrinth (difficulty:int) =
             else state.player_position
         //check if reached the end
         if state.expanded_maze.finish = state.player_position  && not lock_input then
-            winner state.engine state.expanded_maze.rows state.expanded_maze.cols //show victory banner
+            winner state.engine //show victory banner
             ({state with player_position = new_player_position},true), key.KeyChar = QUIT_KEY    //return with lock_input enabled: do not accept further commands
         elif key.KeyChar = 'r' then
             ({state with player_position = new_player_position},true), key.KeyChar = QUIT_KEY    //return with lock_input enabled: do not accept further commands
