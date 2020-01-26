@@ -80,6 +80,11 @@ let mode_interactive (difficulty:int) =
     upper_text.draw_text("W: up , A: left , S: down , D: right",0,2,Color.White)
     upper_text.draw_text("R: solve maze , Q: main menu",0,3,Color.White)
 
+/// <summary> Function that update the screen and the engine </summary>
+/// <param name "lock_input">a bool that when false accept other commands, when true not accept commands  </param>
+/// <param name "screen"> the screen of the program </param>
+/// <param name "key"> the key with the player can move the player_sprite or resolve the maze  </param>
+
     let handle_user_interaction (key : ConsoleKeyInfo) (screen : wronly_raster) ((state : MazeGUIType), (lock_input : bool)) =
         let dx, dy =
             match key.KeyChar,lock_input with 
@@ -112,8 +117,12 @@ let mode_interactive (difficulty:int) =
             ({state with player_position = new_player_position},lock_input || false), key.KeyChar = QUIT_KEY  //continue playing
     gui.engine.loop_on_key handle_user_interaction (gui,false)
     ()
-
-///given the current game instance, uncover an area of the maze by the given range, by emptying pixels in the given mask sprite
+    
+///</summary>given the current game instance, uncover an area of the maze by the given range, by emptying pixels in the given mask sprite</summary>
+///<param name = "mask"> a sprite that hide the maze  </param>
+///<param name = "maze"> the maze where the player play  </param>
+///<param name = "range"> the dimension of the mask  </param>
+/// <return> the new sprite of the mask </returns>
 let uncover_mask (mask:sprite) (maze: MazeGUIType) (range:int) :sprite =
     let player_row, player_column = maze.player_position
     let new_pxs = mask.pixels
@@ -126,8 +135,11 @@ let uncover_mask (mask:sprite) (maze: MazeGUIType) (range:int) :sprite =
     maze.engine.unregister_sprite mask
     //return new mask
     new_mask
-
-///completely uncover the given mask.
+    
+///<summary> when the mask is complete uncover</summary>
+///<param name = "mask" > a sprite to hide the maze </param>
+///<param name = "maze"> our maze where the player play</param>
+///<returns> delete the mask </returns>
 let uncover_all (mask:sprite) (maze: MazeGUIType) :sprite =
     //create a new mask from scratch, completely empty
     let new_mask = maze.engine.create_and_register_sprite (new image(maze.expanded_maze.cols, maze.expanded_maze.rows, MazeGUI.EMPTY_PIXEL), MazeGUI.MAZE_X_OFFSET, MazeGUI.MAZE_Y_OFFSET, 3)
@@ -137,6 +149,9 @@ let uncover_all (mask:sprite) (maze: MazeGUIType) :sprite =
     new_mask
 
 ///initialize an automatic solver demonstration with the given difficulty
+///<summary> mode automatich resoluton of a maze </summary>
+///<param name ="difficulty"> level of difficulty </param>
+///<returns> return the solution of the maze </returns>
 let mode_automatic_resolution (difficulty:int) =
     let gui = MazeGUI.create_with_difficulty difficulty
     let upper_text = gui.engine.create_and_register_sprite (image.rectangle (MENU_WIDTH,MENU_HEIGHT, MazeGUI.EMPTY_PIXEL),1, 1, 1)
@@ -158,6 +173,9 @@ let mode_automatic_resolution (difficulty:int) =
     ()
 
 ///initialize a dark labyrinth game with the given difficulty
+/// <summary> mode wiht a mask to hide the maze </summary>
+///<param name ="difficulty"> level of difficulty </param>
+/// <returns> a player mode </returns>
 let mode_dark_labyrinth (difficulty:int) =
     let gui = MazeGUI.create_with_difficulty (difficulty)
     let mutable mask = gui.engine.create_and_register_sprite (image.rectangle (gui.expanded_maze.cols, gui.expanded_maze.rows, MazeGUI.BLACK_PIXEL,MazeGUI.BLACK_PIXEL),MazeGUI.MAZE_X_OFFSET, MazeGUI.MAZE_Y_OFFSET, 3)
@@ -168,6 +186,7 @@ let mode_dark_labyrinth (difficulty:int) =
     upper_text.draw_text("W: up , A: left , S: down , D: right",0,2,Color.White)
     upper_text.draw_text("R: solve maze , Q: main menu",0,3,Color.White)
 
+///<same fuction on the line 87>
     let handle_user_interaction (key : ConsoleKeyInfo) (screen : wronly_raster) ((state : MazeGUIType), (lock_input : bool)) =
         let dx, dy =
             match key.KeyChar,lock_input with 
