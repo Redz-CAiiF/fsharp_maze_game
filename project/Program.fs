@@ -30,6 +30,7 @@ open System.IO.Pipes
 open System.IO
 open FMaze.GUI
 
+///<summary>Render the main menu</summary>
 let render_menu () : Engine.engine =
     let engine = new Engine.engine (MENU_WIDTH, MENU_HEIGHT)
     let menu = engine.create_and_register_sprite (image.rectangle (MENU_WIDTH,MENU_HEIGHT, MazeGUI.BLACK_PIXEL),0, 0, 0)
@@ -50,7 +51,7 @@ let render_menu () : Engine.engine =
     engine
 
 
-///prompt user to select a difficulty for the required game mode, and start the game
+///<summary>prompt user to select a difficulty for the required game mode, and start the game</summary>
 let select_difficulty (engine : Engine.engine) (start_game: int -> unit) : unit =
     let diff_banner = GUI.Utils.render_banner engine ["Select game difficulty";"";"1: Easy";"2: Medium";"3: Difficult";"4: Impossible"]
     let handle_menu_selection (key : ConsoleKeyInfo) (screen : wronly_raster) (st : bool) =
@@ -67,15 +68,16 @@ let select_difficulty (engine : Engine.engine) (start_game: int -> unit) : unit 
     engine.loop_on_key handle_menu_selection false
     ()
 
-///show the victory banner to the player
+///<summary>show the victory banner to the player</summary>
 let winner (engine:Engine.engine) :unit =
      (GUI.Utils.render_banner engine ["Victory!";"";"Press Q to go back to main menu"]) |> ignore
      ()
 
-///initialize an interactive game with the given difficulty
+///<summary>initialize an interactive game with the given difficulty</summary>
 let mode_interactive (difficulty : int) : unit=
     let gui = MazeGUI.create_with_difficulty (difficulty)
     let upper_text = gui.engine.create_and_register_sprite (image.rectangle (MENU_WIDTH,MENU_HEIGHT, MazeGUI.EMPTY_PIXEL),1, 1, 1)
+    //top menu
     upper_text.draw_text("Interactive Mode:",0,0,Color.White)
     upper_text.draw_text("You're the red dot. Exit the maze!",0,1,Color.White)
     upper_text.draw_text("W: up , A: left , S: down , D: right",0,2,Color.White)
@@ -89,11 +91,12 @@ let mode_interactive (difficulty : int) : unit=
         let dx, dy =
             match key.KeyChar,lock_input with 
                 _ , true -> 0,0 //don't move player if input is locked
-              | 'w',_ -> 0, -1
-              | 'a',_ ->  -1, 0
-              | 'd',_ ->  1, 0
-              | 's',_ ->  0, 1
-              | 'r',_ ->  ignore (MazeGUI.display_solution (state)) //display solution on the screen
+              | c,_ when c = 'w' || c = 'W' || c = '8' -> 0, -1
+              | c,_ when c = 'a' || c = 'A' || c = '4' ->  -1, 0
+              | c,_ when c = 'd' || c = 'D' || c = '6' ->  1, 0
+              | c,_ when c = 's' || c = 'S' || c = '2' ->  0, 1
+              | c,_ when c = 'r' || c = 'R' -> 
+                          ignore (MazeGUI.display_solution (state)) //display solution on the screen
                           upper_text.draw_text("Q: main menu                            ",0,2,Color.White)
                           upper_text.draw_text("                                        ",0,3,Color.White)
                           0, 0
@@ -191,11 +194,11 @@ let mode_dark_labyrinth (difficulty : int) : unit =
         let dx, dy =
             match key.KeyChar,lock_input with 
                 _ , true -> 0,0 //don't move player if input is locked
-              | 'w',_ -> 0, -1
-              | 'a',_ ->  -1, 0
-              | 'd',_ ->  1, 0
-              | 's',_ ->  0, 1
-              | 'r',_ ->  
+              | c,_ when c = 'w' || c = 'W' || c = '8' -> 0, -1
+              | c,_ when c = 'a' || c = 'A' || c = '4' ->  -1, 0
+              | c,_ when c = 'd' || c = 'D' || c = '6' ->  1, 0
+              | c,_ when c = 's' || c = 'S' || c = '2' ->  0, 1
+              | c,_ when c = 'r' || c = 'R' -> 
                           ignore (MazeGUI.display_solution (state)) //display solution on the screen
                           mask <- uncover_all mask state      //remove the mask and show the whole maze
                           upper_text.draw_text("Q: main menu                            ",0,2,Color.White)

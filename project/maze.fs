@@ -214,6 +214,10 @@ module Maze =
     ///<summary>Contain routines used to expand a maze map.</summary>
     module Expand = 
 
+        ///<summary>takes the coordinates of the start or end of the maze and expand them</summary>
+        ///<param name="(row,col)">The coordinate of the start or end of the maze.</param>
+        ///<param name="maze">A generated maze.</param>
+        ///<returns>The expanded coordinate of the start or end of the maze</returns>
         let get_outer_expanded_coord (row:int,col:int) (maze:MazeType) :(int*int)=
             if row = 0 then row, Utils.expand__coordinate_value col
             else if col = 0 then Utils.expand__coordinate_value row, col
@@ -259,11 +263,9 @@ module Maze =
                         let y = Utils.expand__coordinate_value y
                         //sostituisco i muri right e bottom con quelli salvati nella cella
                         let exp_index = Utils.from_bidim_to_monodim (maze.rows |> Utils.expand__coordinate_value) (maze.cols |> Utils.expand__coordinate_value)
-                        let replace_cell (position:int) (cell:'A) (map:'A list): 'A list = 
-                            map.[..(position-1)]@[cell]@map.[(position+1)..]
     
-                        res <- replace_cell (exp_index x (y+1)) current.walls.right res
-                        res <- replace_cell (exp_index (x+1) y) current.walls.bottom res
+                        res <- replace (exp_index x (y+1)) current.walls.right res
+                        res <- replace (exp_index (x+1) y) current.walls.bottom res
                     res
                 set_maze maze
             

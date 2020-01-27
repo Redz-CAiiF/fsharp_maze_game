@@ -1,0 +1,1074 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+<assembly><name>maze_game</name></assembly>
+<members>
+<member name="T:LabProg2019.Prelude.Color">
+<summary>
+ Type alias for ConsoleColor.
+</summary>
+</member>
+<member name="M:LabProg2019.Prelude.synced`1.apply_and_set(Microsoft.FSharp.Core.FSharpFunc{`0,`0})">
+<summary>
+ Apply the given function f to the synchronized value and modify it atomically.
+</summary>
+</member>
+<member name="M:LabProg2019.Prelude.synced`1.apply``1(Microsoft.FSharp.Core.FSharpFunc{`0,``0})">
+<summary>
+ Apply the given function f to the synchronized value atomically.
+</summary>
+</member>
+<member name="T:LabProg2019.Prelude.synced`1">
+<summary>
+ Access a shared value in a thread-safe synchronized way.
+</summary>
+</member>
+<member name="M:LabProg2019.Prelude.ConsoleColor.nibble_of_color.Static(System.ConsoleColor)">
+<summary>
+ Convert a ConsoleColor to a 4-bit nibble in the system console format.
+</summary>
+</member>
+<member name="M:LabProg2019.Prelude.ConsoleColor.color_of_nibble.Static(System.Int16)">
+<summary>
+ Convert a 4-bit nibble in the system console format to a ConsoleColor.
+</summary>
+</member>
+<member name="M:LabProg2019.Prelude.ConsoleColor.of_rgb.Static(System.Byte,System.Byte,System.Byte)">
+<summary>
+ Calculates the nearest ConsoleColor to the given RGB triple.
+</summary>
+</member>
+<member name="M:LabProg2019.Prelude.ConsoleColor.shade_by_brightness(System.ConsoleColor,System.Int32)">
+<summary>
+ Calculate a pair of Colors (foreground, backgroud) given a reference color and an integer representing the brightness in the range [0, 3].
+</summary>
+</member>
+<member name="M:LabProg2019.Prelude.ConsoleColor.get_darken(System.ConsoleColor)">
+<summary>
+ Computes the dark version of a given Color.
+</summary>
+</member>
+<member name="M:LabProg2019.Prelude.clamp(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>
+ Calculates the intersection between the two given rectangluar regions.
+</summary>
+</member>
+<member name="M:LabProg2019.Prelude.deg2rad(System.Double)">
+<summary>
+ Convert an angle a in degrees into radians.
+</summary>
+</member>
+<member name="P:LabProg2019.Config.MENU_WIDTH">
+<summary>
+menu configuration
+</summary>
+</member>
+<member name="T:LabProg2019.External.Coord">
+<summary>
+ This struct represents points as pairs of 16-bit integers. Used by low-level console writing primitives for committing screen regions.
+</summary>
+</member>
+<member name="T:LabProg2019.External.SmallRect">
+<summary>
+ This struct represents screen areas as rectangles. Used by low-level console writing primitives for committing screen regions.
+</summary>
+</member>
+<member name="F:LabProg2019.External.CharInfo.Attributes">
+<summary>
+ Extra attributes for additional informations: colors are encoded here.
+</summary>
+</member>
+<member name="F:LabProg2019.External.CharInfo.Char">
+<summary>
+ The character field of type CharUnion.
+</summary>
+</member>
+<member name="P:LabProg2019.External.CharInfo.fg(System.ConsoleColor)">
+<summary>
+ Get or set the foreground color.
+</summary>
+</member>
+<member name="P:LabProg2019.External.CharInfo.bg(System.ConsoleColor)">
+<summary>
+ Get or set the background color.
+</summary>
+</member>
+<member name="P:LabProg2019.External.CharInfo.fg">
+<summary>
+ Get or set the foreground color.
+</summary>
+</member>
+<member name="P:LabProg2019.External.CharInfo.bg">
+<summary>
+ Get or set the background color.
+</summary>
+</member>
+<member name="T:LabProg2019.External.CharInfo">
+<summary>
+ This struct represents a character cell with its character and colors. It directly stubs the CharInfo struct defined in Windows low-level API (kernel32.dll).
+</summary>
+</member>
+<member name="T:LabProg2019.External.CharUnion">
+<summary>
+ This struct is actually a C-like union type representing either a Unicode 16-bit charachter or an ASCII 8-bit character on the same memory address.
+</summary>
+</member>
+<member name="M:LabProg2019.External.WriteConsoleOutput(Microsoft.Win32.SafeHandles.SafeFileHandle,LabProg2019.External.CharInfo[],LabProg2019.External.Coord,LabProg2019.External.Coord,Microsoft.FSharp.Core.byref{LabProg2019.External.SmallRect,Microsoft.FSharp.Core.ByRefKinds.InOut})">
+<summary>
+ This is the stub for the main console writing primitive. It commits a rectangular region of CharInfo on the system console using a low-latency high-performance algorithm.
+</summary>
+</member>
+<member name="T:LabProg2019.External">
+<summary>
+ External types directly stubbing structs defined in Windows low-level API (kernel32.dll).
+</summary>
+</member>
+<member name="T:LabProg2019.Globals.remote_logger">
+<summary>
+ Type specialization used by the log server process.
+</summary>
+</member>
+<member name="M:LabProg2019.Globals.logger.warn``1(Microsoft.FSharp.Core.PrintfFormat{``0,Microsoft.FSharp.Core.Unit,System.String,Microsoft.FSharp.Core.Unit})">
+<summary>
+ Output the given printf-like format string with warn severity.
+</summary>
+</member>
+<member name="M:LabProg2019.Globals.logger.msg``1(Microsoft.FSharp.Core.PrintfFormat{``0,Microsoft.FSharp.Core.Unit,System.String,Microsoft.FSharp.Core.Unit})">
+<summary>
+ Output the given printf-like format string with the default informational severity.
+</summary>
+</member>
+<member name="M:LabProg2019.Globals.logger.error``1(Microsoft.FSharp.Core.PrintfFormat{``0,Microsoft.FSharp.Core.Unit,System.String,Microsoft.FSharp.Core.Unit})">
+<summary>
+ Output the given printf-like format string with error severity.
+</summary>
+</member>
+<member name="M:LabProg2019.Globals.logger.debug``1(Microsoft.FSharp.Core.PrintfFormat{``0,Microsoft.FSharp.Core.Unit,System.String,Microsoft.FSharp.Core.Unit})">
+<summary>
+ Output the given printf-like format string with debug severity.
+</summary>
+</member>
+<member name="M:LabProg2019.Globals.logger.atomic_print(System.ConsoleColor,System.String)">
+<summary>
+ Internal low-level atomic print primitive. Do not call this directly.
+</summary>
+</member>
+<member name="T:LabProg2019.Globals.logger">
+<summary>
+ Logger type.
+</summary>
+</member>
+<member name="M:LabProg2019.Globals.stopwatch``1(System.String,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,``0})">
+<summary>
+ Run the given function and returns its result paired with the elapsed time.
+</summary>
+</member>
+<member name="M:LabProg2019.Globals.stopwatch_quiet``1(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,``0})">
+<summary>
+ Runs the given function and returns its result paired with the elapsed time.
+</summary>
+</member>
+<member name="M:LabProg2019.Globals.rnd_color">
+<summary>
+ Generate a random ConsoleColor among the available system palette.
+</summary>
+</member>
+<member name="M:LabProg2019.Globals.rnd_bool">
+<summary>
+ Generate a random boolean.
+</summary>
+</member>
+<member name="M:LabProg2019.Globals.rnd_float(System.Double,System.Double)">
+<summary>
+ Generate a random float within the range [a, b].
+</summary>
+</member>
+<member name="M:LabProg2019.Globals.rnd_int(System.Int32,System.Int32)">
+<summary>
+ Generate a random integer within the range [a, b].
+</summary>
+</member>
+<member name="P:LabProg2019.Globals.Rnd">
+<summary>
+ Global PRNG instance.
+</summary>
+</member>
+<member name="P:LabProg2019.Globals.Log">
+<summary>
+ Global logger instance.    
+</summary>
+</member>
+<member name="F:LabProg2019.Gfx.region.parent@">
+<summary>
+ Get the parent raster.
+</summary>
+</member>
+<member name="P:LabProg2019.Gfx.region.parent">
+<summary>
+ Get the parent raster.
+</summary>
+</member>
+<member name="T:LabProg2019.Gfx.region">
+<summary>
+ Class respresenting a subregion of the parent raster.
+ Constructor arguments are the parent raster and the subregion coordinates and size relative to the parent coordinates.
+</summary>
+</member>
+<member name="F:LabProg2019.Gfx.sprite.z@">
+<summary>
+ Get or set the z value of this sprite.
+</summary>
+</member>
+<member name="F:LabProg2019.Gfx.sprite.y@">
+<summary>
+ Get or set the y coordinate of this sprite as a float.
+</summary>
+</member>
+<member name="F:LabProg2019.Gfx.sprite.x@">
+<summary>
+ Get or set the x coordinate of this sprite as a float.
+</summary>
+</member>
+<member name="P:LabProg2019.Gfx.sprite.z(System.Int32)">
+<summary>
+ Get or set the z value of this sprite.
+</summary>
+</member>
+<member name="P:LabProg2019.Gfx.sprite.y(System.Double)">
+<summary>
+ Get or set the y coordinate of this sprite as a float.
+</summary>
+</member>
+<member name="P:LabProg2019.Gfx.sprite.x(System.Double)">
+<summary>
+ Get or set the x coordinate of this sprite as a float.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.sprite.move_by(System.Int32,System.Int32)">
+<summary>
+ Recalculate the x and y coordinates of this sprite given a pair of integers (dx, dy) representing the horizontal and vertical offsets.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.sprite.move_by(System.Double,System.Double)">
+<summary>
+ Recalculate the x and y coordinates of this sprite given a pair of floats (dx, dy) representing the horizontal and vertical offsets.
+</summary>
+</member>
+<member name="P:LabProg2019.Gfx.sprite.z">
+<summary>
+ Get or set the z value of this sprite.
+</summary>
+</member>
+<member name="P:LabProg2019.Gfx.sprite.y">
+<summary>
+ Get or set the y coordinate of this sprite as a float.
+</summary>
+</member>
+<member name="P:LabProg2019.Gfx.sprite.x">
+<summary>
+ Get or set the x coordinate of this sprite as a float.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.sprite.draw(LabProg2019.Gfx.wronly_raster)">
+<summary>
+ Draw this sprite onto the given wronly_raster. Clamping may take place.
+</summary>
+</member>
+<member name="T:LabProg2019.Gfx.sprite">
+<summary>
+ Subclass of image representing sprites. Sprites are images that can have a location and can be moved.
+ Constructor parameters are the image, coordinates x, y and an integer z that is the order by which sprites are rendered, in ascending order (lower z means more behind, higher z means more in front).
+ Coordinates x and y are stored as floats, allowing fine precision movement of sprites.
+</summary>
+</member>
+<member name="F:LabProg2019.Gfx.image.pixels@">
+<summary>
+ Retrieve the pixels as a 1-dimensional array.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.image.rectangle(System.Int32,System.Int32,LabProg2019.External.CharInfo,Microsoft.FSharp.Core.FSharpOption{LabProg2019.External.CharInfo})">
+<summary>
+ Create a new image object with a rectangle drawn in it. The resulting image is w * h pixels in size.
+ The border of the rectangle is drawn using argument px; if the optional argument filled_px is passed as well, the rectangle gets flood-filled with that.
+</summary>
+</member>
+<member name="P:LabProg2019.Gfx.image.pixels">
+<summary>
+ Retrieve the pixels as a 1-dimensional array.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.image.circle(System.Int32,LabProg2019.External.CharInfo,Microsoft.FSharp.Core.FSharpOption{LabProg2019.External.CharInfo})">
+<summary>
+ Create a new image object with a circle of ray r drawn at the center of it. The resulting image is a square of size r * 2 + 1.
+ The border of the circle is drawn using argument px; if the optional argument filled_px is passed as well, the circle gets flood-filled with that.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.image.#ctor(System.Int32,System.Int32,Microsoft.FSharp.Core.FSharpOption{LabProg2019.External.CharInfo})">
+<summary>
+ Alternate constructor creating a new pixel array initialized with empty pixels.
+</summary>
+</member>
+<member name="T:LabProg2019.Gfx.image">
+<summary>
+ Class representing images as a subclass of raster.
+ Constructor arguments are width, height and the 1-dimensional array of pixels with the image data.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.system_console_raster.resize(System.Int32,System.Int32)">
+<summary>
+resize console window with the given width and height values
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.system_console_raster.at(System.Int32,System.Int32,System.ConsoleColor,Microsoft.FSharp.Core.FSharpOption{System.ConsoleColor})">
+<summary>
+ Set the cursor position at coordinates (x, y) and set the current colors.
+</summary>
+</member>
+<member name="T:LabProg2019.Gfx.system_console_raster">
+<summary>
+ Class representing the system console as a wronly_raster.
+ Width and height are given as constructor arguments.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.raster.unsafe_get(System.Int32,System.Int32)">
+<summary>
+ Low level unsafe read access. Unsafe means no boundary check is performed, thus failing at runtime when coordinates are out of boundaries.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.raster.unsafe_blit(System.Int32,System.Int32,System.Int32,System.Int32,LabProg2019.Gfx.wronly_raster,System.Int32,System.Int32)">
+<summary>
+ Blit a rectangular region of pixels from this source to the destination raster.
+ Expression src.unsafe_blit (x0, y0, w, h, dst, x1, y1) blits from source raster src to destination wronly_raster dst, copying the rectangular region with top-left corner at (x0, y0) and bottom-right corner at (x0 + w - 1, y0 + h -1) to destination coordinates (x1, y1).
+ This method does not check boundaries.
+</summary>
+</member>
+<member name="P:LabProg2019.Gfx.raster.Item(System.Int32,System.Int32,LabProg2019.External.CharInfo)">
+<summary>
+ Item getter and setter are shortcuts to unsafe_get and unsafe_plot respectively. 
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.raster.region(System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>
+ Create a region object from this raster as parent raster given the area coordinates.
+</summary>
+</member>
+<member name="P:LabProg2019.Gfx.raster.Item(System.Int32,System.Int32)">
+<summary>
+ Item getter and setter are shortcuts to unsafe_get and unsafe_plot respectively. 
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.raster.get(System.Int32,System.Int32)">
+<summary>
+ Reads a pixel value at the given coordinates. If coordinates are out of boundaries then nothing is plotted.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.raster.flood_fill(System.Int32,System.Int32,LabProg2019.External.CharInfo)">
+<summary>
+ Fill algorithm starting from the given point (x, y) and flooding the region consisting of contiguous empty pixels with the given argument fill_px.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.raster.commit_from(LabProg2019.External.CharInfo[])">
+<summary>
+ Commit the given buffer to the system console.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.raster.blit(System.Int32,System.Int32,System.Int32,System.Int32,LabProg2019.Gfx.wronly_raster,System.Int32,System.Int32)">
+<summary>
+ Blit the given region (x0 + w - 1, y0 + h -1) of the source raster src to the destination wronly_raster dst at given point (x1, y1). Clamping is performed and a sub-region of the specified area may be actually blitted.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.raster.blit(LabProg2019.Gfx.wronly_raster,System.Int32,System.Int32)">
+<summary>
+ Blit the whole source raster src to the destination wronly_raster dst at given point (x1, y1). Clamping is performed and a sub-region of the specified area may be actually blitted.
+</summary>
+</member>
+<member name="T:LabProg2019.Gfx.raster">
+<summary>
+ Subclass extending wronly_raster with read operations.
+ Width and height are given as constructor arguments.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.wronly_raster.unsafe_plot(System.Int32,System.Int32,LabProg2019.External.CharInfo)">
+<summary>
+ Low-level unsafe plot primitive. Unsafe means no boundary check is performed, thus failing at runtime when coordinates are out of boundaries.
+</summary>
+</member>
+<member name="P:LabProg2019.Gfx.wronly_raster.Item(System.Int32,System.Int32,LabProg2019.External.CharInfo)">
+<summary>
+ Item setter is a shortcut to unsafe_plot. No getter available.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.wronly_raster.plot(System.Int32,System.Int32,LabProg2019.External.CharInfo)">
+<summary>
+ Plot the given pixel at the given coordinates. If coordinates are out of boundaries then nothing is plotted.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.wronly_raster.is_inside(System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>
+ Check whether the given rectangular region (x, y, w, h) is contained within the boundaries of this raster.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.wronly_raster.is_inside(System.Int32,System.Int32)">
+<summary>
+ Check whether the given point (x, y) is contained within the boundaries of this raster.
+</summary>
+</member>
+<member name="P:LabProg2019.Gfx.wronly_raster.width">
+<summary>
+ The width of this raster.
+</summary>
+</member>
+<member name="P:LabProg2019.Gfx.wronly_raster.height">
+<summary>
+ The height of this raster.
+</summary>
+</member>
+<member name="P:LabProg2019.Gfx.wronly_raster.commit">
+<summary>
+ Commit this raster to the system console.
+</summary>
+</member>
+<member name="P:LabProg2019.Gfx.wronly_raster.clear">
+<summary>
+ Clear this raster setting all pixels to empty.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.wronly_raster.draw_text(System.String,System.Int32,System.Int32,System.ConsoleColor,Microsoft.FSharp.Core.FSharpOption{System.ConsoleColor})">
+<summary>
+ Draw the given text at the given coordinates with the given colors. The font is fixed size and OS-dependant.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.wronly_raster.draw_rectangle(System.Int32,System.Int32,System.Int32,System.Int32,LabProg2019.External.CharInfo)">
+<summary>
+ Draw a rectangle with (x0, y0) as top-left corner and (x0 + w - 1, y0 + h - 1) as bottom-right corner.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.wronly_raster.draw_line(System.Int32,System.Int32,System.Int32,System.Int32,LabProg2019.External.CharInfo)">
+<summary>
+ Draw a line with the Bresenham algorithm plotting each dot with the given pixel. The line starts at (x0, y0) and ends at (x1, y1).
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.wronly_raster.draw_circle(System.Int32,System.Int32,System.Int32,LabProg2019.External.CharInfo)">
+<summary>
+ Draw a circle with (x0, y0) as center and r as ray, using px as pixel.
+</summary>
+</member>
+<member name="T:LabProg2019.Gfx.wronly_raster">
+<summary>
+ Class representing write-only rasters providing basic plotting, drawing and blitting primitives. No read operations are available.
+ Width and height are given as constructor arguments.
+</summary>
+</member>
+<member name="T:LabProg2019.Gfx.pixel">
+<summary>
+ Alias for the pixel type.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.CharInfo.get_is_empty(LabProg2019.External.CharInfo)">
+<summary>
+ Tests whether this is an empty character cell.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.CharInfo.get_empty.Static">
+<summary>
+ Shortcut for creating an empty cell given the foreground and background colors.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.CharInfo.filled.Static(System.ConsoleColor,Microsoft.FSharp.Core.FSharpOption{System.ConsoleColor})">
+<summary>
+ Shortcut for creating a filled cell given the foreground and background colors.
+</summary>
+</member>
+<member name="M:LabProg2019.Gfx.CharInfo.create.Static(System.Char,System.ConsoleColor,Microsoft.FSharp.Core.FSharpOption{System.ConsoleColor})">
+<summary>
+ Create a new CharInfo given a character, a foreground color and a background color. Background color argument is optional and defaults to black.
+</summary>
+</member>
+<member name="F:LabProg2019.Engine.engine.show_fps@">
+<summary>
+ Flag for enabling/disabling fps and frame time information overlay (default = true in Debug and false in Release).
+</summary>
+</member>
+<member name="F:LabProg2019.Engine.engine.show_sprites@">
+<summary>
+ Flag for enabling/disabling automatic rendering of sprites at each frame (default = true).
+</summary>
+</member>
+<member name="F:LabProg2019.Engine.engine.auto_clear@">
+<summary>
+ Flag for enabling/disabling automatic clearing of each frame (default = true).
+</summary>
+</member>
+<member name="F:LabProg2019.Engine.engine.screen_height@">
+<summary>
+ Get the height of the output console.
+</summary>
+</member>
+<member name="F:LabProg2019.Engine.engine.screen_width@">
+<summary>
+ Get the width of the output console.
+</summary>
+</member>
+<member name="M:LabProg2019.Engine.engine.unregister_sprite(LabProg2019.Gfx.sprite)">
+<summary>
+unregister a sprite and update the screen
+</summary>
+</member>
+<member name="P:LabProg2019.Engine.engine.show_sprites(System.Boolean)">
+<summary>
+ Flag for enabling/disabling automatic rendering of sprites at each frame (default = true).
+</summary>
+</member>
+<member name="P:LabProg2019.Engine.engine.show_fps(System.Boolean)">
+<summary>
+ Flag for enabling/disabling fps and frame time information overlay (default = true in Debug and false in Release).
+</summary>
+</member>
+<member name="P:LabProg2019.Engine.engine.screen_width(System.Int32)">
+<summary>
+ Get the width of the output console.
+</summary>
+</member>
+<member name="P:LabProg2019.Engine.engine.screen_height(System.Int32)">
+<summary>
+ Get the height of the output console.
+</summary>
+</member>
+<member name="P:LabProg2019.Engine.engine.auto_clear(System.Boolean)">
+<summary>
+ Flag for enabling/disabling automatic clearing of each frame (default = true).
+</summary>
+</member>
+<member name="M:LabProg2019.Engine.engine.resize(System.Int32,System.Int32)">
+<summary>
+resize the engine window with the given width and height values
+</summary>
+</member>
+<member name="M:LabProg2019.Engine.engine.register_sprite(LabProg2019.Gfx.sprite)">
+<summary>
+ Register the given sprite so that the engine knows it and renders it each frame according to its z value.
+</summary>
+</member>
+<member name="M:LabProg2019.Engine.engine.loop_on_key``1(Microsoft.FSharp.Core.FSharpFunc{System.ConsoleKeyInfo,Microsoft.FSharp.Core.FSharpFunc{LabProg2019.Gfx.wronly_raster,Microsoft.FSharp.Core.FSharpFunc{``0,System.Tuple{``0,System.Boolean}}}},``0)">
+<summary>
+ Start the engine loop given a custom update function and an initial state.
+ The update function is called every time a key is pressed on the system console; the key is passed as argument to the update function, together with the output wronly_raster and the state.
+ Each call to the update function produces a boolean and a new state: the latter is passed to the subsequent call; the former tells the engine whether to quit or not the big loop.
+</summary>
+</member>
+<member name="M:LabProg2019.Engine.engine.loop``1(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.FSharpOption{System.ConsoleKeyInfo},Microsoft.FSharp.Core.FSharpFunc{LabProg2019.Gfx.wronly_raster,Microsoft.FSharp.Core.FSharpFunc{``0,System.Tuple{``0,System.Boolean}}}},``0)">
+<summary>
+ Start the engine loop given a custom update function and an initial state.
+ The update function is called every I milliseconds, where I = 1000 / fps_cap, on a different thread, allowing advanced concurrent rendering strategies.
+ A key may either have or not have been pressed, therefore a value of type &apos;ConsoleKeyInfo option&apos; is passed to the update function, together with the output wronly_raster and the state.
+ Each call to the update function produces a boolean and a new state: the latter is passed to the subsequent call; the former tells the engine whether to quit or not the big loop.
+</summary>
+</member>
+<member name="P:LabProg2019.Engine.engine.show_sprites">
+<summary>
+ Flag for enabling/disabling automatic rendering of sprites at each frame (default = true).
+</summary>
+</member>
+<member name="P:LabProg2019.Engine.engine.show_fps">
+<summary>
+ Flag for enabling/disabling fps and frame time information overlay (default = true in Debug and false in Release).
+</summary>
+</member>
+<member name="P:LabProg2019.Engine.engine.screen_width">
+<summary>
+ Get the width of the output console.
+</summary>
+</member>
+<member name="P:LabProg2019.Engine.engine.screen_height">
+<summary>
+ Get the height of the output console.
+</summary>
+</member>
+<member name="P:LabProg2019.Engine.engine.auto_clear">
+<summary>
+ Flag for enabling/disabling automatic clearing of each frame (default = true).
+</summary>
+</member>
+<member name="M:LabProg2019.Engine.engine.create_and_register_sprite(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>
+ Shortcut for creating and registering a sprite in one operation with an empty image.
+</summary>
+</member>
+<member name="M:LabProg2019.Engine.engine.create_and_register_sprite(LabProg2019.Gfx.image,System.Int32,System.Int32,System.Int32)">
+<summary>
+ Shortcut for creating and registering a sprite in one operation with a given image.
+</summary>
+</member>
+<member name="M:LabProg2019.Engine.engine.clear">
+<summary>
+clear the screen and unregister sprites
+</summary>
+</member>
+<member name="T:LabProg2019.Engine.engine">
+<summary>
+ This class provides the 2D ASCII engine.
+ Constructors picks width and height of the output console and optionally the frame-rate cap and the flip queue length.
+ A flip queue length of 0 implies no buffering and direct rendering on the system console.
+ The system console windows is automatically created when this class gets instantiated.
+ Calling one of the loop methods make the engine start its render loop.
+ Sprites can be registered for making the engine draw them each frame automatically in ascending z-order.
+ The order of operations for each frame are: clear buffer; render sprites; call user update function; commit frame; switch buffer.
+</summary>
+</member>
+<member name="P:FMaze.Core.WallsType.left">
+<summary>
+Open/Closed status for the cell&apos;s left wall
+</summary>
+</member>
+<member name="P:FMaze.Core.WallsType.bottom">
+<summary>
+Open/Closed status for the cell&apos;s bottom wall
+</summary>
+</member>
+<member name="P:FMaze.Core.WallsType.right">
+<summary>
+Open/Closed status for the cell&apos;s right wall
+</summary>
+</member>
+<member name="P:FMaze.Core.WallsType.top">
+<summary>
+Open/Closed status for the cell&apos;s top wall
+</summary>
+</member>
+<member name="T:FMaze.Core.WallsType">
+<summary>Defines walls for a cell. Values: OPEN/CLOSED</summary>
+</member>
+<member name="P:FMaze.Core.CellType.visited">
+<summary>
+whether the cell was visited by generator algorhythm or not
+</summary>
+</member>
+<member name="P:FMaze.Core.CellType.walls">
+<summary>
+walls for the cell
+</summary>
+</member>
+<member name="T:FMaze.Core.CellType">
+<summary>
+The cell data structure.
+</summary>
+</member>
+<member name="P:FMaze.Core.SolutionType.path">
+<summary>
+the path from the end to the start
+</summary>
+</member>
+<member name="T:FMaze.Core.SolutionType">
+<summary>
+The data structure representing a maze solution instance.
+</summary>
+</member>
+<member name="P:FMaze.Core.ExpandedMazeType.finish">
+<summary>
+cell that player must reach in order to succesfully end the game.
+</summary>
+</member>
+<member name="P:FMaze.Core.ExpandedMazeType.start">
+<summary>
+cell where the player will be first spawned at game startup.
+</summary>
+</member>
+<member name="P:FMaze.Core.ExpandedMazeType.cols">
+<summary>
+number of columns the maze is made up of
+</summary>
+</member>
+<member name="P:FMaze.Core.ExpandedMazeType.rows">
+<summary>
+number of rows the maze is made up of
+</summary>
+</member>
+<member name="P:FMaze.Core.ExpandedMazeType.map">
+<summary>
+map of cells representing the structure of the maze
+</summary>
+</member>
+<member name="P:FMaze.Core.MazeType.finish">
+<summary>
+finish cell (row,column)
+</summary>
+</member>
+<member name="P:FMaze.Core.MazeType.start">
+<summary>
+start cell (row, column)
+</summary>
+</member>
+<member name="P:FMaze.Core.MazeType.cols">
+<summary>
+number of columns the maze is made up of
+</summary>
+</member>
+<member name="P:FMaze.Core.MazeType.rows">
+<summary>
+number of rows the maze is made up of
+</summary>
+</member>
+<member name="P:FMaze.Core.MazeType.map">
+<summary>
+map of cells representing the structure of the maze
+</summary>
+</member>
+<member name="T:FMaze.Core.MazeType">
+<summary>
+The data structure representing a maze instance.
+</summary>
+</member>
+<member name="M:FMaze.Core.Utils.replace``1(System.Int32,``0,Microsoft.FSharp.Collections.FSharpList{``0})">
+<summary>Replace the given element at the specified coordinate in the list</summary>
+<param name="index">The position of the element to replace</param>
+<param name="new_el">The new element</param>
+<param name="lst">The list</param>
+<returns>the list with the replaced element</returns>
+</member>
+<member name="M:FMaze.Core.Utils.expand__coordinate_value(System.Int32)">
+<summary>Expand the given coordinate</summary>
+<param name="x">The coordinate to expand</param>
+<returns><c>true</c> the expanded coordinate</returns>
+</member>
+<member name="M:FMaze.Core.Utils.isOdd(System.Int32)">
+<summary>Check if the given number is odd.</summary>
+<param name="x">The value to check</param>
+<returns><c>true</c> if the number is odd, <c>false</c> if not.</returns>
+</member>
+<member name="M:FMaze.Core.Utils.isEven(System.Int32)">
+<summary>Check if the given number is even.</summary>
+<param name="x">The value to check</param>
+<returns><c>true</c> if the number is even, <c>false</c> if not.</returns>
+</member>
+<member name="M:FMaze.Core.Utils.from_monodim_to_bidim(System.Int32,System.Int32)">
+<summary>Convert a monodimensional index into bidimensional coordinates.</summary>
+<param name="index">The monodimensional index to convert to</param>
+<param name="cols">Numbers of columns in the matrix</param>
+<returns>A tuple <c>(row , col )</c> containing the coordinates corresponding the given momodimensional index.</returns>
+</member>
+<member name="M:FMaze.Core.Utils.from_bidim_to_monodim(System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>Convert bidimensional coordinates in a 1-dimensional index for matrix operations.</summary>
+<param name="rows">Number of rows of the matrix</param>
+<param name="cols">Numbers of columns of the matrix</param>
+<param name="row">Row index</param>
+<param name="col">Column index</param>
+<returns>The respective 1-dimensional index if coordinates are valid, false if not</returns>
+</member>
+<member name="M:FMaze.Core.Utils.are_coordinates_valid(System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>Check if the given coordinates are valid in the given matrix dimensions.</summary>
+<param name="rows">Number of rows of the matrix</param>
+<param name="cols">Numbers of columns of the matrix</param>
+<param name="row">Row index to check</param>
+<param name="col">Column index to check</param>
+<returns><c>true</c> if the coordinates are vaild in the given matrix dimensions, <c>false</c> if not.</returns>
+</member>
+<member name="T:FMaze.Core.Utils">
+<summary>The Utils module contains utility functions and definitions used across the whole application</summary>
+</member>
+<member name="P:FMaze.Core.Walls.OPEN">
+<summary>Const value which represent an open wall.</summary>
+</member>
+<member name="P:FMaze.Core.Walls.CLOSED">
+<summary>Const value which represent a closed wall.</summary>
+</member>
+<member name="T:FMaze.Core.Walls">
+<summary>The Walls module define consts for the <c>WallType</c> type.</summary>
+</member>
+<member name="M:FMaze.Core.Cell.create(FMaze.Core.WallsType,System.Boolean)">
+<summary>Create a new <c>CellType</c> instance with the given parameters.</summary>
+</member>
+<member name="M:FMaze.Core.Cell.set_visited(FMaze.Core.CellType,System.Boolean)">
+<summary>Sets the given value of visited for the given cell.</summary>
+<param name="cell">The cell which the setter operates on</param>
+<param name="visited">The new value of visited</param>
+<returns>The given cell with the updated value of visited</returns>
+</member>
+<member name="P:FMaze.Core.Cell.ERROR_CELL">
+<summary>A cell representing an error in the application</summary>
+</member>
+<member name="T:FMaze.Core.Cell">
+<summary>The Cell module defines common operations on cells.</summary>
+<remarks>
+A cell is the basic component of the maze. It contains info on the walls and a boolean used for various purposes throughout the application.
+Cells, organized in a list constitute a map
+</remarks>
+</member>
+<member name="M:FMaze.Core.Maze.create(System.Int32,System.Int32)">
+<summary>Creates a new Maze from the given parameters.</summary>
+<param name = "rows "> the rows of the maze. </param>
+<param name = "cols" > the cols of the maze </param>
+<returns> The maze with the given parameters. </returns>
+</member>
+<member name="M:FMaze.Core.Maze.get_bi_cell(System.Int32,System.Int32,FMaze.Core.MazeType)">
+<summary>Gets the cell at the specified index in the given Maze. Index is specified as 1-dimensional.</summary>
+<param name="position">The index of the desired element in the maze</param>
+<param name="maze">The maze to select the element from</param>
+<returns>The cell at the specified index</returns>
+</member>
+<member name="M:FMaze.Core.Maze.get_cell(System.Int32,FMaze.Core.MazeType)">
+<summary>Gets the cell at the specified index in the given Maze. Index is specified as 1-dimensional.</summary>
+<param name="position">The index of the desired element in the maze</param>
+<param name="maze">The maze to select the element from</param>
+<returns>The cell at the specified index</returns>
+</member>
+<member name="M:FMaze.Core.Maze.generate_different_outer_coordinate(System.Int32,System.Int32,System.Int32,System.Int32)">
+<summary>Gets coordinates of a random outer cell for the given maze dimensions, different from the given one. An outer cell is defined as a cell which is on the sides of the maze (on the map limit).</summary>
+<param name="rows">Number of rows the maze which the outer random coordinates must be generated is made up of.</param>
+<param name="cols">Number of columns the maze which the outer random coordinates must be generated is made up of.</param>
+<param name="coord">The coordinate which the newly generated coordinate must be different from.</param>
+<returns>A pair of int representing coordinates of a random outer cell of the given maze dimensions.</returns>
+</member>
+<member name="M:FMaze.Core.Maze.generate_outer_coordinate(System.Int32,System.Int32)">
+<summary>Gets coordinates of a random outer cell for the given maze dimensions. An outer cell is defined as a cell which is on the sides of the maze (on the map limit).</summary>
+<param name="rows">Number of rows the maze which the outer random coordinates must be generated is made up of.</param>
+<param name="cols">Number of columns the maze which the outer random coordinates must be generated is made up of.</param>
+<returns>A pair of int representing coordinates of a random outer cell of the given maze dimensions.</returns>
+</member>
+<member name="P:FMaze.Core.Maze.SEED">
+<summary>The seed used for generating random numbers and implementing randomness in the maze generator algorhythm</summary>
+</member>
+<member name="M:FMaze.Core.Maze.Resolutor.solve(FMaze.Core.ExpandedMazeType)">
+<summary>Solve the given maze</summary>
+<param name="expanded_map">The maze in its expanded form that will be used to find the solution</param>
+<returns>A value of SolutionType type, containing the solution of the maze and the maze dimensions</returns>
+</member>
+<member name="M:FMaze.Core.Maze.Resolutor.get_unvisited_neighbours(System.Int32,Microsoft.FSharp.Collections.FSharpList{System.Boolean},System.Int32,System.Int32)">
+<summary>Return the index of all the unvisited neighbours or the non wall parts of the maze</summary>
+<param name="index">The index of the choosen cell</param>
+<param name="maze">The maze to select the element from</param>
+<param name="rows">The maze rows number</param>
+<param name="cols">The maze columns number</param>
+<returns>A list with the unvisited cells connected to the current one</returns>
+</member>
+<member name="T:FMaze.Core.Maze.Resolutor">
+<summary>Contain used to solve a maze.</summary>
+</member>
+<member name="M:FMaze.Core.Maze.Expand.expand(FMaze.Core.MazeType)">
+<summary>Expand the provided maze.</summary>
+<returns>The expanded maze</returns>
+</member>
+<member name="M:FMaze.Core.Maze.Expand.convert_maze_to_expandedmaze(FMaze.Core.MazeType)">
+<summary>Convert a maze to its expanded form</summary>
+<param name="maze">A generated maze.</param>
+<returns>A new expanded maze made from the provided maze</returns>
+</member>
+<member name="M:FMaze.Core.Maze.Expand.get_outer_expanded_coord(System.Int32,System.Int32,FMaze.Core.MazeType)">
+<summary>takes the coordinates of the start or end of the maze and expand them</summary>
+<param name="(row,col)">The coordinate of the start or end of the maze.</param>
+<param name="maze">A generated maze.</param>
+<returns>The expanded coordinate of the start or end of the maze</returns>
+</member>
+<member name="T:FMaze.Core.Maze.Expand">
+<summary>Contain routines used to expand a maze map.</summary>
+</member>
+<member name="M:FMaze.Core.Maze.Generator.generate(FMaze.Core.MazeType)">
+<summary>Generate a maze from a default initialized <c>Maze</c> instance.</summary>
+<param name="maze">A default initialized maze.</param>
+<returns>A generated maze using recursive backtracker as the generating algorithm</returns>
+</member>
+<member name="M:FMaze.Core.Maze.Generator.recursive_backtracker(FMaze.Core.MazeType,System.Int32)">
+<summary>The recursive backtracker algorhythm used for generating the maze. See <a href="https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker">Maze generation on Wikipedia</a> for details about how the algorhythm.</summary>
+<param name="maze">An maze initialized with default cells</param>
+<param name="start">The index of the cell representing the entry point of the recursive backtracker algorhythm </param>
+<returns>The maze with randomly generated paths.</returns>
+</member>
+<member name="M:FMaze.Core.Maze.Generator.has_unvisited_neighbours(System.Int32,FMaze.Core.MazeType)">
+<summary>Given a maze and a cell index check if the given cell has unvisited neighbours.</summary>
+<param name="index">Index of the base cell</param>
+<param name="maze">The maze where the cell is located in</param>
+<returns><c>true</c> if the given cell has unvisited neighbours, <c>false</c> if not.</returns>
+</member>
+<member name="M:FMaze.Core.Maze.Generator.unvisited_neighbours_number(System.Int32,FMaze.Core.MazeType)">
+<summary>Given a maze and a cell index return the number of unvisited neightbours for the given cell.</summary>
+<param name="index">Index of the base cell</param>
+<param name="maze">The maze where the cell is located in</param>
+<returns>The number of unvisited neighbours of the cell at the given index.</returns>
+</member>
+<member name="M:FMaze.Core.Maze.Generator.get_unvisited_neighbours(System.Int32,FMaze.Core.MazeType)">
+<summary>Given a maze and a cell index return a list of indexes of the cell neighbours.</summary>
+<param name="index">Index of the base cell</param>
+<param name="maze">The maze where the cell is located in</param>
+<returns>A list of monodimensional indexes each one representing an unvisited neighbour of the cell at the given index.</returns>
+</member>
+<member name="M:FMaze.Core.Maze.Generator.is_explored(Microsoft.FSharp.Collections.FSharpList{FMaze.Core.CellType})">
+<summary>Given a cell map, check if the map has been entirely explored, i.e. all the cells have been visited by the generator algorhythm.</summary>
+<param name="map">The cell map which the check is performed on</param>
+<returns><c>true</c> if the map has been entirely explored, <c>false</c> if not.</returns>
+</member>
+<member name="T:FMaze.Core.Maze.Generator">
+<summary>Routines used in the maze generation process.</summary>
+</member>
+<member name="M:FMaze.Core.Maze.MazeMap.remove_common_wall(Microsoft.FSharp.Collections.FSharpList{FMaze.Core.CellType},System.Int32,System.Int32,System.Int32)">
+<summary>Remove the wall of adjacent cells.</summary>
+<param name="current">The current cell</param>
+<param name="next">The adjacent cell</param>
+<returns>A new map with the modified cells</returns>
+</member>
+<member name="M:FMaze.Core.Maze.MazeMap.find_cell(FMaze.Core.CellType,Microsoft.FSharp.Collections.FSharpList{FMaze.Core.CellType})">
+<summary>Given a cell find the index of that cell in the given map.</summary>
+<param name="cell">The new cell to look for in the map</param>
+<param name="map">The cell map to search on for the cell</param>
+<returns>The index of the cell in the map, or <c>-1</c> if the cell is not present in the map.</returns>
+</member>
+<member name="M:FMaze.Core.Maze.MazeMap.generate_map(System.Int32,System.Int32)">
+<summary>Generate a map and initialize cells to their default value.</summary>
+<param name="rows">Number of rows of the map</param>
+<param name="cols">Number of columns of the map</param>
+<returns>A new map of <code>rows</code> rows and <code>cols</code> columns whose elements are <code>CellType</code> instances initialized to default value.</returns>
+</member>
+<member name="T:FMaze.Core.Maze.MazeMap">
+<summary>Defines operations on cell lists.</summary>
+</member>
+<member name="T:FMaze.Core.Maze">
+<summary>The <c>Maze</c> module contains functions to operate on <code>MazeType</code> instances.</summary>
+</member>
+<member name="P:FMaze.GUI.MazeGUIType.player_position">
+<summary>
+current player position
+</summary>
+</member>
+<member name="P:FMaze.GUI.MazeGUIType.player_sprite">
+<summary>
+the sprite for the player.
+</summary>
+</member>
+<member name="P:FMaze.GUI.MazeGUIType.maze_sprite">
+<summary>
+the sprite for the maze. Contains an image with pixels representing the current maze 2D structure.
+</summary>
+</member>
+<member name="P:FMaze.GUI.MazeGUIType.engine">
+<summary>
+the engine responsible for rendering the graphical user interface for the game.
+</summary>
+</member>
+<member name="P:FMaze.GUI.MazeGUIType.expanded_maze">
+<summary>
+the data structure representing the expanded maze
+</summary>
+</member>
+<member name="P:FMaze.GUI.MazeGUIType.logic">
+<summary>
+the data structure representing the game logic.
+</summary>
+</member>
+<member name="T:FMaze.GUI.MazeGUIType">
+<summary>The data structure representing an instance of a maze game rendered with the given Engine.<\summary>
+</member>
+<member name="M:FMaze.GUI.Utils.render_banner(LabProg2019.Engine.engine,Microsoft.FSharp.Collections.FSharpList{System.String})">
+<summary>Render a simple banner with the given parameters on the center of the screen</summary>
+</member>
+<member name="P:FMaze.GUI.Utils.BANNER_FOREGROUND">
+<summary>
+Color used for rendering text in banners
+</summary>
+</member>
+<member name="P:FMaze.GUI.Utils.BANNER_BACKGROUND">
+<summary>
+Color used for banners background
+</summary>
+</member>
+<member name="T:FMaze.GUI.Utils">
+<summary>Provide utility functions for handling the graphical user interface.</summary>
+</member>
+<member name="M:FMaze.GUI.MazeGUI.create_with_difficulty(System.Int32)">
+ <summary> Create a new MazeGui from the difficulty given.</summary>
+ <param name = "difficulty" > the difficulty of the maze</param>
+ <returns>return a MazeGui instance from the difficulty given. </returns>
+</member>
+<member name="M:FMaze.GUI.MazeGUI.create(System.Int32,System.Int32)">
+<summary>Creates a new MazeGUI from the given parameters. It generates and initializes all the necessary items to handle a graphical maze game.</summary>
+<param name="rows">The rows of the mazegui</param>
+<param name="cols">The cols of the mazegui</param>
+<returns>The MazeGUI instance created with the given parameters.</returns>
+</member>
+<member name="M:FMaze.GUI.MazeGUI.display_solution(FMaze.GUI.MazeGUIType)">
+<summary> Solve a maze and store the solution. </summary>
+<param name = "maze" > the maze we want solve. </param>
+ <return> return a unit e render the path  </returns>
+</member>
+<member name="M:FMaze.GUI.MazeGUI.solution_to_image(FMaze.Core.SolutionType)">
+<summary>Convert an SolutionType to image. </summary>
+<param name = "solution"> the Solution that we wanto convert. </param>
+<return> image from Solution. </returns>
+</member>
+<member name="M:FMaze.GUI.MazeGUI.to_image(FMaze.Core.ExpandedMazeType)">
+<summary>Convert an ExpandedMaze to an image.</summary>
+<param name="expanded_maze">The expanded maze that we want to convert.</param>
+<returns>An image from the expanded maze.</returns>
+</member>
+<member name="M:FMaze.GUI.MazeGUI.to_pixel_array(FMaze.Core.ExpandedMazeType)">
+<summary>Convert an ExpandedMaze to a pixel array.</summary>
+<param name="expanded_maze">The expanded maze that we want to convert</param>
+<returns>The pixel map.</returns>
+</member>
+<member name="P:FMaze.GUI.MazeGUI.PLAYER_IMAGE">
+<summary>
+the image which is used to represent the player&apos;s position in the graphical user interface
+</summary>
+</member>
+<member name="P:FMaze.GUI.MazeGUI.BLACK_PIXEL">
+<summary>
+a black filled pixel
+</summary>
+</member>
+<member name="P:FMaze.GUI.MazeGUI.EMPTY_PIXEL">
+<summary>
+an empty and transparent pixel
+</summary>
+</member>
+<member name="P:FMaze.GUI.MazeGUI.PATH_PIXEL">
+<summary>
+the pixel value which is used to highlight the correct path in the graphical user interface
+</summary>
+</member>
+<member name="P:FMaze.GUI.MazeGUI.WALL_PIXEL">
+<summary>
+the pixel value which is used to represent walls in the graphical user interface.
+</summary>
+</member>
+<member name="T:FMaze.GUI.MazeGUI">
+<summary>The <c>MazeGUI</c> module contains functions to operate on <code>MazeGUIType</code> instances. It exposes a constructor for generating a maze game with a graphical user interface.</summary>
+</member>
+<member name="M:FMaze.Program.mode_dark_labyrinth(System.Int32)">
+<summary>
+initialize a dark labyrinth game with the given difficulty
+ &lt;summary&gt; mode wiht a mask to hide the maze &lt;/summary&gt;
+&lt;param name =&quot;difficulty&quot;&gt; level of difficulty &lt;/param&gt;
+ &lt;returns&gt; a player mode &lt;/returns&gt;
+</summary>
+</member>
+<member name="M:FMaze.Program.mode_automatic_resolution(System.Int32)">
+<summary>
+initialize an automatic solver demonstration with the given difficulty
+&lt;summary&gt; mode automatich resoluton of a maze &lt;/summary&gt;
+&lt;param name =&quot;difficulty&quot;&gt; level of difficulty &lt;/param&gt;
+&lt;returns&gt; return the solution of the maze &lt;/returns&gt;
+</summary>
+</member>
+<member name="M:FMaze.Program.uncover_all(LabProg2019.Gfx.sprite,FMaze.GUI.MazeGUIType)">
+<summary> when the mask is complete uncover</summary>
+<param name = "mask" > a sprite to hide the maze </param>
+<param name = "maze"> our maze where the player play</param>
+<returns> delete the mask </returns>
+</member>
+<member name="M:FMaze.Program.uncover_mask(LabProg2019.Gfx.sprite,FMaze.GUI.MazeGUIType,System.Int32)">
+</summary>given the current game instance, uncover an area of the maze by the given range, by emptying pixels in the given mask sprite</summary>
+<param name = "mask"> a sprite that hide the maze  </param>
+<param name = "maze"> the maze where the player play  </param>
+<param name = "range"> the dimension of the mask  </param>
+ <return> the new sprite of the mask </returns>
+</member>
+<member name="M:FMaze.Program.mode_interactive(System.Int32)">
+<summary>initialize an interactive game with the given difficulty</summary>
+</member>
+<member name="M:FMaze.Program.winner(LabProg2019.Engine.engine)">
+<summary>show the victory banner to the player</summary>
+</member>
+<member name="M:FMaze.Program.select_difficulty(LabProg2019.Engine.engine,Microsoft.FSharp.Core.FSharpFunc{System.Int32,Microsoft.FSharp.Core.Unit})">
+<summary>prompt user to select a difficulty for the required game mode, and start the game</summary>
+</member>
+<member name="M:FMaze.Program.render_menu">
+<summary>Render the main menu</summary>
+</member>
+</members>
+</doc>
